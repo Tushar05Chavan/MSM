@@ -929,7 +929,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       const Text('Recurring'),
                                                   value: _checkboxListTile,
                                                   onChanged: (value) {
-                                                    setState(() {
+                                                    setState(() { 
                                                       _checkboxListTile =
                                                           !_checkboxListTile;
                                                     });

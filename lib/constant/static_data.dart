@@ -18,7 +18,7 @@ const List<Map<String, dynamic>> data = [
   }
 ];
 const List<Map<String, dynamic>> filterData = [
-  {'name': 'daily'},
+  {'name': 'Daily'},
   {'name': 'Weekly'},
   {'name': 'Monthly'},
   {'name': 'Yearly'},

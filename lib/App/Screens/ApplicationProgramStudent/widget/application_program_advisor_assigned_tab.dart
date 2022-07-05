@@ -300,7 +300,7 @@ class _AppAdvisorAssignTabState extends State<AppAdvisorAssignTab> {
                 SizedBox(
                   height: Get.height * 0.07,
                 ),
-                supportSection()
+                supportSection(),
               ],
             ),
           ),

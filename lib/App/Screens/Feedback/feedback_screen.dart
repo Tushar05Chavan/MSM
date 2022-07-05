@@ -51,10 +51,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               decoration: BoxDecoration(
                                   color: kRed,
                                   borderRadius: BorderRadius.circular(5)),
-                              child: const Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 25,
+                              child: const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 5, 0 ),
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
                               ),
                             ),
                           ),

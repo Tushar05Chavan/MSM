@@ -95,7 +95,7 @@ class LoginScreen extends GetView<LoginController> {
                     child: TextFormField(
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please Enter Password';
+                          return 'Please enter password';
                         }
                       },
                       onChanged: (value) {

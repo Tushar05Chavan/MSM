@@ -5,6 +5,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:msm_unify/Api/api_response.dart';
+import 'package:msm_unify/App/Screens/ApplicationView/application_view.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/common_app_bar.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer.dart';
 import 'package:msm_unify/App/common/AppConfig/support_section.dart';
@@ -989,9 +990,9 @@ class TableRow extends DataTableSource {
                 '${data.data![index].notificationType}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
-                textAlign: TextAlign.center,
+                //textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -1000,7 +1001,7 @@ class TableRow extends DataTableSource {
       DataCell(
         InkWell(
           onTap: () {
-            // Get.to(() => ApplicationViewScreen());
+            // Get.to(() => const ApplicationViewScreen());
           },
           child: Container(
             height: Get.height * 0.17,
@@ -1016,9 +1017,9 @@ class TableRow extends DataTableSource {
                 '${data.data![index].agentStudentName}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
-                textAlign: TextAlign.center,
+                //textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -1045,7 +1046,7 @@ class TableRow extends DataTableSource {
                           ),
                           Row(children: [
                             const Text(
-                              'Quiry Detail',
+                              'Query Detail',
                               style: TextStyle(
                                   color: kNavy,
                                   fontFamily: 'Poppins',
@@ -1114,20 +1115,20 @@ class TableRow extends DataTableSource {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                '${data.data![index].queryDetails}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontFamily: 'Roboto',
-                  color: Colors.grey,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+              child: Html(
+                data: '${data.data![index].queryDetails}',),
+                //textAlign: TextAlign.center,
+                // style:  const TextStyle(
+                //   fontFamily: 'Roboto',
+                //   color: Colors.grey,
+                // ),
+                // overflow: TextOverflow.ellipsis,
+                // maxLines: 1,
               ),
             ),
           ),
         ),
-      ),
+      
       DataCell(
         InkWell(
           onTap: () {
@@ -1147,9 +1148,9 @@ class TableRow extends DataTableSource {
                 '${data.data![index].addStamp}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
-                textAlign: TextAlign.center,
+                //textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -1174,9 +1175,9 @@ class TableRow extends DataTableSource {
                 'Akansha',
                 style: TextStyle(
                   fontFamily: 'Roboto',
-                  color: Colors.grey,
+                  color: Colors.black,
                 ),
-                textAlign: TextAlign.center,
+                //textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -1193,4 +1194,5 @@ class TableRow extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+  
 }

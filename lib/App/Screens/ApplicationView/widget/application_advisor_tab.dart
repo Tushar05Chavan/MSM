@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/model/responseModek/application_view_response_model.dart';
 import 'package:msm_unify/model/responseModek/counsellor_response_model.dart';
 import 'package:msm_unify/model/responseModek/msm_marketing_manager_respone_model.dart';
@@ -214,7 +215,7 @@ class _ApplicationAdvisorTabScreenState
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           'Save & Continue',
                           style: TextStyle(
@@ -224,6 +225,10 @@ class _ApplicationAdvisorTabScreenState
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
+                supportSection(),
               ],
             ),
           ),

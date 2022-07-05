@@ -52,11 +52,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
     'Canada'
   ];
   final List<String> _countryCode = [
-    '91(India)',
-    '93(Afghanistan)',
-    '55(Brazil)',
-    '246(British Indian Ocean Territory)',
-    '1 (Canada)',
+    '+91(India)',
+    '+93(Afghanistan)',
+    '+55(Brazil)',
+    '+246(British Indian Ocean Territory)',
+    '+1 (Canada)',
   ];
 
   final List<String> _gender = ['Male', 'Female', 'other'];
@@ -549,7 +549,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                   .toString(),
                                               child: Text(
                                                 countryCode.countryName
-                                                    .toString(),
+                                                    .toString(),semanticsLabel: "+",
                                                 style: const TextStyle(
                                                     color: kGrey4,
                                                     fontFamily: "Roboto",

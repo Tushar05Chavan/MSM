@@ -1122,9 +1122,21 @@ class _StudentListScreenState extends State<StudentListScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: Get.height * 0.025,
+                    const SizedBox(
+                      height: 10,
                     ),
+                     Row(
+                       children: [
+                         Text(
+                                    'Number of items: 96',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                       ],
+                     ),
                     supportSection(),
                   ],
                 ),

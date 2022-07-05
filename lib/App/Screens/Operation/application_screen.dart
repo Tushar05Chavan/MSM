@@ -1580,8 +1580,23 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 10,
                     ),
+                     Row(
+                       children: [
+                         Text(
+                                    'Number of items: 178',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                       ],
+                     ),
+                              const SizedBox(
+                                height: 10,
+                              ),
                     supportSection(),
                   ],
                 ),
