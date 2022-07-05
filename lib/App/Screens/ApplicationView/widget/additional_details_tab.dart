@@ -41,11 +41,14 @@ class _AdditionDetailsState extends State<AdditionDetails> {
   bool _additionalDetails9 = false;
   bool _additionalDetails10 = false;
   bool _additionalDetails11 = false;
+  bool _additionalDetails12 = false;
   bool _cbu = false;
   bool _sportsandrecreation = false;
   bool _oncampus = false;
   bool _offCampus = false;
   bool _studentClubs = false;
+  bool _scholarships = false;
+  bool _daycare = false;
   bool _servicesFor = false;
   bool _religious = false;
   bool _healthServices = false;
@@ -1290,7 +1293,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                   activeColor: Colors.red,
                   controlAffinity: ListTileControlAffinity.leading,
                   title: const Text(
-                      'Your application cannot be processed until the application fee and all documentation have been received. '),
+                      'Official copy of proof of English language Proficiency Testing Score (if first langauage is not English or previous education was not delivered in english) mus be submitted direct from the testing organization.'),
                   value: _additionalDetails11,
                   onChanged: (value) {
                     setState(() {
@@ -1298,8 +1301,20 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                     });
                   },
                 ),
+                CheckboxListTile(
+                  activeColor: Colors.red,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: const Text(
+                      'Your application cannot be processed until the application fee and all documentation have been received. '),
+                  value: _additionalDetails12,
+                  onChanged: (value) {
+                    setState(() {
+                      _additionalDetails12 = !_additionalDetails12;
+                    });
+                  },
+                ),
                 const Text(
-                  'INTENDED \ CONCENTRATIONMAJOR',
+                  'INTENDED CONCENTRATION / MAJOR',
                   style: TextStyle(
                     color: kNavy,
                     fontFamily: 'Poppins',
@@ -1399,7 +1414,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                               yesval4 = value as int;
                             });
                           },
-                          title: Text('yes')),
+                          title: Text('yes ')),
                     ),
                     SizedBox(
                       width: Get.width * 0.30,
@@ -1411,7 +1426,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                               yesval4 = index as int;
                             });
                           },
-                          title: Text('No')),
+                          title: Text('No ')),
                     ),
                   ],
                 ),
@@ -1634,7 +1649,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                   height: 15,
                 ),
                 const Text(
-                  'PERSONAL \nINTERESTS/ADDITIONAL INFORMATION',
+                  'PERSONAL \nINTERESTS/ADDITIONAL INFORMATION (OPTIONAL)',
                   style: TextStyle(
                     color: kNavy,
                     fontFamily: 'Poppins',
@@ -1802,6 +1817,28 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                   onChanged: (value) {
                     setState(() {
                       _studentLoan = !_studentLoan;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  activeColor: Colors.red,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: const Text('Scholarships and bursaries '),
+                  value: _scholarships,
+                  onChanged: (value) {
+                    setState(() {
+                      _scholarships = !_scholarships;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  activeColor: Colors.red,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  title: const Text('Daycare '),
+                  value: _daycare,
+                  onChanged: (value) {
+                    setState(() {
+                      _daycare = !_daycare;
                     });
                   },
                 ),
