@@ -1876,6 +1876,21 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                   ],
                 ),
               ),
+               Row(
+                       children: [
+                         Text(
+                                    'Number of items: 21',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                       ],
+                     ),
+                     SizedBox(
+                      height: 10,
+                    ),
               supportSection()
             ],
           ),

@@ -154,7 +154,7 @@ packages:
       name: fl_chart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.55.0"
+    version: "0.51.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -211,14 +211,14 @@ packages:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.0"
+    version: "8.2.1"
   geolocator_android:
     dependency: transitive
     description:
       name: geolocator_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "3.2.1"
   geolocator_apple:
     dependency: transitive
     description:
@@ -267,7 +267,7 @@ packages:
       name: google_fonts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "2.3.3"
   google_maps_flutter:
     dependency: "direct main"
     description:
