@@ -953,6 +953,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
+              
               supportSection(),
             ],
           ),

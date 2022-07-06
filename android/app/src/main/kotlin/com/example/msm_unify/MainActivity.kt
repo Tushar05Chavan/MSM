@@ -1,4 +1,4 @@
-package com.example.msm_unify
+package com.example.msmunify
 
 import io.flutter.embedding.android.FlutterActivity
 

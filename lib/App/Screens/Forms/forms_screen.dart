@@ -926,6 +926,21 @@ class _FormScreenState extends State<FormScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
+               Row(
+                       children: [
+                         Text(
+                                    'Number of items: 19',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                       ],
+                     ),
+                     SizedBox(
+                      height: 10,
+                    ),
               supportSection(),
             ],
           ),

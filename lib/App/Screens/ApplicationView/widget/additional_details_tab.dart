@@ -870,10 +870,39 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                 const SizedBox(
                   height: 15,
                 ),
+
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       width: Get.width * 0.30,
+                //       child: RadioListTile(
+                //           value: 1,
+                //           groupValue: yesval,
+                //           onChanged: (value) {
+                //             setState(() {
+                //               yesval = value as int;
+                //             });
+                //           },
+                //           title: Text('yes')),
+                //     ),
+                //     SizedBox(
+                //       width: Get.width * 0.30,
+                //       child: RadioListTile(
+                //           value: 2,
+                //           groupValue: yesval,
+                //           onChanged: (index) {
+                //             setState(() {
+                //               yesval = index as int;
+                //             });
+                //           },
+                //           title: Text('No')),
+                //     ),
+                //   ],
+                // ),
                 Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 1,
                           groupValue: yesval,
@@ -882,10 +911,10 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                               yesval = value as int;
                             });
                           },
-                          title: Text('yes')),
+                          title: Text('Yes')),
                     ),
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 2,
                           groupValue: yesval,
@@ -898,6 +927,8 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                     ),
                   ],
                 ),
+
+
                 const Text(
                   'Please Specify',
                   style: TextStyle(
@@ -960,7 +991,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                 Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 1,
                           groupValue: yesval1,
@@ -972,7 +1003,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                           title: Text('yes')),
                     ),
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 2,
                           groupValue: yesval1,
@@ -1025,7 +1056,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                 Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 1,
                           groupValue: yesval2,
@@ -1037,7 +1068,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                           title: Text('yes')),
                     ),
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 2,
                           groupValue: yesval2,
@@ -1405,7 +1436,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                 Row(
                   children: [
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 1,
                           groupValue: yesval4,
@@ -1417,7 +1448,7 @@ class _AdditionDetailsState extends State<AdditionDetails> {
                           title: Text('yes ')),
                     ),
                     SizedBox(
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.35,
                       child: RadioListTile(
                           value: 2,
                           groupValue: yesval4,
