@@ -46,19 +46,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               Get.back();
                             },
                             child: Container(
-                              height: Get.height * 0.03,
-                              width: Get.width * 0.06,
+                              height: Get.height * 0.04,
+                              width: Get.width * 0.08,
                               decoration: BoxDecoration(
                                   color: kRed,
                                   borderRadius: BorderRadius.circular(5)),
-                              child: const Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 5, 0 ),
-                                child: Icon(
+                                  child: const Icon(
                                   Icons.close,
                                   color: Colors.white,
                                   size: 22,
                                 ),
-                              ),
+                              
                             ),
                           ),
                         ]),

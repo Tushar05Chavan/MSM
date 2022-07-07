@@ -185,7 +185,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
-                                        width: Get.width * 0.33,
+                                        width: Get.width * 0.47,
                                         decoration: BoxDecoration(
                                             color: const Color(0xffF5F5F5),
                                             border: Border.all(
@@ -901,7 +901,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
-                                        width: Get.width * 0.50,
+                                        width: Get.width * 0.60,
                                         decoration: BoxDecoration(
                                             color: const Color(0xffF5F5F5),
                                             border: Border.all(
@@ -958,7 +958,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
-                                        width: Get.width * 0.37,
+                                        width: Get.width * 0.60,
                                         decoration: BoxDecoration(
                                             color: const Color(0xffF5F5F5),
                                             border: Border.all(
@@ -1051,7 +1051,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
-                                        width: Get.width * 0.50,
+                                        width: Get.width * 0.60,
                                         decoration: BoxDecoration(
                                             color: const Color(0xffF5F5F5),
                                             border: Border.all(
@@ -1632,29 +1632,43 @@ class TableRow extends DataTableSource {
   DataRow? getRow(int index) {
     return DataRow(cells: [
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.33,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.33,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].applicationId}'),
           ),
-          child: Text('${data!.data![index].applicationId}'),
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.50,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.50,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].statusName}'),
           ),
-          child: Text('${data!.data![index].statusName}'),
         ),
       ),
       DataCell(
@@ -1678,68 +1692,103 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.33,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.33,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].lastName}'),
           ),
-          child: Text('${data!.data![index].lastName}'),
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.33,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.33,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].applicationDate}'),
           ),
-          child: Text('${data!.data![index].applicationDate}'),
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.43,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.43,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].submitDate}'),
           ),
-          child: Text('${data!.data![index].submitDate}'),
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.50,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.50,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].instName}'),
           ),
-          child: Text('${data!.data![index].instName}'),
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.37,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.37,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('+${data!.data![index].mobileNo}'),
           ),
-          child: Text('+${data!.data![index].mobileNo}'),
         ),
       ),
       DataCell(
@@ -1940,16 +1989,23 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        Container(
-          alignment: Alignment.centerLeft,
-          height: Get.height * 0.17,
-          width: Get.width * 0.50,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+        GestureDetector(
+          onTap: () {
+            Get.to(ApplicationViewScreen(
+              applicationId: data!.data![index].applicationId,
+            ));
+          },
+          child: Container(
+            alignment: Alignment.centerLeft,
+            height: Get.height * 0.17,
+            width: Get.width * 0.50,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
+            child: Text('${data!.data![index].documentsStatus}'),
           ),
-          child: Text('${data!.data![index].documentsStatus}'),
         ),
       ),
     ]);

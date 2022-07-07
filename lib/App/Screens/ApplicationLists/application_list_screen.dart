@@ -359,7 +359,7 @@ class _ApplicationListScreenState extends State<ApplicationListScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.33,
+                                  width: Get.width * 0.430,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(

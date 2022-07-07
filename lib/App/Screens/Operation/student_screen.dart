@@ -340,7 +340,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 2),
                                     height: Get.height * 0.10,
-                                    width: Get.width * 0.33,
+                                    width: Get.width * 0.420,
                                     decoration: BoxDecoration(
                                         color: const Color(0xffF5F5F5),
                                         border: Border.all(
@@ -1201,7 +1201,7 @@ class TableRow extends DataTableSource {
         Container(
           alignment: Alignment.centerLeft,
           height: Get.height * 0.17,
-          width: Get.width * 0.33,
+          width: Get.width * 0.420,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),

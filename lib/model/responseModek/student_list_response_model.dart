@@ -58,7 +58,7 @@ class Datum {
   String? province;
   String? citizenship;
   Agent? agent;
-  Status? status;
+  String? status;
   DateTime? addStamp;
   int? numberOfApplication;
 
@@ -75,7 +75,8 @@ class Datum {
         province: json["Province"] == null ? null : json["Province"],
         citizenship: json["Citizenship"],
         agent: agentValues.map[json["Agent"]],
-        status: statusValues.map[json["Status"]],
+        status: json["Status"],
+       // status: statusValues.map[json["Status"]],
         addStamp: DateTime.parse(json["AddStamp"]),
         numberOfApplication: json["NumberOfApplication"],
       );

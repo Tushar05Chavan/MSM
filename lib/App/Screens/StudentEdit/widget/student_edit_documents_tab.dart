@@ -172,7 +172,7 @@ class _StudentEditDocumentTabScreenState
                                           ),
                                           child: const Center(
                                             child: Text(
-                                              'Selected File',
+                                              'Select File',
                                               style: TextStyle(
                                                 color: kRed,
                                                 fontSize: 15,

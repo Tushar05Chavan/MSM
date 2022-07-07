@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:msm_unify/App/AppData/app_data.dart';
@@ -500,11 +501,17 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                     height: 15,
                                   ),
                                   TextFormField(
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Email ID is required";
-                                      }
-                                    },
+                                    // validator: (value) {
+                                    //   if (value!.isEmpty) {
+                                    //     return "Email ID is required";
+                                    //   }
+                                    // },
+                                    validator: MultiValidator(
+                                      [
+                                        RequiredValidator(errorText: "Email ID is required"),
+                                        EmailValidator(errorText: "Email ID is invalid")
+                                      ]
+                                    ),
                                     controller: _emailId,
                                     cursorColor: kRed,
                                     decoration: InputDecoration(
@@ -863,9 +870,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                 BorderRadius.circular(5),
                                             hint: const Text("Country"),
                                             value: _residentialSelectedCountry,
-                                            items: countryCode1.map((country) {
+                                            items: 
+                                            //countryCode1.map((country) 
+                                            countryForSearch.map((country){
                                               return DropdownMenuItem(
-                                                  value: country.countryCode
+                                                  value: country.countryId
                                                       .toString(),
                                                   child: Text(
                                                     country.countryName

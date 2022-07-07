@@ -99,7 +99,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             controller: _useName,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Username is Required";
+                                return "Username is required";
                               } else if (!RegExp(r'\S+@\S+\.\S+')
                                   .hasMatch(value)) {
                                 return "Enter Valid Username";

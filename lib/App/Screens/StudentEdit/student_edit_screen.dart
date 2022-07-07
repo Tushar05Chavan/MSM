@@ -332,8 +332,8 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                             CrossAxisAlignment.start,
                                                                         children: [
                                                                           Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceBetween,
+                                                                            // mainAxisAlignment:
+                                                                              //  MainAxisAlignment.spaceBetween,
                                                                             children: [
                                                                               const Flexible(
                                                                                 child: Text(
@@ -343,21 +343,24 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                              Flexible(
-                                                                                child: GestureDetector(
-                                                                                  onTap: () {
-                                                                                    Get.back();
-                                                                                  },
-                                                                                  child: Container(
-                                                                                    height: Get.height * 0.04,
-                                                                                    width: Get.width * 0.08,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: kRed,
-                                                                                      borderRadius: BorderRadius.circular(8),
-                                                                                    ),
-                                                                                    child: const Icon(
-                                                                                      Icons.close,
-                                                                                      color: Colors.white,
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                                                                child: Flexible(
+                                                                                  child: GestureDetector(
+                                                                                    onTap: () {
+                                                                                      Get.back();
+                                                                                    },
+                                                                                    child: Container(
+                                                                                      height: Get.height * 0.04,
+                                                                                      width: Get.width * 0.08,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: kRed,
+                                                                                        borderRadius: BorderRadius.circular(8),
+                                                                                      ),
+                                                                                      child: const Icon(
+                                                                                        Icons.close,
+                                                                                        color: Colors.white,
+                                                                                      ),
                                                                                     ),
                                                                                   ),
                                                                                 ),
@@ -639,7 +642,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                             'Passport Details',
                                                                             style:
                                                                                 TextStyle(
-                                                                              color: kNavy,
+                                                                              color: kRed,
                                                                               fontSize: 14,
                                                                               fontFamily: 'Poppins',
                                                                             ),

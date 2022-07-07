@@ -93,31 +93,37 @@ class _StdNoteTabState extends State<StdNoteTab> {
                   height: Get.height * 0.05,
                 ),
                 GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    height: Get.height * 0.05,
-                    width: Get.width * 0.29,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border:
-                            Border.all(color: kNavy, style: BorderStyle.solid)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Icon(
-                          Icons.add,
-                          color: kNavy,
-                        ),
-                        Flexible(
-                          child: Text(
-                            'Add More',
-                            style: TextStyle(
-                              color: kNavy,
-                            ),
+                  onTap: () {
+                     
+                
+              },
+                  child: FlatButton(
+                    onPressed: () { },
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      height: Get.height * 0.05,
+                      width: Get.width * 0.29,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border:
+                              Border.all(color: kNavy, style: BorderStyle.solid)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Icon(
+                            Icons.add,
+                            color: kNavy,
                           ),
-                        )
-                      ],
+                          Flexible(
+                            child: Text(
+                              'Add More',
+                              style: TextStyle(
+                                color: kNavy,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
