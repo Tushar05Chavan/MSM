@@ -18,6 +18,7 @@ class StdNoteTab extends StatefulWidget {
 
 class _StdNoteTabState extends State<StdNoteTab> {
   final _comment = TextEditingController();
+  String _text = "";
 
   final StudentNoteViewModel studentNoteViewModel =
       Get.put(StudentNoteViewModel());
@@ -98,7 +99,9 @@ class _StdNoteTabState extends State<StdNoteTab> {
                 
               },
                   child: FlatButton(
-                    onPressed: () { },
+                    onPressed: () { 
+                       _text = _comment.text;
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       height: Get.height * 0.05,
@@ -147,7 +150,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        "${response[index].activityStatus}/${response[index].activityStamp}/${response[index].displayName}",
+                                        "${response[index].activityStamp}/${response[index].displayName}",
                                         style: const TextStyle(
                                             fontFamily: 'Roboto',
                                             fontSize: 16,
@@ -166,7 +169,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                                 Row(
                                   children: [
                                     Text(
-                                      '${response[index].activityStatus}',
+                                      "${response[index].activityRemark}",
                                       style: TextStyle(
                                           fontFamily: 'Roboto',
                                           fontSize: 18,

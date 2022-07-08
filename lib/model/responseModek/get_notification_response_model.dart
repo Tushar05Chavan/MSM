@@ -11,7 +11,7 @@ String getNotificationResponseModelToJson(GetNotificationResponseModel data) =>
     json.encode(data.toJson());
 
 class GetNotificationResponseModel {
-  GetNotificationResponseModel({
+  GetNotificationResponseModel({ 
     this.data,
     this.columns,
   });
@@ -80,7 +80,7 @@ class Datum {
     this.transactionId,
   });
 
-  NotificationType? notificationType;
+  String ? notificationType;
   String? agentStudentName;
   String? queryDetails;
   DateTime? addStamp;
@@ -90,7 +90,7 @@ class Datum {
   int? transactionId;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        notificationType: notificationTypeValues.map[json["Notification Type"]],
+        notificationType: json["Notification Type"],
         agentStudentName: json["Agent/Student Name"],
         queryDetails: json["Query Details"],
         addStamp: DateTime.parse(json["Add Stamp"]),

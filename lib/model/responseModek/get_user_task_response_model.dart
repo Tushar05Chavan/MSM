@@ -11,6 +11,8 @@ List<GetUserTaskResponseModel> getUserTaskResponseModelFromJson(String str) =>
 String getUserTaskResponseModelToJson(List<GetUserTaskResponseModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+    
+
 class GetUserTaskResponseModel {
   GetUserTaskResponseModel({
     this.taskId,
@@ -50,14 +52,14 @@ class GetUserTaskResponseModel {
   String? taskSubject;
   DateTime? dueDate;
   String? taskStatus;
-  TaskPriority? taskPriority;
+  String? taskPriority;
   TaskDescription? taskDescription;
   dynamic reminderDate;
   dynamic isRecurring;
   dynamic recurringMode;
   dynamic recurranceStart;
   dynamic recurranceEnd;
-  AssignedTo? taskOwner;
+  String? taskOwner;
   String? taskResponse;
   AssignedTo? assignedTo;
   dynamic creator;
@@ -84,14 +86,14 @@ class GetUserTaskResponseModel {
         taskSubject: json["TaskSubject"],
         dueDate: DateTime.parse(json["DueDate"]),
         taskStatus: json["TaskStatus"],
-        taskPriority: taskPriorityValues.map[json["TaskPriority"]],
+        taskPriority: json["TaskPriority"],
         taskDescription: taskDescriptionValues.map[json["TaskDescription"]],
         reminderDate: json["ReminderDate"],
         isRecurring: json["isRecurring"],
         recurringMode: json["RecurringMode"],
         recurranceStart: json["RecurranceStart"],
         recurranceEnd: json["RecurranceEnd"],
-        taskOwner: assignedToValues.map[json["TaskOwner"]],
+        taskOwner: json["TaskOwner"],
         taskResponse: json["TaskResponse"],
         assignedTo: assignedToValues.map[json["AssignedTo"]],
         creator: json["Creator"],

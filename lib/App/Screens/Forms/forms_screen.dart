@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,10 @@ import 'package:msm_unify/model/responseModek/form_institution_response_model.da
 import 'package:msm_unify/model/responseModek/get_forms_detail_response_model.dart';
 import 'package:msm_unify/viewModel/form_institution_view_model.dart';
 import 'package:msm_unify/viewModel/get_form_details_view_model.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xl;
+import 'package:syncfusion_flutter_datagrid_export/export.dart';
+import 'package:open_file/open_file.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);
@@ -39,6 +44,35 @@ class _FormScreenState extends State<FormScreen> {
     });
     setState(() {});
     print('Insti==$institutions');
+  }
+
+  Future<void> createExcel() async {
+    final xl.Workbook workbook = xl.Workbook();
+    final xl.Worksheet sheet = workbook.worksheets[0];
+    sheet.getRangeByName('A1').setText('Title');
+    sheet.getRangeByName('B1').setText('Institution');
+    sheet.getRangeByName('C1').setText('Description');
+    // sheet.getRangeByName('D1').setText('Action');
+    //sheet.getRangeByName('E1').setText('Logged by');
+    // sheet.getRangeByIndex(rowIndex, columnIndex)
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    // if (kIsWeb) {
+    //   AnchorElement(
+    //       href:
+    //           'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+    //     ..setAttribute('download', 'Output.xlsx')
+    //     ..click();
+    // } else {
+    final String path = (await getApplicationSupportDirectory()).path;
+    final String fileName =
+        //Platform.isWindows ? '$path\\Output.xlsx' : 
+        '$path/Output.xlsx';
+    final File file = File(fileName);
+    await file.writeAsBytes(bytes, flush: true);
+    OpenFile.open(fileName);
   }
 
   final TextEditingController _search = TextEditingController();
@@ -206,7 +240,22 @@ class _FormScreenState extends State<FormScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
+              
               Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    GetBuilder<GetFormDetailsViewModel>(
+                      builder: (controller) {
+                        if (controller.apiResponse.status == Status.COMPLETE) {
+                          List<GetFormsDetailsResponseModel> response =
+                              controller.apiResponse.data;
+
+                          List data = [response.length];
+                          print('RESPONSE===${response.length}');
+                          return Column(
+                            children: [
+                              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -219,90 +268,216 @@ class _FormScreenState extends State<FormScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    SvgPicture.asset(
-                      'assets/icons/XLSX.svg',
-                      height: 35,
-                      width: 35,
-                    ),
+                     GestureDetector(
+                                      onTap: () async {
+                                        final xl.Workbook workbook =
+                                            xl.Workbook();
+                                        final xl.Worksheet sheet =
+                                            workbook.worksheets[0];
+                                        sheet
+                                            .getRangeByName('A1')
+                                            .setText('Title');
+                                        sheet
+                                            .getRangeByName('B1')
+                                            .setText('Institution');
+                                        sheet
+                                            .getRangeByName('C1')
+                                            .setText('Description');
+                                        // sheet
+                                        //     .getRangeByName('D1')
+                                        //     .setText('Add Stamp');
+                                        // sheet
+                                        //     .getRangeByName('E1')
+                                        //     .setText('Logged by');
+
+                                        // sheet.importList(list, firstRow, firstColumn, isVertical);
+                                       sheet.tableCollection.toString();
+                                        print(data[0]);
+                                        for (var i = 0; i < data[0]; i++) {
+                                          sheet
+                                              .getRangeByIndex(i + 2, 1)
+                                              .setValue(response
+                                                  [i].docTitle);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 2)
+                                              .setValue(response
+                                                  [i].institutionName);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 3)
+                                              .setValue(response
+                                                  [i].docDescription);
+                                          // sheet
+                                          //     .getRangeByIndex(i + 2, 4)
+                                          //     .setValue(
+                                          //         response.data![i].addStamp);
+                                          // sheet
+                                          //     .getRangeByIndex(i + 2, 5)
+                                          //     .setValue(
+                                          //         response.data![i].loggedBy);
+                                                                               }
+///////////////////////////////////
+                                        final List<int> bytes =
+                                            workbook.saveAsStream();
+                                        workbook.dispose();
+
+                                        // if (kIsWeb) {
+                                        //   AnchorElement(
+                                        //       href:
+                                        //           'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+                                        //     ..setAttribute('download', 'Output.xlsx')
+                                        //     ..click();
+                                        // } else {
+                                        final String path =
+                                            (await getApplicationSupportDirectory())
+                                                .path;
+                                        final String fileName =
+                                            Platform.isWindows
+                                                ? '$path\\Output.xlsx'
+                                                : '$path/Output.xlsx';
+                                        final File file = File(fileName);
+                                        await file.writeAsBytes(bytes,
+                                            flush: true);
+                                        OpenFile.open(fileName);
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/icons/XLSX.svg',
+                                        height: 35,
+                                        width: 35,
+                                      ),
+                                    ),
                     const SizedBox(
                       width: 10,
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    GetBuilder<GetFormDetailsViewModel>(
-                      builder: (controller) {
-                        if (controller.apiResponse.status == Status.COMPLETE) {
-                          List<GetFormsDetailsResponseModel> response =
-                              controller.apiResponse.data;
-                          return PaginatedDataTable(
-                              onRowsPerPageChanged: (perPage) {},
-                              columnSpacing: 0,
-                              rowsPerPage: 5,
-                              availableRowsPerPage: const [5],
-                              dataRowHeight: Get.height * 0.05,
-                              headingRowHeight: Get.height * 0.08,
-                              horizontalMargin: 1,
-                              columns: [
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.33,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Title',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                              PaginatedDataTable(
+                                  onRowsPerPageChanged: (perPage) {},
+                                  columnSpacing: 0,
+                                  rowsPerPage: 5,
+                                  availableRowsPerPage: const [5],
+                                  dataRowHeight: Get.height * 0.05,
+                                  headingRowHeight: Get.height * 0.08,
+                                  horizontalMargin: 1,
+                                  columns: [
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.33,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                                DataColumn(
-                                    label: Container(
+                                                  },
+                                                  child: const Text(
+                                                    'Title',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(
+                                                                seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.43,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                    'Institution',
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    softWrap: false,
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(
+                                                                seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                      label: Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
@@ -328,10 +503,7 @@ class _FormScreenState extends State<FormScreen> {
                                                 });
                                               },
                                               child: const Text(
-                                                'Institution',
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                softWrap: false,
+                                                ' Description',
                                                 style: TextStyle(
                                                   fontFamily: 'Roboto',
                                                   color: Colors.black,
@@ -356,84 +528,456 @@ class _FormScreenState extends State<FormScreen> {
                                                   color: Colors.black,
                                                 ))
                                           ],
-                                        ))),
-                                DataColumn(
-                                  label: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 2),
-                                    height: Get.height * 0.10,
-                                    width: Get.width * 0.43,
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xffF5F5F5),
-                                        border: Border.all(
-                                            color: Colors.white, width: 2)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              // colorsValue = true;
-                                              Future.delayed(
-                                                  const Duration(seconds: 2),
-                                                  () {
-                                                // colorsValue = false;
-                                                setState(() {});
-                                              });
-                                            });
-                                          },
-                                          child: const Text(
-                                            ' Description',
+                                        ),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 2),
+                                        height: Get.height * 0.10,
+                                        width: Get.width * 0.43,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xffF5F5F5),
+                                            border: Border.all(
+                                                color: Colors.white, width: 2)),
+                                        child: const Center(
+                                          child: Text(
+                                            'Action',
                                             style: TextStyle(
                                               fontFamily: 'Roboto',
                                               color: Colors.black,
                                             ),
                                           ),
                                         ),
-                                        InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                // colorsValue = true;
-                                                Future.delayed(
-                                                    Duration(seconds: 1), () {
-                                                  // colorsValue = false;
-                                                  setState(() {});
-                                                });
-                                              });
-                                            },
-                                            // onTap: () {},
-                                            child: Icon(
-                                              Icons.filter_list,
-                                              color: Colors.black,
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 2),
-                                    height: Get.height * 0.10,
-                                    width: Get.width * 0.43,
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xffF5F5F5),
-                                        border: Border.all(
-                                            color: Colors.white, width: 2)),
-                                    child: const Center(
-                                      child: Text(
-                                        'Action',
-                                        style: TextStyle(
-                                          fontFamily: 'Roboto',
-                                          color: Colors.black,
-                                        ),
                                       ),
                                     ),
+                                  ],
+                                  source: TableRow(response)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2),
+                                child: Container(
+                                  height: Get.height * 0.08,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black.withOpacity(0.2)),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      SvgPicture.asset(
+                                        'assets/icons/Filter.svg',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  actions: [
+                                                    Stack(
+                                                      children: [
+                                                        SizedBox(
+                                                          height:
+                                                              Get.height * 0.80,
+                                                          width: Get.width,
+                                                          child:
+                                                              StatefulBuilder(
+                                                            builder: (BuildContext
+                                                                    context,
+                                                                void Function(
+                                                                        void
+                                                                            Function())
+                                                                    setState) {
+                                                              return Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  const Text(
+                                                                    'Filter Builder',
+                                                                    style: TextStyle(
+                                                                        fontFamily:
+                                                                            'Roboto',
+                                                                        fontSize:
+                                                                            22,
+                                                                        color: Colors
+                                                                            .black),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height:
+                                                                        Get.height *
+                                                                            0.04,
+                                                                  ),
+                                                                  const Divider(),
+                                                                  SizedBox(
+                                                                    height:
+                                                                        Get.height *
+                                                                            0.04,
+                                                                  ),
+                                                                  Row(
+                                                                    children: [
+                                                                      PopupMenuButton(
+                                                                          child:
+                                                                              Container(
+                                                                            padding:
+                                                                                const EdgeInsets.all(10),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Colors.red.withOpacity(0.2),
+                                                                              borderRadius: BorderRadius.circular(10),
+                                                                            ),
+                                                                            child:
+                                                                                Text(add.toString()),
+                                                                          ),
+                                                                          itemBuilder: (context) =>
+                                                                              [
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {
+                                                                                      add = 'Not And';
+                                                                                    });
+                                                                                  },
+                                                                                  child: const Text('Not And'),
+                                                                                ),
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {
+                                                                                      add = 'or';
+                                                                                    });
+                                                                                  },
+                                                                                  child: const Text('or'),
+                                                                                ),
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {
+                                                                                      add = 'Not or';
+                                                                                    });
+                                                                                  },
+                                                                                  child: const Text('Not or'),
+                                                                                ),
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {
+                                                                                      add = 'And';
+                                                                                    });
+                                                                                  },
+                                                                                  child: const Text('And'),
+                                                                                ),
+                                                                              ]),
+                                                                      const SizedBox(
+                                                                        width:
+                                                                            10,
+                                                                      ),
+                                                                      PopupMenuButton(
+                                                                        child:
+                                                                            Container(
+                                                                          padding:
+                                                                              const EdgeInsets.all(10),
+                                                                          child:
+                                                                              Text(
+                                                                            "+",
+                                                                            style:
+                                                                                TextStyle(color: Colors.green.withOpacity(0.5), fontSize: 25),
+                                                                          ),
+                                                                        ),
+                                                                        itemBuilder:
+                                                                            (context) =>
+                                                                                [
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                _addCondition = true;
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('Add Condition'),
+                                                                          ),
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                _addGroup = true;
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('Add Group'),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  _addGroup ==
+                                                                          true
+                                                                      ? Row(
+                                                                          children: [
+                                                                            const SizedBox(
+                                                                              width: 5,
+                                                                            ),
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  _addGroup = false;
+                                                                                });
+                                                                              },
+                                                                              child: const Icon(
+                                                                                Icons.close,
+                                                                                color: Colors.red,
+                                                                                size: 25,
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            PopupMenuButton(
+                                                                                child: Container(
+                                                                                  padding: const EdgeInsets.all(10),
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: Colors.red.withOpacity(0.2),
+                                                                                    borderRadius: BorderRadius.circular(10),
+                                                                                  ),
+                                                                                  child: Text(add1.toString()),
+                                                                                ),
+                                                                                itemBuilder: (context) => [
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'Not And';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('Not And'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'or';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('or'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'Not or';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('Not or'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'And';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('And'),
+                                                                                      ),
+                                                                                    ]),
+                                                                            const SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            PopupMenuButton(
+                                                                              child: Container(
+                                                                                padding: const EdgeInsets.all(10),
+                                                                                child: Text(
+                                                                                  "+",
+                                                                                  style: TextStyle(color: Colors.green.withOpacity(0.5), fontSize: 25),
+                                                                                ),
+                                                                              ),
+                                                                              itemBuilder: (context) => [
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {
+                                                                                      _addCondition = true;
+                                                                                    });
+                                                                                  },
+                                                                                  child: const Text('Add Condition'),
+                                                                                ),
+                                                                                PopupMenuItem(
+                                                                                  onTap: () {
+                                                                                    setState(() {});
+                                                                                  },
+                                                                                  child: const Text('Add Group'),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      : const SizedBox(),
+                                                                  const SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  _addCondition ==
+                                                                          true
+                                                                      ? Row(
+                                                                          children: [
+                                                                            const SizedBox(
+                                                                              width: 5,
+                                                                            ),
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  _addCondition = false;
+                                                                                });
+                                                                              },
+                                                                              child: const Icon(
+                                                                                Icons.close,
+                                                                                color: Colors.red,
+                                                                                size: 25,
+                                                                              ),
+                                                                            ),
+                                                                            const SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            PopupMenuButton(
+                                                                                child: Container(
+                                                                                  padding: const EdgeInsets.all(10),
+                                                                                  decoration: BoxDecoration(
+                                                                                    color: Colors.red.withOpacity(0.2),
+                                                                                    borderRadius: BorderRadius.circular(10),
+                                                                                  ),
+                                                                                  child: Text(add1.toString()),
+                                                                                ),
+                                                                                itemBuilder: (context) => [
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'Not And';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('Not And'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'or';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('or'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'Not or';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('Not or'),
+                                                                                      ),
+                                                                                      PopupMenuItem(
+                                                                                        onTap: () {
+                                                                                          setState(() {
+                                                                                            add1 = 'And';
+                                                                                          });
+                                                                                        },
+                                                                                        child: const Text('And'),
+                                                                                      ),
+                                                                                    ]),
+                                                                            const SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            Container(
+                                                                              padding: const EdgeInsets.all(10),
+                                                                              decoration: BoxDecoration(
+                                                                                color: Colors.green.withOpacity(0.5),
+                                                                                borderRadius: BorderRadius.circular(10),
+                                                                              ),
+                                                                              child: const Text('Contains'),
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      : const SizedBox(),
+                                                                ],
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                        Positioned(
+                                                          right: 5,
+                                                          bottom: 5,
+                                                          child: Row(
+                                                            children: [
+                                                              GestureDetector(
+                                                                onTap: () {
+                                                                  Get.back();
+                                                                },
+                                                                child:
+                                                                    const Text(
+                                                                  'OK',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      fontSize:
+                                                                          16),
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 25,
+                                                              ),
+                                                              GestureDetector(
+                                                                onTap: () {
+                                                                  Get.back();
+                                                                },
+                                                                child:
+                                                                    const Text(
+                                                                  'CANCEL',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .red,
+                                                                      fontSize:
+                                                                          16),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        },
+                                        child: const Text(
+                                          "Create Filter",
+                                          style: TextStyle(
+                                            color: Color(0xffe8252a),
+                                            fontFamily: 'Roboto',
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                              source: TableRow(response));
+                              ),
+                              SizedBox(
+                                height: Get.height * 0.025,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Number of items: ${response.length}',
+                                    textAlign: TextAlign.left,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
                         } else {
                           if (controller.apiResponse.status == Status.ERROR) {
                             return const Center(
@@ -449,498 +993,9 @@ class _FormScreenState extends State<FormScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2),
-                child: Container(
-                  height: Get.height * 0.08,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black.withOpacity(0.2)),
-                  ),
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/Filter.svg',
-                        height: 30,
-                        width: 30,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  actions: [
-                                    Stack(
-                                      children: [
-                                        SizedBox(
-                                          height: Get.height * 0.80,
-                                          width: Get.width,
-                                          child: StatefulBuilder(
-                                            builder: (BuildContext context,
-                                                void Function(void Function())
-                                                    setState) {
-                                              return Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  const Text(
-                                                    'Filter Builder',
-                                                    style: TextStyle(
-                                                        fontFamily: 'Roboto',
-                                                        fontSize: 22,
-                                                        color: Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    height: Get.height * 0.04,
-                                                  ),
-                                                  const Divider(),
-                                                  SizedBox(
-                                                    height: Get.height * 0.04,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      PopupMenuButton(
-                                                          child: Container(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Colors.red
-                                                                  .withOpacity(
-                                                                      0.2),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                            ),
-                                                            child: Text(
-                                                                add.toString()),
-                                                          ),
-                                                          itemBuilder:
-                                                              (context) => [
-                                                                    PopupMenuItem(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          add =
-                                                                              'Not And';
-                                                                        });
-                                                                      },
-                                                                      child: const Text(
-                                                                          'Not And'),
-                                                                    ),
-                                                                    PopupMenuItem(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          add =
-                                                                              'or';
-                                                                        });
-                                                                      },
-                                                                      child: const Text(
-                                                                          'or'),
-                                                                    ),
-                                                                    PopupMenuItem(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          add =
-                                                                              'Not or';
-                                                                        });
-                                                                      },
-                                                                      child: const Text(
-                                                                          'Not or'),
-                                                                    ),
-                                                                    PopupMenuItem(
-                                                                      onTap:
-                                                                          () {
-                                                                        setState(
-                                                                            () {
-                                                                          add =
-                                                                              'And';
-                                                                        });
-                                                                      },
-                                                                      child: const Text(
-                                                                          'And'),
-                                                                    ),
-                                                                  ]),
-                                                      const SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      PopupMenuButton(
-                                                        child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10),
-                                                          child: Text(
-                                                            "+",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .green
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                                fontSize: 25),
-                                                          ),
-                                                        ),
-                                                        itemBuilder:
-                                                            (context) => [
-                                                          PopupMenuItem(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                _addCondition =
-                                                                    true;
-                                                              });
-                                                            },
-                                                            child: const Text(
-                                                                'Add Condition'),
-                                                          ),
-                                                          PopupMenuItem(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                _addGroup =
-                                                                    true;
-                                                              });
-                                                            },
-                                                            child: const Text(
-                                                                'Add Group'),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  _addGroup == true
-                                                      ? Row(
-                                                          children: [
-                                                            const SizedBox(
-                                                              width: 5,
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  _addGroup =
-                                                                      false;
-                                                                });
-                                                              },
-                                                              child: const Icon(
-                                                                Icons.close,
-                                                                color:
-                                                                    Colors.red,
-                                                                size: 25,
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            PopupMenuButton(
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(10),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .red
-                                                                        .withOpacity(
-                                                                            0.2),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                  ),
-                                                                  child: Text(add1
-                                                                      .toString()),
-                                                                ),
-                                                                itemBuilder:
-                                                                    (context) =>
-                                                                        [
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'Not And';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('Not And'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'or';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('or'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'Not or';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('Not or'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'And';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('And'),
-                                                                          ),
-                                                                        ]),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            PopupMenuButton(
-                                                              child: Container(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(10),
-                                                                child: Text(
-                                                                  "+",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .green
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                      fontSize:
-                                                                          25),
-                                                                ),
-                                                              ),
-                                                              itemBuilder:
-                                                                  (context) => [
-                                                                PopupMenuItem(
-                                                                  onTap: () {
-                                                                    setState(
-                                                                        () {
-                                                                      _addCondition =
-                                                                          true;
-                                                                    });
-                                                                  },
-                                                                  child: const Text(
-                                                                      'Add Condition'),
-                                                                ),
-                                                                PopupMenuItem(
-                                                                  onTap: () {
-                                                                    setState(
-                                                                        () {});
-                                                                  },
-                                                                  child: const Text(
-                                                                      'Add Group'),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : const SizedBox(),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  _addCondition == true
-                                                      ? Row(
-                                                          children: [
-                                                            const SizedBox(
-                                                              width: 5,
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                setState(() {
-                                                                  _addCondition =
-                                                                      false;
-                                                                });
-                                                              },
-                                                              child: const Icon(
-                                                                Icons.close,
-                                                                color:
-                                                                    Colors.red,
-                                                                size: 25,
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            PopupMenuButton(
-                                                                child:
-                                                                    Container(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(10),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .red
-                                                                        .withOpacity(
-                                                                            0.2),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                  ),
-                                                                  child: Text(add1
-                                                                      .toString()),
-                                                                ),
-                                                                itemBuilder:
-                                                                    (context) =>
-                                                                        [
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'Not And';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('Not And'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'or';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('or'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'Not or';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('Not or'),
-                                                                          ),
-                                                                          PopupMenuItem(
-                                                                            onTap:
-                                                                                () {
-                                                                              setState(() {
-                                                                                add1 = 'And';
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                                const Text('And'),
-                                                                          ),
-                                                                        ]),
-                                                            const SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Container(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(10),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Colors
-                                                                    .green
-                                                                    .withOpacity(
-                                                                        0.5),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                              ),
-                                                              child: const Text(
-                                                                  'Contains'),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      : const SizedBox(),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 5,
-                                          bottom: 5,
-                                          child: Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text(
-                                                  'OK',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 16),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 25,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.back();
-                                                },
-                                                child: const Text(
-                                                  'CANCEL',
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize: 16),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              });
-                        },
-                        child: const Text(
-                          "Create Filter",
-                          style: TextStyle(
-                            color: Color(0xffe8252a),
-                            fontFamily: 'Roboto',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               SizedBox(
                 height: Get.height * 0.025,
               ),
-               Row(
-                       children: [
-                         Text(
-                                    'Number of items: 19',
-                                    textAlign: TextAlign.left,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black,
-                                        fontFamily: 'Poppins'),
-                                  ),
-                       ],
-                     ),
-                     SizedBox(
-                      height: 10,
-                    ),
               supportSection(),
             ],
           ),

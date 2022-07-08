@@ -15,7 +15,7 @@ import 'package:msm_unify/viewModel/get_notification_view_model.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xl;
-
+import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import '../../common/color_constant.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -69,7 +69,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // } else {
     final String path = (await getApplicationSupportDirectory()).path;
     final String fileName =
-        Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+        //Platform.isWindows ? '$path\\Output.xlsx' : 
+        '$path/Output.xlsx';
     final File file = File(fileName);
     await file.writeAsBytes(bytes, flush: true);
     OpenFile.open(fileName);
@@ -137,6 +138,33 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     const SizedBox(
                                       width: 10,
                                     ),
+                                    // GestureDetector(
+                                    //   onTap: () async {
+                                    //     final xl.Workbook workbook =
+                                    //         xl.Workbook();
+                                    //     final xl.Worksheet sheet =
+                                    //         workbook.worksheets[0];
+                                    //     sheet
+                                    //         .getRangeByName('A1')
+                                    //         .setText('Notification Type');
+                                    //     sheet
+                                    //         .getRangeByName('B1')
+                                    //         .setText('Agent/Student Name');
+                                    //     sheet
+                                    //         .getRangeByName('C1')
+                                    //         .setText('Query details');
+                                    //     sheet
+                                    //         .getRangeByName('D1')
+                                    //         .setText('Add Stamp');
+                                    //     sheet
+                                    //         .getRangeByName('E1')
+                                    //         .setText('Logged by');
+
+                                    //     // sheet.importList(list, firstRow, firstColumn, isVertical);
+                                    //     sheet.tableCollection.toString();
+                                    //     sheet.getRangeByIndex(2, 2).setValue(
+                                    //         response.data![0].notificationType);
+
                                     GestureDetector(
                                       onTap: () async {
                                         final xl.Workbook workbook =
@@ -160,10 +188,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                             .setText('Logged by');
 
                                         // sheet.importList(list, firstRow, firstColumn, isVertical);
-                                        sheet.tableCollection.toString();
-                                        sheet.getRangeByIndex(2, 2).setValue(
-                                            response.data![0].notificationType);
-
+                                       sheet.tableCollection.toString();
+                                        print(data[0]);
+                                        for (var i = 0; i < data[0]; i++) {
+                                          sheet
+                                              .getRangeByIndex(i + 2, 1)
+                                              .setValue(response
+                                                  .data![i].notificationType);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 2)
+                                              .setValue(response
+                                                  .data![i].agentStudentName);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 3)
+                                              .setValue(response
+                                                  .data![i].queryDetails);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 4)
+                                              .setValue(
+                                                  response.data![i].addStamp);
+                                          sheet
+                                              .getRangeByIndex(i + 2, 5)
+                                              .setValue(
+                                                  response.data![i].loggedBy);                             }
+///////////////////////////////////
                                         final List<int> bytes =
                                             workbook.saveAsStream();
                                         workbook.dispose();
