@@ -35,7 +35,7 @@ class _DetailsTabScreenState extends State<DetailsTabScreen> {
   List<ProvinceCountryResponseModel> provinceState = [];
   Future<void> provinceCountry() async {
     await _provinceCountryViewModel.provinceCountryViewModel(
-        cuntryId: int.parse(_selectedCountry.toString()));
+         int.parse(_selectedCountry.toString()));
     List<ProvinceCountryResponseModel> response =
         _provinceCountryViewModel.apiResponse.data;
     response.forEach((element) {

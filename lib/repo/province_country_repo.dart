@@ -8,11 +8,11 @@ import 'package:msm_unify/services/api_url.dart';
 class ProvinceCountryRepo extends ApiURLService {
   Future<List<ProvinceCountryResponseModel>> provinceCountryRepo(
       {int? countryId}) async {
-    print('rrfgr');
+    print('countryId:$countryId');
     var response = await APIService().getResponse(
         url: "${BaseUrl.baseUrl}/Misc/Province?Country=$countryId",
         apitype: APIType.aGet);
-    print('rrfgr');
+    ('rrfgr');
     print('--res ${response}');
     List<ProvinceCountryResponseModel> provinceCountryResponseModel =
         provinceCountryResponseModelFromJson(jsonEncode(response));

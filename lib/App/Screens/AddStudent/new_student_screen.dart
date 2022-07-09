@@ -124,19 +124,21 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
   @override
   void initState() {
     countryForSearchCode();
+     getLanguage();
     getCountryCode();
-    provinceCountry();
-    getLanguage();
+    
+   
     getRelation();
 
     super.initState();
   }
 
   List<ProvinceCountryResponseModel> provinceState = [];
-  Future<void> provinceCountry() async {
-    await _provinceCountryViewModel.provinceCountryViewModel();
+  Future<void> provinceCountry(int _id) async {
+    await _provinceCountryViewModel.provinceCountryViewModel(_id);
     List<ProvinceCountryResponseModel> response =
         _provinceCountryViewModel.apiResponse.data;
+    provinceState.clear();
     response.forEach((element) {
       provinceState.add(element);
     });
@@ -582,6 +584,10 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       if (value!.isEmpty) {
                                         return "Contact number is required";
                                       }
+                                      if (value.length < 9 && value.length > 10) {
+                                        return "Invalid Contact number ";
+                                      }
+
                                     },
                                     decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
@@ -886,10 +892,12 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                   ));
                                             }).toList(),
                                             onChanged: (newValue) {
-                                              setState(() {
+                                             // setState(() {
+                                              //int value = country.countryId;
+                                              provinceCountry(int.parse(newValue.toString()));
                                                 _residentialSelectedCountry =
                                                     newValue as String?;
-                                              });
+                                             // });
                                             }),
                                       ),
                                       const SizedBox(
@@ -1644,6 +1652,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     },
                                                     "emergencyInfo": {}
                                                   };
+                                                  
 
                                                   bool milan =
                                                       await AddNewStudentRepo
@@ -1656,31 +1665,33 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     Get.off(
                                                         const StudentListScreen());
                                                   } else {
-                                                    print('else ma aavu');
+                                                    print('error');
                                                   }
                                                 }
                                               },
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 20),
-                                                height: Get.height * 0.05,
-                                                decoration: BoxDecoration(
-                                                    color: kGreen1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                child: const Center(
-                                                  child: Text(
-                                                    'Save',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 11),
+                                              
+                                                child: Container(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 20),
+                                                  height: Get.height * 0.05,
+                                                  decoration: BoxDecoration(
+                                                      color: kGreen1,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15)),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      'Save',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 11),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
+                                            
                                           ],
                                         ),
                                       ),

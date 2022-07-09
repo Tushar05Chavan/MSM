@@ -5,19 +5,18 @@ import 'package:msm_unify/repo/province_country_repo.dart';
 
 class ProvinceCountryViewModel extends GetxController {
   ApiResponse _apiResponse = ApiResponse.initial(message: 'Initialization');
-
+ 
+  
   ApiResponse get apiResponse => _apiResponse;
 
-  onInit() {
-    provinceCountryViewModel();
-  }
+  
 
-  Future<void> provinceCountryViewModel({int? cuntryId}) async {
+  Future<void> provinceCountryViewModel(int? countryId) async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     update();
     try {
       List<ProvinceCountryResponseModel> response =
-          await ProvinceCountryRepo().provinceCountryRepo(countryId: cuntryId);
+          await ProvinceCountryRepo().provinceCountryRepo(countryId: countryId);
       print('ProvinceCountryResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
     } catch (e) {

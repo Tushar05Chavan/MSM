@@ -20,7 +20,7 @@ class _CommonProvinceStateState extends State<CommonProvinceState> {
 
   List<ProvinceCountryResponseModel> provinceState = [];
   Future<void> provinceCountry() async {
-    await _provinceCountryViewModel.provinceCountryViewModel();
+    await _provinceCountryViewModel.provinceCountryViewModel(12);
     List<ProvinceCountryResponseModel> response =
         _provinceCountryViewModel.apiResponse.data;
     response.forEach((element) {
