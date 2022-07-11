@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,10 +8,6 @@ import 'package:msm_unify/viewModel/country_dropdown_view_model.dart';
 import '../../../../viewModel/type_dropdown_view_model.dart';
 import '../../../common/AppConfig/support_section.dart';
 import '../../../common/color_constant.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xl;
-import 'package:syncfusion_flutter_datagrid_export/export.dart';
 
 class StudentVisaTab extends StatefulWidget {
   final int? countryId;
@@ -74,35 +69,6 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
     setState(() {});
   }
 
-  Future<void> createExcel() async {
-    final xl.Workbook workbook = xl.Workbook();
-    final xl.Worksheet sheet = workbook.worksheets[0];
-    sheet.getRangeByName('A1').setText('Notification Type');
-    sheet.getRangeByName('B1').setText('Agent/Student Name');
-    sheet.getRangeByName('C1').setText('Query details');
-    sheet.getRangeByName('D1').setText('Add Stamp');
-    sheet.getRangeByName('E1').setText('Logged by');
-    // sheet.getRangeByIndex(rowIndex, columnIndex)
-
-    final List<int> bytes = workbook.saveAsStream();
-    workbook.dispose();
-
-    // if (kIsWeb) {
-    //   AnchorElement(
-    //       href:
-    //           'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-    //     ..setAttribute('download', 'Output.xlsx')
-    //     ..click();
-    // } else {
-    final String path = (await getApplicationSupportDirectory()).path;
-    final String fileName =
-        //Platform.isWindows ? '$path\\Output.xlsx' : 
-        '$path/Output.xlsx';
-    final File file = File(fileName);
-    await file.writeAsBytes(bytes, flush: true);
-    OpenFile.open(fileName);
-  }
-
   @override
   void initState() {
     getType();
@@ -116,16 +82,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-          child:
-          GetBuilder<GetUserTaskViewModel>(
-                      builder: (controller) {
-                        if (controller.apiResponse.status == Status.COMPLETE) {
-                          List<GetUserTaskResponseModel> response =
-                              controller.apiResponse.data;
-
-                              List data = [response.length];
-                          print('RESPONSE===${response.length}');
-          return Column(
+          child: Column(
             children: [
               const SizedBox(
                 height: 20,
@@ -1216,14 +1173,10 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
               ),
               supportSection(),
             ],
-          );
-                        }
-                      }
           ),
-        )
         ),
-      );
-    
+      ),
+    );
   }
 }
 

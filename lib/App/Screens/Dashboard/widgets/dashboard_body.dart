@@ -334,6 +334,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                   fontFamily: 'Poppins',
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
+                                  
                                   color: kRed,
                                 ),
                               )
