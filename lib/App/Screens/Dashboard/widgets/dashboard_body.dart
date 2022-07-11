@@ -8,6 +8,7 @@ import 'package:msm_unify/App/Screens/AddStudent/add_student_screen.dart';
 import 'package:msm_unify/App/Screens/ApplicationLists/application_list_screen.dart';
 import 'package:msm_unify/App/Screens/ApplicationView/application_view.dart';
 import 'package:msm_unify/App/Screens/Dashboard/controller/dashboard_controller.dart';
+import 'package:msm_unify/App/Screens/ProgramDetail/program_details_screen.dart';
 import 'package:msm_unify/ScholarshipView/scholarship_view_screen.dart';
 import 'package:msm_unify/model/responseModek/country_response_model.dart';
 import 'package:msm_unify/model/responseModek/for_dashboard_response_model.dart';
@@ -933,7 +934,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                     controller.apiResponse.data;
                 if (newsData.isEmpty) {
                   print('no dattatata');
-                  return const Center(child: Text('No Data Found'));
+                  return const Center(child: Text('No Mews Data Found'));
                 }
 
                 return ListView.separated(
@@ -1007,6 +1008,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                 );
               } else {
                 if (controller.apiResponse.status == Status.ERROR) {
+                  print('No Data Found');
                   return const Text('No Data Found');
                 }
                 return const Text('No data');
@@ -1202,23 +1204,23 @@ class _DashboardBodyState extends State<DashboardBody> {
                                     const Spacer(),
                                     GestureDetector(
                                       onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                content: Container(
-                                                  height: Get.height * 0.10,
-                                                  width: Get.width,
-                                                  child: const Center(
-                                                    child:
-                                                        Text('Not implemented'),
-                                                  ),
-                                                ),
-                                              );
-                                            });
-                                        // Get.to(ProgramDetailScreen(
-                                        //   programId: data[index].programId,
-                                        // ));
+                                        // showDialog(
+                                        //     context: context,
+                                        //     builder: (context) {
+                                        //       return AlertDialog(
+                                        //         content: Container(
+                                        //           height: Get.height * 0.10,
+                                        //           width: Get.width,
+                                        //           child: const Center(
+                                        //             child:
+                                        //                 Text('Not implemented'),
+                                        //           ),
+                                        //         ),
+                                        //       );
+                                        //     });
+                                        Get.to(ProgramDetailScreen(
+                                          programId: data[index].programId,
+                                        ));
                                       },
                                       child: Container(
                                         height: 35,

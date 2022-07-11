@@ -23,7 +23,7 @@ import 'package:msm_unify/viewModel/student_view_view_model.dart';
 import '../../../model/responseModek/student_view_response_model.dart';
 import 'widget/student_application_tab.dart';
 import 'widget/student_education_tab.dart';
-import 'widget/student_intrest_tab.dart';
+//import 'widget/student_intrest_tab.dart';
 import 'widget/student_note_tab.dart';
 import 'widget/student_test_scrores_tab.dart';
 import 'widget/student_visa_tab.dart';
@@ -178,7 +178,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
     studentData();
     getLanguage();
     provinceCountry();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
 
     super.initState();
   }
@@ -212,7 +212,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 7,
+        length: 6,
         child: Scaffold(
             key: _key,
             endDrawer: commonDrawer(context),
@@ -1343,7 +1343,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/birthday.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 18,
                                               ),
                                               const Text(
                                                 'Date Of Birth:',
@@ -1371,7 +1371,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/gender.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 23,
                                               ),
                                               const Text(
                                                 'Gender:',
@@ -1399,7 +1399,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/language.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 17,
                                               ),
                                               const Text(
                                                 'Language:',
@@ -1427,7 +1427,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/citizenship.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 11,
                                               ),
                                               const Text(
                                                 'Citizenship:',
@@ -1455,7 +1455,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/passport.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 17,
                                               ),
                                               const Text(
                                                 'Passport:',
@@ -1483,7 +1483,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/passport.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 17,
                                               ),
                                               const Text(
                                                 'Expriry Date:',
@@ -1511,7 +1511,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/email1.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 17,
                                               ),
                                               Text(
                                                 '${resp.genInfo!.email}',
@@ -1531,7 +1531,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/phone.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 19,
                                               ),
                                               const Text(
                                                 'Contact:',
@@ -1559,7 +1559,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/agent.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 20,
                                               ),
                                               const Text(
                                                 'Agent/Recruiter:',
@@ -1587,7 +1587,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/residential.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 16,
                                               ),
                                               const Text(
                                                 'Residential Address:',
@@ -1617,7 +1617,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                               SvgPicture.asset(
                                                   'assets/icons/mailingaddress.svg'),
                                               const SizedBox(
-                                                width: 15,
+                                                width: 17,
                                               ),
                                               const Text(
                                                 'Mailing Address:',
@@ -1703,9 +1703,9 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                     Tab(
                                       child: Text('Student Visa'),
                                     ),
-                                    Tab(
-                                      child: Text('Interest'),
-                                    ),
+                                    // Tab(
+                                    //   child: Text('Interest'),
+                                    // ),
                                     Tab(
                                       child: Text('Application'),
                                     ),
@@ -1728,7 +1728,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                               const StdTestScoreTab(),
                               StudentEditDocumentTabScreen(data: resp),
                               const StudentVisaTab(),
-                              const StdInterestTab(),
+                              //const StdInterestTab(),
                               StdApplicationScreen(data: resp),
                               StdNoteTab(data: resp),
                             ],

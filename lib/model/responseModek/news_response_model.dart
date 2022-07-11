@@ -43,11 +43,11 @@ class NewsResponseModel {
   });
 
   int? id;
-  DateTime? date;
-  DateTime? dateGmt;
+  String? date;
+  String? dateGmt;
   Guid? guid;
-  DateTime? modified;
-  DateTime? modifiedGmt;
+  String? modified;
+  String? modifiedGmt;
   String? slug;
   String? status;
   String? type;
@@ -62,7 +62,7 @@ class NewsResponseModel {
   bool? sticky;
   String? template;
   String? format;
-  List<dynamic>? meta;
+  Meta? meta;
   List<int>? categories;
   List<int>? tags;
   List<dynamic>? acf;
@@ -73,11 +73,11 @@ class NewsResponseModel {
   factory NewsResponseModel.fromJson(Map<String, dynamic> json) =>
       NewsResponseModel(
         id: json["id"],
-        date: DateTime.parse(json["date"]),
-        dateGmt: DateTime.parse(json["date_gmt"]),
+        date: json["date"],
+        dateGmt: json["date_gmt"],
         guid: Guid.fromJson(json["guid"]),
-        modified: DateTime.parse(json["modified"]),
-        modifiedGmt: DateTime.parse(json["modified_gmt"]),
+        modified: json["modified"],
+        modifiedGmt: json["modified_gmt"],
         slug: json["slug"],
         status: json["status"],
         type: json["type"],
@@ -92,7 +92,7 @@ class NewsResponseModel {
         sticky: json["sticky"],
         template: json["template"],
         format: json["format"],
-        meta: List<dynamic>.from(json["meta"].map((x) => x)),
+        meta: Meta.fromJson(json["meta"]),
         categories: List<int>.from(json["categories"].map((x) => x)),
         tags: List<int>.from(json["tags"].map((x) => x)),
         acf: List<dynamic>.from(json["acf"].map((x) => x)),
@@ -103,11 +103,11 @@ class NewsResponseModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "date": date!.toIso8601String(),
-        "date_gmt": dateGmt!.toIso8601String(),
+        "date": date,
+        "date_gmt": dateGmt,
         "guid": guid!.toJson(),
-        "modified": modified!.toIso8601String(),
-        "modified_gmt": modifiedGmt!.toIso8601String(),
+        "modified": modified,
+        "modified_gmt": modifiedGmt,
         "slug": slug,
         "status": status,
         "type": type,
@@ -122,7 +122,7 @@ class NewsResponseModel {
         "sticky": sticky,
         "template": template,
         "format": format,
-        "meta": List<dynamic>.from(meta!.map((x) => x)),
+        "meta": meta!.toJson(),
         "categories": List<dynamic>.from(categories!.map((x) => x)),
         "tags": List<dynamic>.from(tags!.map((x) => x)),
         "acf": List<dynamic>.from(acf!.map((x) => x)),
@@ -132,6 +132,25 @@ class NewsResponseModel {
       };
 }
 
+class Meta {
+  Meta({
+    this.inline_featured_image,
+  }
+
+  );
+
+  bool? inline_featured_image;
+
+  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
+        inline_featured_image: json["inline_featured_image"],
+       
+      );
+
+  Map<String, dynamic> toJson() => {
+        "inline_featured_image": inline_featured_image,
+        
+      };
+}
 class Content {
   Content({
     this.rendered,

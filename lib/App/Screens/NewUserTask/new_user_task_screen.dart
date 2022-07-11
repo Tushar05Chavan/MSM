@@ -1065,76 +1065,134 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    GetBuilder<GetUserTaskViewModel>(
-                      builder: (controller) {
-                        if (controller.apiResponse.status == Status.COMPLETE) {
-                          List<GetUserTaskResponseModel> response =
-                              controller.apiResponse.data;
+                    Column(
+                      children: [
+                        GetBuilder<GetUserTaskViewModel>(
+                          builder: (controller) {
+                            if (controller.apiResponse.status == Status.COMPLETE) {
+                              List<GetUserTaskResponseModel> response =
+                                  controller.apiResponse.data;
 
-                          return PaginatedDataTable(
-                              onRowsPerPageChanged: (perPage) {},
-                              columnSpacing: 0,
-                              availableRowsPerPage: [5],
-                              rowsPerPage: 5,
-                              dataRowHeight: Get.height * 0.08,
-                              headingRowHeight: Get.height * 0.08,
-                              horizontalMargin: 1,
-                              columns: [
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.25,
-                                        width: Get.width * 0.33,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Owner',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                                 return PaginatedDataTable(
+                                  onRowsPerPageChanged: (perPage) {},
+                                  columnSpacing: 0,
+                                  availableRowsPerPage: [5],
+                                  rowsPerPage: 5,
+                                  dataRowHeight: Get.height * 0.08,
+                                  headingRowHeight: Get.height * 0.08,
+                                  horizontalMargin: 1,
+                                  columns: [
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.25,
+                                            width: Get.width * 0.33,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: const Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                                DataColumn(
-                                    label: Container(
+                                                  },
+                                                  child: const Text(
+                                                    'Owner',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: const Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.33,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
+                                                    });
+                                                  },
+                                                  child: const Text(
+                                                    'Type',
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    softWrap: false,
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                      label: Container(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 2),
                                         height: Get.height * 0.10,
@@ -1152,18 +1210,15 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                 setState(() {
                                                   // colorsValue = true;
                                                   Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
+                                                      const Duration(seconds: 2),
+                                                      () {
                                                     // colorsValue = false;
                                                     setState(() {});
                                                   });
                                                 });
                                               },
                                               child: const Text(
-                                                'Type',
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                softWrap: false,
+                                                'Subject',
                                                 style: TextStyle(
                                                   fontFamily: 'Roboto',
                                                   color: Colors.black,
@@ -1175,8 +1230,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                   setState(() {
                                                     // colorsValue = true;
                                                     Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
+                                                        Duration(seconds: 1), () {
                                                       // colorsValue = false;
                                                       setState(() {});
                                                     });
@@ -1188,287 +1242,237 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                   color: Colors.black,
                                                 ))
                                           ],
-                                        ))),
-                                DataColumn(
-                                  label: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 2),
-                                    height: Get.height * 0.10,
-                                    width: Get.width * 0.33,
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xffF5F5F5),
-                                        border: Border.all(
-                                            color: Colors.white, width: 2)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              // colorsValue = true;
-                                              Future.delayed(
-                                                  const Duration(seconds: 2),
-                                                  () {
-                                                // colorsValue = false;
-                                                setState(() {});
-                                              });
-                                            });
-                                          },
-                                          child: const Text(
-                                            'Subject',
-                                            style: TextStyle(
-                                              fontFamily: 'Roboto',
-                                              color: Colors.black,
-                                            ),
-                                          ),
                                         ),
-                                        InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                // colorsValue = true;
-                                                Future.delayed(
-                                                    Duration(seconds: 1), () {
-                                                  // colorsValue = false;
-                                                  setState(() {});
-                                                });
-                                              });
-                                            },
-                                            // onTap: () {},
-                                            child: Icon(
-                                              Icons.filter_list,
-                                              color: Colors.black,
-                                            ))
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.40,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Activity Count',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        const Duration(
-                                                            seconds: 1), () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.40,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: const Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.40,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Due Date',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
+                                                  },
+                                                  child: const Text(
+                                                    'Activity Count',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            const Duration(
+                                                                seconds: 1), () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: const Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.40,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.40,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Status',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
+                                                  },
+                                                  child: const Text(
+                                                    'Due Date',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.40,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                                DataColumn(
-                                    label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.40,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  // colorsValue = true;
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
-                                                    // colorsValue = false;
-                                                    setState(() {});
-                                                  });
-                                                });
-                                              },
-                                              child: const Text(
-                                                'Priority',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
+                                                  },
+                                                  child: const Text(
+                                                    'Status',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                    DataColumn(
+                                        label: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2),
+                                            height: Get.height * 0.10,
+                                            width: Get.width * 0.40,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xffF5F5F5),
+                                                border: Border.all(
+                                                    color: Colors.white, width: 2)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      // colorsValue = true;
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        // colorsValue = false;
+                                                        setState(() {});
+                                                      });
                                                     });
-                                                  });
-                                                },
-                                                // onTap: () {},
-                                                child: Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
-                                        ))),
-                              ],
-                              source: TableRow(response));
-                        } else {
-                          if (controller.apiResponse.status == Status.ERROR) {
-                            return const Center(
-                              child: Text('No Data Found'),
-                            );
-                          }
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                      },
-                    ),
-                    Padding(
+                                                  },
+                                                  child: const Text(
+                                                    'Priority',
+                                                    style: TextStyle(
+                                                      fontFamily: 'Roboto',
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        // colorsValue = true;
+                                                        Future.delayed(
+                                                            Duration(seconds: 1),
+                                                            () {
+                                                          // colorsValue = false;
+                                                          setState(() {});
+                                                        });
+                                                      });
+                                                    },
+                                                    // onTap: () {},
+                                                    child: Icon(
+                                                      Icons.filter_list,
+                                                      color: Colors.black,
+                                                    ))
+                                              ],
+                                            ))),
+                                  ],
+                                  source: TableRow(response));
+                            } else {
+                              if (controller.apiResponse.status == Status.ERROR) {
+                                return const Center(
+                                  child: Text('No Data Found'),
+                                );
+                              }
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                          },
+                        ),
+                      ],
+                     ),
+                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       child: Container(
                         height: Get.height * 0.08,
@@ -1939,11 +1943,11 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                 ),
               ),
               Row(
-                children: [
+                children: const [
                   Text(
                     'Number of items: 21',
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                         fontFamily: 'Poppins'),

@@ -55,7 +55,7 @@ class _CommonCountryState extends State<CommonCountry> {
                   }
                 },
                 borderRadius: BorderRadius.circular(5),
-                hint: Text(widget.hintText.toString()),
+                hint: Text('Country of Education'),
                 value: widget.selectedCountry,
                 items: countryS.map((province) {
                   return DropdownMenuItem(

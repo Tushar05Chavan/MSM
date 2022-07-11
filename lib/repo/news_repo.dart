@@ -13,7 +13,7 @@ class NewsRepo extends ApiURLService {
     print('--res ${response}');
     List<NewsResponseModel> newsResponseModel =
         newsResponseModelFromJson(jsonEncode(response));
-    // print('=========jjjj${tilesResponseModel.first}');
+     print('=========jjjj${newsResponseModel.first}');
     return newsResponseModel;
   }
 }

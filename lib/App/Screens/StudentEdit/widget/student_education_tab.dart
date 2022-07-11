@@ -144,7 +144,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                 height: 10,
               ),
               CommonCountry(
-                hintText: '${widget.data!.eduInfo!.countryOfEducationName}',
+                hintText: 'Country of Education',
                 selectedCountry: _selectedCountryEducation,
                 onchange: (String val) {
                   setState(() {
@@ -167,7 +167,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                     },
                     borderRadius: BorderRadius.circular(5),
                     hint: Text(
-                        "${widget.data!.eduInfo!.highestLevelOfEducationName}"),
+                        "Highest Level of Education"),
                     value: _selectedDegreeEducation,
                     items: levelOfEdu.map((countryEducation) {
                       return DropdownMenuItem(
@@ -199,7 +199,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                       }
                     },
                     borderRadius: BorderRadius.circular(5),
-                    hint: Text("${widget.data!.eduInfo!.gradingSchemeName}"),
+                    hint: Text("Grading Scheme"),
                     value: _selectedGradeEducation,
                     items: grades.map((gradeEducation) {
                       return DropdownMenuItem(
@@ -238,7 +238,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                     hintStyle: TextStyle(
                         color: Colors.black.withOpacity(0.2),
                         fontFamily: 'Roboto'),
-                    hintText: '${widget.data!.eduInfo!.gradeAverage}',
+                    hintText: 'Grade Average',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     )),
