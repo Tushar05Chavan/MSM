@@ -60,7 +60,7 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                         ));
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(3),
                         height: Get.height * 0.05,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),

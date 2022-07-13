@@ -32,6 +32,7 @@ import '../../../common/AppConfig/support_section.dart';
 import '../../../common/color_constant.dart';
 import '../../FeeWaierLists/fee_waier_list.dart';
 
+
 class DashboardBody extends StatefulWidget {
   const DashboardBody({Key? key}) : super(key: key);
 
@@ -331,6 +332,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                               ),
                               Text(
                                 '${forDashboardData[index].waiverPer}${'%'}',
+                                
                                 style: const TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 18,
@@ -421,7 +423,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                               setState(() {});
                             },
                             child: Container(
-                              width: Get.width * 0.13,
+                              width: Get.width * 0.135,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: SelectedIndex == index
@@ -513,7 +515,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    '${response[index].growth}',
+                                                    '${response[index].growth}' '%',
                                                     style: const TextStyle(
                                                         fontFamily: 'Roboto',
                                                         fontSize: 18,
@@ -540,7 +542,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${response[index].growth}',
+                                                        '${response[index].growth}''%',
                                                         style: TextStyle(
                                                             fontFamily:
                                                                 'Roboto',
@@ -584,7 +586,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                                             height: 5,
                                                           ),
                                                           Text(
-                                                            '${response[index].growth}',
+                                                            '${response[index].growth}' '%',
                                                             style: TextStyle(
                                                                 fontFamily:
                                                                     'Roboto',
@@ -619,7 +621,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                                                 height: 5,
                                                               ),
                                                               Text(
-                                                                '${response[index].growth}',
+                                                                '${response[index].growth}' '%',
                                                                 style: const TextStyle(
                                                                     fontFamily:
                                                                         'Roboto',
@@ -799,7 +801,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                               const SizedBox(height: 10),
                               Container(
                                 height: 26,
-                                width: Get.width * 0.3,
+                                width: Get.width * 0.35,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     color: kOrange),
@@ -1107,6 +1109,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                           horizontal: 10),
                                       child: Text(
                                         '${data[index].programName}',
+                                        textAlign: TextAlign.center,
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           fontFamily: 'Poppins',
@@ -1121,8 +1124,8 @@ class _DashboardBodyState extends State<DashboardBody> {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
-                                      child: Text(
-                                        '${data[index].intakeName}',
+                                      child: Text('Next Intake- '
+                                        '${data[index].intakeName} ',
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           fontFamily: 'Poppins',
@@ -1135,7 +1138,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 10),
-                                      child: Text(
+                                      child: Text('Duration- '
                                         '${data[index].durationTime}',
                                         overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(

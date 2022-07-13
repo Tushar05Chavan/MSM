@@ -145,6 +145,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
               ),
               CommonCountry(
                 hintText: 'Country of Education',
+                
                 selectedCountry: _selectedCountryEducation,
                 onchange: (String val) {
                   setState(() {
@@ -160,11 +161,11 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
-                    validator: (title) {
-                      if (title != null) {
-                        return "Please Enter Title";
-                      }
-                    },
+                    validator: (value) {
+                                          if (value == null) {
+                                            return "Highest level of education is required";
+                                          }
+                                        },
                     borderRadius: BorderRadius.circular(5),
                     hint: Text(
                         "Highest Level of Education"),
@@ -193,11 +194,11 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
-                    validator: (title) {
-                      if (title != null) {
-                        return "Please Enter Title";
-                      }
-                    },
+                    validator: (value) {
+                                          if (value == null) {
+                                            return "Select grade scheme";
+                                          }
+                                        },
                     borderRadius: BorderRadius.circular(5),
                     hint: Text("Grading Scheme"),
                     value: _selectedGradeEducation,
@@ -696,9 +697,9 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                         });
                   },
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(3),
                     height: Get.height * 0.05,
-                    width: Get.width * 0.32,
+                    width: Get.width * 0.29,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(color: kNavy)),

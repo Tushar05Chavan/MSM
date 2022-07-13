@@ -67,7 +67,7 @@ class _ApplicationListScreenState extends State<ApplicationListScreen> {
               appBar: AppBar(
                 backgroundColor: kColorPrimary,
                 titleSpacing: 10.0,
-                title: const Text("Fee Waier Lists"),
+                title: const Text("Application List Views"),
               ),
               body: Padding(
                 padding: const EdgeInsets.all(8.0),

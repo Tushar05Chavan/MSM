@@ -27,10 +27,10 @@ class ForProgramPageViewModel extends GetxController {
     update();
   }
 
-  // List data1 = [];
-  // Future<void> forProgramPage({int? programId}) async {
-  //   await forProgramPageViewModel(programId: programId);
-  //   ForProgramPageResponseModel data = apiResponse.data;
-  //   data1.add(data);
-  // }
+  List data1 = [];
+  Future<void> forProgramPage({int? programId}) async {
+    await forProgramPageViewModel(programId: programId);
+    ForProgramPageResponseModel data = apiResponse.data;
+    data1.add(data);
+  }
 }

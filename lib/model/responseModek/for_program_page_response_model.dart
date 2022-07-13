@@ -71,7 +71,7 @@ class ForProgramPageResponseModel {
   String? instituteAbout;
   String? instAddress;
   String? programDuration;
-  int? applicationFee;
+  double? applicationFee;
   String? instTile;
   int? instCountryId;
   String? specializationName;

@@ -1346,7 +1346,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 18,
                                               ),
                                               const Text(
-                                                'Date Of Birth:',
+                                                'Date Of Birth: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1354,7 +1354,8 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 ),
                                               ),
                                               Text(
-                                                '${resp.genInfo!.dateOfBirth}',
+                                                DateFormat('dd/MM/yyyy').format(DateTime.parse('${resp.genInfo!.dateOfBirth}')),
+                                                //'${resp.genInfo!.dateOfBirth}',
                                                 style: const TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1374,7 +1375,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 23,
                                               ),
                                               const Text(
-                                                'Gender:',
+                                                'Gender: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1402,7 +1403,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 17,
                                               ),
                                               const Text(
-                                                'Language:',
+                                                'Language: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1430,7 +1431,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 11,
                                               ),
                                               const Text(
-                                                'Citizenship:',
+                                                'Citizenship: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1458,7 +1459,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 17,
                                               ),
                                               const Text(
-                                                'Passport:',
+                                                'Passport: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1486,7 +1487,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 17,
                                               ),
                                               const Text(
-                                                'Expriry Date:',
+                                                'Expriry Date: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1494,7 +1495,8 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 ),
                                               ),
                                               Text(
-                                                '${resp.genInfo!.passportExpiryDate}',
+                                                DateFormat('dd/MM/yyyy').format(DateTime.parse('${resp.genInfo!.passportExpiryDate}')),
+                                                //'${resp.genInfo!.passportExpiryDate}',
                                                 style: const TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1534,7 +1536,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 19,
                                               ),
                                               const Text(
-                                                'Contact:',
+                                                'Contact: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1562,7 +1564,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 20,
                                               ),
                                               const Text(
-                                                'Agent/Recruiter:',
+                                                'Agent/Recruiter: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1590,7 +1592,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 16,
                                               ),
                                               const Text(
-                                                'Residential Address:',
+                                                'Residential Address: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,
@@ -1620,7 +1622,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 width: 17,
                                               ),
                                               const Text(
-                                                'Mailing Address:',
+                                                'Mailing Address: ',
                                                 style: TextStyle(
                                                   color: kGrey,
                                                   fontSize: 14,

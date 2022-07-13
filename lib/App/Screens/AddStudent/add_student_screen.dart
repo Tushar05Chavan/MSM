@@ -129,20 +129,20 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       alignment: Alignment.centerRight,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       height: Get.height * 0.038,
-                      width: Get.width * 0.36,
+                      width: Get.width * 0.39,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: kNavy),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
                           Text(
                             '+',
                             style: TextStyle(color: kNavy, fontSize: 20),
                           ),
                           Text(
-                            'Add new Student',
+                            '  Add new Student',
                             style: TextStyle(color: kNavy, fontSize: 12),
                           ),
                         ],

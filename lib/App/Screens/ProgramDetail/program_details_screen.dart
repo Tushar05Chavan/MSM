@@ -81,7 +81,7 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                     child: DropdownButton(
                                         borderRadius: BorderRadius.circular(5),
                                         hint: const Text("Nationalities"),
-                                        value: _selectedCountry,
+                                        value: _selectedCountry ?? "India",
                                         items: _country.map((country) {
                                           return DropdownMenuItem(
                                               value: country,
@@ -509,8 +509,10 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
-                                      children: [
-                                        SvgPicture.asset(
+                                      children: List.generate(response.feeDetail!.length, (index) {
+                                        return Row(
+                                          children: [
+                                            SvgPicture.asset(
                                           'assets/icons/Applicationfee.svg',
                                           height: 15,
                                           width: 15,
@@ -519,23 +521,31 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                           width: 8,
                                         ),
                                         Text(
-                                          '${response.feeDetail![0].feeType}',
+                                          '${response.feeDetail![index].feeType}',
                                           style: const TextStyle(
                                             color: kGrey,
                                             fontFamily: 'Poppins',
                                             fontSize: 14,
                                           ),
                                         )
-                                      ],
+                                          ],
+                                        );
+                                        
+                                      })
                                     ),
                                     SizedBox(width: 5),
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       width: Get.width * 0.30,
                                       child: Row(
-                                        children: [
-                                          Text(
-                                            'CAD ${response.feeDetail![0].feeAmount}',
+                                        children:
+                                        
+                                        List.generate(response.feeDetail!.length, (index){
+                                          return 
+                                          Row(
+                                            children: [
+                                              Text(
+                                            'CAD ${response.feeDetail![index].feeAmount}',
                                             style: const TextStyle(
                                                 decoration:
                                                     TextDecoration.lineThrough,
@@ -545,14 +555,17 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
-                                            '${response.feeDetail![0].actualFee}',
+                                            '${response.feeDetail![index].actualFee}',
                                             style: const TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 13,
                                               color: Color(0xff565656),
                                             ),
                                           ),
-                                        ],
+                                            ],
+                                          );
+                                        })
+                                        
                                       ),
                                     ),
                                   ],
@@ -565,8 +578,10 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Row(
-                                      children: [
-                                        SvgPicture.asset(
+                                      children: List.generate(response.feeDetail!.length, (index) {
+                                        return Row(
+                                          children: [
+                                            SvgPicture.asset(
                                           'assets/icons/TuitionFee.svg',
                                           height: 15,
                                           width: 15,
@@ -575,31 +590,37 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                           width: 8,
                                         ),
                                         Text(
-                                          '${response.feeDetail![2].feeType} ${response.feeDetail![2].feeBasis}',
+                                          '${response.feeDetail![index].feeType} ${response.feeDetail![index].feeBasis}',
                                           style: const TextStyle(
                                             color: kGrey,
                                             fontFamily: 'Poppins',
                                             fontSize: 14,
                                           ),
                                         )
-                                      ],
+                                          ],
+                                        );
+                                      })
                                     ),
                                     const SizedBox(width: 5),
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       width: Get.width * 0.34,
                                       child: Row(
-                                        children: [
-                                          const SizedBox(width: 5),
+                                        children: List.generate(response.feeDetail!.length, (index) {
+                                          return Row(
+                                            children: [
+                                                 const SizedBox(width: 5),
                                           Text(
-                                            'CAD ${response.feeDetail![2].feeAmount}',
+                                            'CAD ${response.feeDetail![index].feeAmount}',
                                             style: const TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 13,
                                               color: Color(0xff565656),
                                             ),
-                                          ),
-                                        ],
+                                          )
+                                            ],
+                                          );
+                                        })
                                       ),
                                     ),
                                   ],

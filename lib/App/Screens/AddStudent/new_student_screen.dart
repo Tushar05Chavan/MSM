@@ -11,6 +11,7 @@ import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/country_code_relation_response_model.dart';
 import 'package:msm_unify/model/responseModek/country_for_search_response_model.dart';
 import 'package:msm_unify/model/responseModek/language_response_model.dart';
+import 'package:msm_unify/model/responseModek/news_response_model.dart';
 import 'package:msm_unify/model/responseModek/province_country_response_model.dart';
 import 'package:msm_unify/model/responseModek/relation_response_model.dart';
 import 'package:msm_unify/services/api_service.dart';
@@ -124,10 +125,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
   @override
   void initState() {
     countryForSearchCode();
-     getLanguage();
+    getLanguage();
     getCountryCode();
-    
-   
+
     getRelation();
 
     super.initState();
@@ -186,6 +186,26 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
       countryForSearch.add(element);
     });
     setState(() {});
+  }
+
+  void showInSnackBar() {
+    Scaffold.of(context).showSnackBar(const SnackBar(
+        backgroundColor: kGreen,
+        content: Text(
+          'Student Added Successfully',
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Roboto', fontSize: 20),
+        )));
+  }
+
+  void showInErrorSnackBar() {
+    Scaffold.of(context).showSnackBar(const SnackBar(
+        backgroundColor: kRed,
+        content: Text(
+          'Fill all the empty fields',
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Roboto', fontSize: 20),
+        )));
   }
 
   @override
@@ -396,7 +416,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                         ),
                                         validator: (value) {
                                           if (value == null) {
-                                            return "Martial status is required";
+                                            return "Marital status is required";
                                           }
                                         },
                                         borderRadius: BorderRadius.circular(5),
@@ -508,12 +528,12 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                     //     return "Email ID is required";
                                     //   }
                                     // },
-                                    validator: MultiValidator(
-                                      [
-                                        RequiredValidator(errorText: "Email ID is required"),
-                                        EmailValidator(errorText: "Email ID is invalid")
-                                      ]
-                                    ),
+                                    validator: MultiValidator([
+                                      RequiredValidator(
+                                          errorText: "Email ID is required"),
+                                      EmailValidator(
+                                          errorText: "Email ID is invalid")
+                                    ]),
                                     controller: _emailId,
                                     cursorColor: kRed,
                                     decoration: InputDecoration(
@@ -546,7 +566,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                         ),
                                         validator: (value) {
                                           if (value == null) {
-                                            return "Country Code is required";
+                                            return "Country code is required";
                                           }
                                         },
                                         borderRadius: BorderRadius.circular(5),
@@ -558,7 +578,8 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                   .toString(),
                                               child: Text(
                                                 countryCode.countryName
-                                                    .toString(),semanticsLabel: "+",
+                                                    .toString(),
+                                                semanticsLabel: "+",
                                                 style: const TextStyle(
                                                     color: kGrey4,
                                                     fontFamily: "Roboto",
@@ -584,10 +605,10 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       if (value!.isEmpty) {
                                         return "Contact number is required";
                                       }
-                                      if (value.length < 9 && value.length > 10) {
+                                      if (value.length < 9 &&
+                                          value.length > 10) {
                                         return "Invalid Contact number ";
                                       }
-
                                     },
                                     decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
@@ -876,9 +897,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                 BorderRadius.circular(5),
                                             hint: const Text("Country"),
                                             value: _residentialSelectedCountry,
-                                            items: 
-                                            //countryCode1.map((country) 
-                                            countryForSearch.map((country){
+                                            items:
+                                                //countryCode1.map((country)
+                                                countryForSearch.map((country) {
                                               return DropdownMenuItem(
                                                   value: country.countryId
                                                       .toString(),
@@ -892,12 +913,13 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                   ));
                                             }).toList(),
                                             onChanged: (newValue) {
-                                             // setState(() {
+                                              // setState(() {
                                               //int value = country.countryId;
-                                              provinceCountry(int.parse(newValue.toString()));
-                                                _residentialSelectedCountry =
-                                                    newValue as String?;
-                                             // });
+                                              provinceCountry(int.parse(
+                                                  newValue.toString()));
+                                              _residentialSelectedCountry =
+                                                  newValue as String?;
+                                              // });
                                             }),
                                       ),
                                       const SizedBox(
@@ -977,6 +999,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       TextFormField(
                                         controller: _residentialZipCode,
                                         cursorColor: kRed,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Postal/Zip code is required";
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -1074,11 +1101,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     BorderRadius.circular(15),
                                               ),
                                             ),
-                                            validator: (value) {
-                                              if (value == null) {
-                                                return "Country is required";
-                                              }
-                                            },
+                                            // validator: (value) {
+                                            //   if (value == null) {
+                                            //     return "Country is required";
+                                            //   }
+                                            // },
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                             hint: const Text("Country"),
@@ -1117,11 +1144,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     BorderRadius.circular(15),
                                               ),
                                             ),
-                                            validator: (value) {
-                                              if (value == null) {
-                                                return "Province/State is required";
-                                              }
-                                            },
+                                            // validator: (value) {
+                                            //   if (value == null) {
+                                            //     return "Province/State is required";
+                                            //   }
+                                            // },
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                             hint: const Text("Province/State"),
@@ -1184,6 +1211,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       TextFormField(
                                         controller: _mailingZipCode,
                                         cursorColor: kRed,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Postal/Zip code is required";
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -1332,11 +1364,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       TextFormField(
                                         cursorColor: kRed,
                                         controller: _emergencyName,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Please enter name";
-                                          }
-                                        },
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty) {
+                                        //     return "Please enter name";
+                                        //   }
+                                        // },
                                         decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -1359,11 +1391,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       ),
                                       DropdownButtonHideUnderline(
                                         child: DropdownButtonFormField(
-                                            validator: (value) {
-                                              if (value == null) {
-                                                return "Select  Relation";
-                                              }
-                                            },
+                                            // validator: (value) {
+                                            //   if (value == null) {
+                                            //     return "Select  Relation";
+                                            //   }
+                                            // },
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
                                                 borderRadius:
@@ -1400,11 +1432,18 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       TextFormField(
                                         controller: _emergencyEmail,
                                         cursorColor: kRed,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Please enter Emergency Email";
-                                          }
-                                        },
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty) {
+                                        //     return "Please enter Emergency Email";
+                                        //   }
+                                        // },
+                                        validator: MultiValidator([
+                                          RequiredValidator(
+                                              errorText:
+                                                  "Email ID is required"),
+                                          EmailValidator(
+                                              errorText: "Email ID is invalid")
+                                        ]),
                                         decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
                                                 borderRadius:
@@ -1438,11 +1477,11 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       ),
                                       DropdownButtonHideUnderline(
                                         child: DropdownButtonFormField(
-                                            validator: (value) {
-                                              if (value == null) {
-                                                return "Select  Country Code";
-                                              }
-                                            },
+                                            // validator: (value) {
+                                            //   if (value == null) {
+                                            //     return "Select  Country Code";
+                                            //   }
+                                            // },
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
                                                 borderRadius:
@@ -1481,8 +1520,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                       TextFormField(
                                         controller: _emergencyCellPhone,
                                         validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Please enter Cell Phone";
+                                          if (value!.length < 9 &&
+                                              value.length > 10) {
+                                            return "Enter valid cell phone number ";
                                           }
                                         },
                                         cursorColor: kRed,
@@ -1540,6 +1580,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                             ),
                                             GestureDetector(
                                               onTap: () async {
+                                                //final snackBar = SnackBar(content: Text('Student Added Successfully'));
+                                                
+
                                                 if (formGlobalKey.currentState!
                                                     .validate()) {
                                                   Map<String, dynamic> map = {
@@ -1652,7 +1695,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     },
                                                     "emergencyInfo": {}
                                                   };
-                                                  
 
                                                   bool milan =
                                                       await AddNewStudentRepo
@@ -1662,36 +1704,38 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                       'RESPONSE=fsf=${APIService().code}');
                                                   if (milan) {
                                                     print('DOne=====');
-                                                    Get.off(
+                                                    // showInSnackBar();
+                                                    //const Center(child: CircularProgressIndicator());
+
+                                                    Get.off(() =>
                                                         const StudentListScreen());
                                                   } else {
+                                                    //showInErrorSnackBar();
                                                     print('error');
                                                   }
                                                 }
                                               },
-                                              
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 20),
-                                                  height: Get.height * 0.05,
-                                                  decoration: BoxDecoration(
-                                                      color: kGreen1,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  child: const Center(
-                                                    child: Text(
-                                                      'Save',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Poppins',
-                                                          fontSize: 11),
-                                                    ),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20),
+                                                height: Get.height * 0.05,
+                                                decoration: BoxDecoration(
+                                                    color: kGreen1,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: const Center(
+                                                  child: Text(
+                                                    'Save',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 11),
                                                   ),
                                                 ),
                                               ),
-                                            
+                                            ),
                                           ],
                                         ),
                                       ),

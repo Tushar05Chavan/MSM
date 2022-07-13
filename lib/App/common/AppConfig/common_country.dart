@@ -49,11 +49,11 @@ class _CommonCountryState extends State<CommonCountry> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
-                validator: (title) {
-                  if (title != null) {
-                    return "please Select Country";
-                  }
-                },
+                validator: (value) {
+                                          if (value == null) {
+                                            return "Country of education is required";
+                                          }
+                                        },
                 borderRadius: BorderRadius.circular(5),
                 hint: Text('Country of Education'),
                 value: widget.selectedCountry,

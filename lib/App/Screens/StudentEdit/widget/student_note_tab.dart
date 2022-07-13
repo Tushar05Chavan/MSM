@@ -103,7 +103,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                        _text = _comment.text;
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(5),
                       height: Get.height * 0.05,
                       width: Get.width * 0.29,
                       decoration: BoxDecoration(

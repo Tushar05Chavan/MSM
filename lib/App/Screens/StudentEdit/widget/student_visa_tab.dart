@@ -322,14 +322,15 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(3),
                       height: Get.height * 0.05,
-                      width: Get.width * 0.30,
+                      width: Get.width * 0.29,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                               color: kNavy, style: BorderStyle.solid)),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
                           Icon(
                             Icons.add,
@@ -1167,6 +1168,18 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(height: 10,),
+              Row(
+                children: const [
+                  Text(
+                                    'Number of items: 0',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                ],
               ),
               SizedBox(
                 height: Get.height * 0.025,

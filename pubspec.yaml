@@ -32,6 +32,8 @@ dependencies:
   syncfusion_flutter_xlsio: ^20.2.36-beta
   form_field_validator: ^1.1.0
   syncfusion_flutter_datagrid_export: ^20.2.36-beta
+  flutter_typeahead: ^4.0.0
+ 
   
 
   #flutter_string_encryption: ^0.3.1

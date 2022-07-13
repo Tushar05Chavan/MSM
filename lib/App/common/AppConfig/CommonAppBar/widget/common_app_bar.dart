@@ -6,12 +6,16 @@ import 'package:msm_unify/App/Screens/NewUserTask/new_user_task_screen.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/controller/app_bar_controller.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/get_feedback_list_response_model.dart';
+import 'package:msm_unify/model/responseModek/what_do_you_want_response_model.dart';
+import 'package:msm_unify/repo/what_do_you_want_repo.dart';
 import 'package:msm_unify/viewModel/get_notification_count_view_model.dart';
+import 'package:msm_unify/viewModel/what_do_you_want_view_model.dart';
 
 import '../../../../../viewModel/get_feedback_list_view_model.dart';
 import '../../../../Screens/Forms/forms_screen.dart';
 import '../../../../Screens/KnowledgeCentre/knowledge_centre_screen.dart';
 import '../../../../Screens/Notification/notification_screen.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 
 PreferredSize buildPreferredSize(
@@ -453,11 +457,30 @@ PreferredSize buildPreferredSize(
                             }),
                       ),
                     ),
+                    SizedBox(width: 6,),
                     Flexible(
-                      child: SizedBox(
+                      child: 
+                      SizedBox(
                         height: Get.height * 0.060,
                         width: Get.width * 0.55,
-                        child: TextFormField(
+                        child:  
+                      // GetBuilder<WhatDoYouWantViewModel>(
+                      //                 builder: (controller) {
+                      //                   if (controller.apiResponse.status ==
+                      //                       Status.COMPLETE) {
+                      //                     List<WhatDoYouWantResponseModel>
+                      //                         response =
+                      //                         controller.apiResponse.data;
+                      //                           return TypeAheadField<WhatDoYouWantResponseModel?>(
+                      //                            suggestionsCallback: WhatDoYouWantRepo.whatDoYouWantRepo,
+                      //                             : (context, WhatDoYouWantResponseModel? suggestion ){
+                      //                                 final result = suggestion!;
+
+                      //                                    return ListTile(
+                      //                                          title:  Text(),
+                      //                                        );
+                      //                                   },)
+                        TextFormField(
                           decoration: InputDecoration(
                               hintStyle: TextStyle(
                                   color: Colors.black.withOpacity(0.2)),
@@ -465,8 +488,12 @@ PreferredSize buildPreferredSize(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                               )),
-                        ),
-                      ),
+                       )
+                      //   //                  
+                      //      }
+                      //                 }
+                      //   )
+                       ),
                     ),
                   ],
                 ),

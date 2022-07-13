@@ -17,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xl;
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import '../../common/color_constant.dart';
+import 'package:intl/intl.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -1194,7 +1195,8 @@ class TableRow extends DataTableSource {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                '${data.data![index].addStamp}',
+                DateFormat('dd/MM/yyyy').format(DateTime.parse('${data.data![index].addStamp}')),
+                //'${data.data![index].addStamp}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
                   color: Colors.black,
