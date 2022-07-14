@@ -32,15 +32,14 @@ class _DashboardPageState extends State<DashboardPage> {
         key: _key,
         // appBar: buildPreferredSize(context, _key),
         endDrawer: commonDrawer(context),
-        body: SafeArea(
-            child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               buildPreferredSize(context, _key),
               DashboardBody(),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

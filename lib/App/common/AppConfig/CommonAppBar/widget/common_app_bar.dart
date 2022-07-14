@@ -19,6 +19,79 @@ import '../../../../Screens/KnowledgeCentre/knowledge_centre_screen.dart';
 import '../../../../Screens/Notification/notification_screen.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+destinationDialog(
+    BuildContext context, List<DestinationResponseModel> response) {
+  List<DestinationResponseModel> responseDummy = [...response];
+  showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.9),
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Container(
+              height: Get.height * 0.70,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (_) {
+                        if (_.isEmpty) {
+                          responseDummy.addAll(response);
+                        } else {
+                          responseDummy.forEach((element) {
+                            element.data
+                                .removeWhere((element) => element.name != _);
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                          hintStyle:
+                              TextStyle(color: Colors.black.withOpacity(0.2)),
+                          hintText: 'Destination',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(responseDummy.length, (index) {
+                        final data = responseDummy[index];
+                        return Column(
+                          children: [
+                            Text(
+                              data.label,
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Column(
+                              children:
+                                  List.generate(data.data.length, (index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      destinationTextController.text =
+                                          data.data[index].name;
+                                      Get.back();
+                                    },
+                                    child: Text(data.data[index].name));
+                              }),
+                            )
+                          ],
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ));
+      });
+}
+
+TextEditingController destinationTextController = new TextEditingController();
+
 PreferredSize buildPreferredSize(
     BuildContext context, GlobalKey<ScaffoldState> key) {
   String? selectedCountry;
@@ -478,25 +551,22 @@ PreferredSize buildPreferredSize(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SimpleDialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              side: const BorderSide(
-                                                  color: Colors.red)),
-                                                  children: [
-                                                    Container(
-                                                      child: Column(
-                                                        children: const [
-                                                          Text('What Do You Want To Study ?'),
-                                                          SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                         
-                                                          
-                                                        ]),
-                                                    ),
-                                                  ]
-                                        );
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                side: const BorderSide(
+                                                    color: Colors.red)),
+                                            children: [
+                                              Container(
+                                                child: Column(children: const [
+                                                  Text(
+                                                      'What Do You Want To Study ?'),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                ]),
+                                              ),
+                                            ]);
                                       });
                                 },
                                 decoration: InputDecoration(
@@ -561,6 +631,10 @@ PreferredSize buildPreferredSize(
                             List<DestinationResponseModel> response =
                                 controller.apiResponse.data;
                             return TextFormField(
+                              controller: destinationTextController,
+                              onTap: () {
+                                destinationDialog(context, response);
+                              },
                               decoration: InputDecoration(
                                   hintStyle: TextStyle(
                                       color: Colors.black.withOpacity(0.2)),
