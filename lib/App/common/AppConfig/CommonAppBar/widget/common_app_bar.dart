@@ -5,9 +5,11 @@ import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/App/Screens/NewUserTask/new_user_task_screen.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/controller/app_bar_controller.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
+import 'package:msm_unify/model/responseModek/destination_response_model.dart';
 import 'package:msm_unify/model/responseModek/get_feedback_list_response_model.dart';
 import 'package:msm_unify/model/responseModek/what_do_you_want_response_model.dart';
 import 'package:msm_unify/repo/what_do_you_want_repo.dart';
+import 'package:msm_unify/viewModel/destination_view_model.dart';
 import 'package:msm_unify/viewModel/get_notification_count_view_model.dart';
 import 'package:msm_unify/viewModel/what_do_you_want_view_model.dart';
 
@@ -16,7 +18,6 @@ import '../../../../Screens/Forms/forms_screen.dart';
 import '../../../../Screens/KnowledgeCentre/knowledge_centre_screen.dart';
 import '../../../../Screens/Notification/notification_screen.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
 
 PreferredSize buildPreferredSize(
     BuildContext context, GlobalKey<ScaffoldState> key) {
@@ -34,6 +35,7 @@ PreferredSize buildPreferredSize(
 
   GetFeedBackListViewModel getFeedBackListViewModel =
       Get.put(GetFeedBackListViewModel());
+
   return PreferredSize(
     preferredSize: Size(MediaQuery.of(context).size.height, 205),
     child: Column(
@@ -428,7 +430,7 @@ PreferredSize buildPreferredSize(
                   children: [
                     Container(
                       height: Get.height * 0.060,
-                      width: Get.width*0.50,
+                      width: Get.width * 0.50,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -436,13 +438,12 @@ PreferredSize buildPreferredSize(
                       ),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                          isExpanded: true,
+                            isExpanded: true,
                             borderRadius: BorderRadius.circular(5),
                             hint: const Text("Nationalities"),
                             value: selectedCountry,
                             items: controller.countryS.map((country) {
                               return DropdownMenuItem(
-
                                   value: country.countryName.toString(),
                                   child: Text(
                                     country.countryName.toString(),
@@ -457,43 +458,90 @@ PreferredSize buildPreferredSize(
                             }),
                       ),
                     ),
-                    SizedBox(width: 6,),
+                    SizedBox(
+                      width: 6,
+                    ),
                     Flexible(
-                      child: 
-                      SizedBox(
+                      child: SizedBox(
                         height: Get.height * 0.060,
                         width: Get.width * 0.55,
-                        child:  
-                      // GetBuilder<WhatDoYouWantViewModel>(
-                      //                 builder: (controller) {
-                      //                   if (controller.apiResponse.status ==
-                      //                       Status.COMPLETE) {
-                      //                     List<WhatDoYouWantResponseModel>
-                      //                         response =
-                      //                         controller.apiResponse.data;
-                      //                           return TypeAheadField<WhatDoYouWantResponseModel?>(
-                      //                            suggestionsCallback: WhatDoYouWantRepo.whatDoYouWantRepo,
-                      //                             : (context, WhatDoYouWantResponseModel? suggestion ){
-                      //                                 final result = suggestion!;
+                        child: GetBuilder<WhatDoYouWantViewModel>(
+                          builder: (controller) {
+                            if (controller.apiResponse.status ==
+                                Status.COMPLETE) {
+                              List<WhatDoYouWantResponseModel> response =
+                                  controller.apiResponse.data;
 
-                      //                                    return ListTile(
-                      //                                          title:  Text(),
-                      //                                        );
-                      //                                   },)
-                        TextFormField(
-                          decoration: InputDecoration(
-                              hintStyle: TextStyle(
-                                  color: Colors.black.withOpacity(0.2)),
-                              hintText: 'What do you Want to study?',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )),
-                       )
-                      //   //                  
-                      //      }
-                      //                 }
-                      //   )
-                       ),
+                              return TextFormField(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SimpleDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              side: const BorderSide(
+                                                  color: Colors.red)),
+                                                  children: [
+                                                    Container(
+                                                      child: Column(
+                                                        children: const [
+                                                          Text('What Do You Want To Study ?'),
+                                                          SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                         
+                                                          
+                                                        ]),
+                                                    ),
+                                                  ]
+                                        );
+                                      });
+                                },
+                                decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                        color: Colors.black.withOpacity(0.2)),
+                                    hintText: 'What do you Want to study?',
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    )),
+                              );
+                            } else {
+                              if (controller.apiResponse.status ==
+                                  Status.ERROR) {
+                                return const Center(
+                                  child: Text('Somthing went wrong'),
+                                );
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        ),
+                        // GetBuilder<WhatDoYouWantViewModel>(
+                        //                 builder: (controller) {
+                        //                   if (controller.apiResponse.status ==
+                        //                       Status.COMPLETE) {
+                        //                     List<WhatDoYouWantResponseModel>
+                        //                         response =
+                        //                         controller.apiResponse.data;
+                        //                           return TypeAheadField<WhatDoYouWantResponseModel?>(
+                        //                            suggestionsCallback: WhatDoYouWantRepo.whatDoYouWantRepo,
+                        //                             : (context, WhatDoYouWantResponseModel? suggestion ){
+                        //                                 final result = suggestion!;
+
+                        //                                    return ListTile(
+                        //                                          title:  Text(),
+                        //                                        );
+                        //                                   },)
+
+                        //   //
+                        //      }
+                        //                 }
+                        //   )
+                      ),
                     ),
                   ],
                 ),
@@ -506,14 +554,32 @@ PreferredSize buildPreferredSize(
                     SizedBox(
                       height: Get.height * 0.060,
                       width: Get.width * 0.30,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            hintStyle:
-                                TextStyle(color: Colors.black.withOpacity(0.2)),
-                            hintText: 'Destination',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
+                      child: GetBuilder<DestinationViewModel>(
+                        builder: (controller) {
+                          if (controller.apiResponse.status ==
+                              Status.COMPLETE) {
+                            List<DestinationResponseModel> response =
+                                controller.apiResponse.data;
+                            return TextFormField(
+                              decoration: InputDecoration(
+                                  hintStyle: TextStyle(
+                                      color: Colors.black.withOpacity(0.2)),
+                                  hintText: 'Destination',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                            );
+                          } else {
+                            if (controller.apiResponse.status == Status.ERROR) {
+                              return const Center(
+                                child: Text('Somthing went wrong'),
+                              );
+                            }
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
                       ),
                     ),
                     Container(

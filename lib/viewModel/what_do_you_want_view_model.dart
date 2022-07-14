@@ -12,10 +12,10 @@ class WhatDoYouWantViewModel extends GetxController {
   // onInit() {
   //   addNewStudentViewModel();
   // }
-  String? res;
-  Future<void> whatDoYouWantViewModel(Map<String, dynamic>? model) async {
-    _apiResponse = ApiResponse.loading(message: 'Loading');
-    update();
+  // String? res;
+  // Future<void> whatDoYouWantViewModel(Map<String, dynamic>? model) async {
+  //   _apiResponse = ApiResponse.loading(message: 'Loading');
+  //   update();
     // try {
     //   List<WhatDoYouWantResponseModel> response =
     //       await WhatDoYouWantRepo.whatDoYouWantRepo();
@@ -26,6 +26,23 @@ class WhatDoYouWantViewModel extends GetxController {
     //   print(".........>$e");
     //   _apiResponse = ApiResponse.error(message: 'error');
     // }
-    update();
+    //update();
+  //}
+
+    onInit() {
+    whatDoYouWantViewModel();
   }
+
+  Future<void> whatDoYouWantViewModel() async {
+    _apiResponse = ApiResponse.loading(message: 'Loading');
+    try {
+      List<WhatDoYouWantResponseModel> response = await WhatDoYouWantRepo().whatDoYouWantRepo();
+      print('WhatDoYouWantResponseModel RESPONSE=>${response}');
+      _apiResponse = ApiResponse.complete(response);
+    } catch (e) {
+      print(".........>$e");
+      _apiResponse = ApiResponse.error(message: 'error');
+    }
+  }
+
 }
