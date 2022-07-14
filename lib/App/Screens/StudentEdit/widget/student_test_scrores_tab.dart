@@ -178,6 +178,26 @@ class _StdTestScoreTabState extends State<StdTestScoreTab> {
                 SizedBox(
                   height: Get.height * 0.05,
                 ),
+                _selectedTest == "ACT"
+                    ? Column(
+                        children: [
+                          //
+                          Text("AMT")
+                        ],
+                      )
+                    : _selectedTest == "GMAT"
+                        ? Column(
+                            children: [Text("GMAT")],
+                          )
+                        : _selectedTest == "GRE"
+                            ? Column(
+                                children: [Text("GRE")],
+                              )
+                            : _selectedTest == "SAT"
+                                ? Column(
+                                    children: [Text("SAT")],
+                                  )
+                                : Container(),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(
