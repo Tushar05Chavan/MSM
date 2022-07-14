@@ -28,69 +28,276 @@ destinationDialog(
       builder: (BuildContext context) {
         return Dialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
+                borderRadius: BorderRadius.circular(20.0),
+                side: const BorderSide(color: Colors.red)),
             child: Container(
               height: Get.height * 0.70,
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TextFormField(
-                      onChanged: (_) {
-                        if (_.isEmpty) {
-                          responseDummy.addAll(response);
-                        } else {
-                          responseDummy.forEach((element) {
-                            element.data
-                                .removeWhere((element) => element.name != _);
-                          });
-                        }
-                      },
-                      decoration: InputDecoration(
-                          hintStyle:
-                              TextStyle(color: Colors.black.withOpacity(0.2)),
-                          hintText: 'Destination',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(responseDummy.length, (index) {
-                        final data = responseDummy[index];
-                        return Column(
-                          children: [
-                            Text(
-                              data.label,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                child: Scrollbar(
+                  isAlwaysShown: true,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Spacer(),
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              height: Get.height * 0.03,
+                              width: Get.width * 0.07,
+                              decoration: BoxDecoration(
+                                  color: kRed,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
-                            Column(
-                              children:
-                                  List.generate(data.data.length, (index) {
-                                return GestureDetector(
-                                    onTap: () {
-                                      destinationTextController.text =
-                                          data.data[index].name;
-                                      Get.back();
-                                    },
-                                    child: Text(data.data[index].name));
-                              }),
-                            )
-                          ],
-                        );
-                      }),
-                    ),
-                  ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        onChanged: (_) {
+                          if (_.isEmpty) {
+                            responseDummy.addAll(response);
+                          } else {
+                            responseDummy.forEach((element) {
+                              element.data
+                                  .removeWhere((element) => element.name != _);
+                            });
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintStyle:
+                                TextStyle(color: Colors.black.withOpacity(0.2)),
+                            hintText: 'Destination',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(responseDummy.length, (index) {
+                          final data = responseDummy[index];
+                          return Column(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.label,
+
+                                //textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kGrey5,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 1,
+                                color: kRedLight,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    List.generate(data.data.length, (index) {
+                                  return GestureDetector(
+                                      onTap: () {
+                                        destinationTextController.text =
+                                            data.data[index].name;
+                                        Get.back();
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 12,
+                                              ),
+                                              Flexible(
+                                                  child: Text(
+                                                      data.data[index].name)),
+                                            ],
+                                          ),
+                                          Divider(
+                                            thickness: 1,
+                                            color: kGrey6,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          )
+                                        ],
+                                      ));
+                                }),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ));
       });
 }
 
+
+WhatDoYouWantDialog(
+    BuildContext context, List<WhatDoYouWantResponseModel> response) {
+  List<WhatDoYouWantResponseModel> responseDummy = [...response];
+  showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.9),
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                side: const BorderSide(color: Colors.red)),
+            child: Container(
+              height: Get.height * 0.70,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: SingleChildScrollView(
+                child: Scrollbar(
+                  isAlwaysShown: true,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Spacer(),
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              height: Get.height * 0.03,
+                              width: Get.width * 0.07,
+                              decoration: BoxDecoration(
+                                  color: kRed,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        onChanged: (_) {
+                          if (_.isEmpty) {
+                            responseDummy.addAll(response);
+                          } else {
+                            responseDummy.forEach((element) {
+                              element.data
+                                  .removeWhere((element) => element != _);
+                            });
+                          }
+                        },
+                        decoration: InputDecoration(
+                            hintStyle:
+                                TextStyle(color: Colors.black.withOpacity(0.2)),
+                            hintText: 'What do you want to study ?',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(responseDummy.length, (index) {
+                          final data = responseDummy[index];
+                          return Column(
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.label,
+
+                                //textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: kGrey5,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 1,
+                                color: kRedLight,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children:
+                                    List.generate(data.data.length, (index) {
+                                  return GestureDetector(
+                                      onTap: () {
+                                        studiesTextController.text =
+                                            data.data[index];
+                                        Get.back();
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 12,
+                                              ),
+                                              Flexible(
+                                                  child: Text(
+                                                      data.data[index])),
+                                            ],
+                                          ),
+                                          Divider(
+                                            thickness: 1,
+                                            color: kGrey6,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          )
+                                        ],
+                                      ));
+                                }),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ));
+      });
+}
+
+
 TextEditingController destinationTextController = new TextEditingController();
+TextEditingController studiesTextController = new TextEditingController();
+
 
 PreferredSize buildPreferredSize(
     BuildContext context, GlobalKey<ScaffoldState> key) {
@@ -546,28 +753,9 @@ PreferredSize buildPreferredSize(
                                   controller.apiResponse.data;
 
                               return TextFormField(
+                                controller: studiesTextController,
                                 onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return SimpleDialog(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                side: const BorderSide(
-                                                    color: Colors.red)),
-                                            children: [
-                                              Container(
-                                                child: Column(children: const [
-                                                  Text(
-                                                      'What Do You Want To Study ?'),
-                                                  SizedBox(
-                                                    height: 5,
-                                                  ),
-                                                ]),
-                                              ),
-                                            ]);
-                                      });
+                                  WhatDoYouWantDialog(context, response);
                                 },
                                 decoration: InputDecoration(
                                     hintStyle: TextStyle(

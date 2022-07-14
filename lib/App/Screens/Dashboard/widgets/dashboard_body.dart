@@ -548,7 +548,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                             setState(() {});
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            margin: EdgeInsets.symmetric(horizontal: 5),
                             width: Get.width * 0.135,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -569,7 +569,8 @@ class _DashboardBodyState extends State<DashboardBody> {
                             ),
                           ),
                         );
-                      }),
+                      }
+                      )
                     ),
                   ),
 
