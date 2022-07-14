@@ -531,47 +531,45 @@ class _DashboardBodyState extends State<DashboardBody> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: List.generate(4, (index) {
-                        return GestureDetector(
-                          onTap: () async {
-                            SelectedIndex = index;
-                            await _getTilesViewModel.getTilesViewModel(
-                                duration: SelectedIndex == 0
-                                    ? 1
-                                    : SelectedIndex == 1
-                                        ? 2
-                                        : SelectedIndex == 2
-                                            ? 3
-                                            : SelectedIndex == 3
-                                                ? 4
-                                                : 1);
-                            setState(() {});
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 5),
-                            width: Get.width * 0.135,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: SelectedIndex == index
-                                    ? Color(0xff6A707E)
-                                    : Colors.white),
-                            child: Center(
-                              child: Text(
-                                '${filterData[index]['name']}',
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    color: SelectedIndex == index
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500),
-                              ),
+                        children: List.generate(4, (index) {
+                      return GestureDetector(
+                        onTap: () async {
+                          SelectedIndex = index;
+                          await _getTilesViewModel.getTilesViewModel(
+                              duration: SelectedIndex == 0
+                                  ? 1
+                                  : SelectedIndex == 1
+                                      ? 2
+                                      : SelectedIndex == 2
+                                          ? 3
+                                          : SelectedIndex == 3
+                                              ? 4
+                                              : 1);
+                          setState(() {});
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          width: Get.width * 0.135,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: SelectedIndex == index
+                                  ? Color(0xff6A707E)
+                                  : Colors.white),
+                          child: Center(
+                            child: Text(
+                              '${filterData[index]['name']}',
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  color: SelectedIndex == index
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
-                        );
-                      }
-                      )
-                    ),
+                        ),
+                      );
+                    })),
                   ),
 
                   // Expanded(
@@ -635,8 +633,9 @@ class _DashboardBodyState extends State<DashboardBody> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                List<TilesResponseModel> response = controller.apiResponse.data;
                 if (controller.apiResponse.status == Status.COMPLETE) {
+                  List<TilesResponseModel> response =
+                      controller.apiResponse.data;
                   return Padding(
                       padding: const EdgeInsets.all(10),
                       child: Column(
