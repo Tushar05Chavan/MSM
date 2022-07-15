@@ -18,6 +18,7 @@ class StudentApplicationViewModel extends GetxController {
               studentId: studentId);
       print('STUDENT APPLICATION MODEL RESPONSE=>$response');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print("ERRORRRRR>>>>>  $e");
       _apiResponse = ApiResponse.error(message: 'error');
