@@ -82,7 +82,8 @@ DropdownButtonHideUnderline IntakeDropdown(
 }
 
 DropdownButtonHideUnderline examDropDown(
-    {String? selectedExam, List<ExamDropResponseModel>? exam}) {
+    
+    {Function(String)? onChanged, String? selectedExam, List<ExamDropResponseModel>? exam}) {
   return DropdownButtonHideUnderline(
     child: DropdownButtonHideUnderline(
       child: DropdownButtonFormField(
@@ -113,6 +114,10 @@ DropdownButtonHideUnderline examDropDown(
           }).toList(),
           onChanged: (newValue) {
             selectedExam = newValue as String?;
+            if (onChanged != null){
+              onChanged(newValue??"");
+            }
+            
           }),
     ),
   );
