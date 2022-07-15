@@ -17,6 +17,7 @@ class StudentDocViewModel extends GetxController {
           await StudentDocRepo.studentDocRepo(parentId: parentId);
       print('STUDENT DOCUMENT MODEL RESPONSE=>$response');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print("ERRORRRRR>>>>>$e");
       _apiResponse = ApiResponse.error(message: 'error');

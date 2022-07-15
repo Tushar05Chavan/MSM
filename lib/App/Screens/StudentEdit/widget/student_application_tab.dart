@@ -517,11 +517,15 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                         ],
                       );
                     } else if (controller.apiResponse.status == Status.ERROR) {
-                      return const CircularProgressIndicator();
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                return Center(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('No Data Available'),
+                ));
+                
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );                  
                   },
                 ),
                 Padding(

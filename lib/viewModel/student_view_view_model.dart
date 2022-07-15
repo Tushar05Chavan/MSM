@@ -21,6 +21,7 @@ class StudentViewViewModel extends GetxController {
           await StudentViewRepo.studentViewRepo(studentId: studentId);
       print('STUDENT VIEW MODEL RESPONSE=>$response');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print("ERRORRRRR>>>>>  $e");
       _apiResponse = ApiResponse.error(message: 'error');

@@ -132,7 +132,7 @@ class GenInfo {
   String? citizenshipName;
   String? passportNo;
   String? agentName;
-  DateTime? passportExpiryDate;
+  String? passportExpiryDate;
   String? salution;
   String? mailingAddres;
   String? mailingCity;
@@ -181,7 +181,7 @@ class GenInfo {
         citizenshipName: json["CitizenshipName"],
         passportNo: json["PassportNo"],
         agentName: json["AgentName"],
-        passportExpiryDate: DateTime.parse(json["PassportExpiryDate"]),
+        passportExpiryDate: json["PassportExpiryDate"],
         salution: json["Salution"],
         mailingAddres: json["MailingAddres"],
         mailingCity: json["MailingCity"],
@@ -232,7 +232,7 @@ class GenInfo {
         "CitizenshipName": citizenshipName,
         "PassportNo": passportNo,
         "AgentName": agentName,
-        "PassportExpiryDate": passportExpiryDate!.toIso8601String(),
+        "PassportExpiryDate": passportExpiryDate,
         "Salution": salution,
         "MailingAddres": mailingAddres,
         "MailingCity": mailingCity,
