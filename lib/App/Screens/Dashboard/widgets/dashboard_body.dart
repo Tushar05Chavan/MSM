@@ -374,7 +374,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
                               width: 50,
@@ -386,9 +386,9 @@ class _DashboardBodyState extends State<DashboardBody> {
                                           '${"https://msmqastorage.blob.core.windows.net/files/files/institution/"}${forDashboardData[index].instLogoPath}'))),
                             ),
                             const SizedBox(
-                              width: 10,
+                              width: 20,
                             ),
-                            Flexible(
+                            Expanded(
                               child: Text(
                                 '${forDashboardData[index].institutionName}',
                                 style: const TextStyle(
@@ -401,6 +401,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                             const SizedBox(
                               width: 10,
                             ),
+                            Spacer(),
                             Text(
                               '${forDashboardData[index].waiverPer}${'%'}',
                               style: const TextStyle(

@@ -682,6 +682,8 @@ class _SearchBarState extends State<SearchBar> {
                                     WhatDoYouWantDialog(context, response);
                                   },
                                   decoration: InputDecoration(
+                                      contentPadding:
+                                          EdgeInsets.symmetric(horizontal: 20),
                                       hintStyle: TextStyle(
                                           color: Colors.black.withOpacity(0.2)),
                                       hintText: 'What do you Want to study?',
@@ -750,6 +752,8 @@ class _SearchBarState extends State<SearchBar> {
                                   destinationDialog(context, response);
                                 },
                                 decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(horizontal: 20),
                                     hintStyle: TextStyle(
                                         color: Colors.black.withOpacity(0.2)),
                                     hintText: 'Destination',
