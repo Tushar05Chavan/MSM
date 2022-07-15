@@ -227,10 +227,10 @@ class FeeDetail {
     this.actualFee,
   });
 
-  int? feeId;
+  num? feeId;
   String? feeType;
   String? feeBasis;
-  int? feeAmount;
+  num? feeAmount;
   String? actualFee;
 
   factory FeeDetail.fromJson(Map<String, dynamic> json) => FeeDetail(

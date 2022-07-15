@@ -315,7 +315,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               // );
             } else {
               if (controller.apiResponse.status == Status.ERROR) {
-                return const CircularProgressIndicator();
+                return Container();
               }
               return const Center(
                 child: CircularProgressIndicator(),
@@ -475,8 +475,8 @@ class _DashboardBodyState extends State<DashboardBody> {
                     // );
                   } else {
                     if (controller.apiResponse.status == Status.ERROR) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Center(
+                        child: Container(),
                       );
                     }
                     return const Center(
@@ -1007,6 +1007,8 @@ class _DashboardBodyState extends State<DashboardBody> {
                       //   },
                       // ),
                       );
+                } else if (controller.apiResponse.status == Status.ERROR) {
+                  return Container();
                 } else {
                   // if (controller.apiResponse.status == Status.ERROR) {
                   //   return const Center(

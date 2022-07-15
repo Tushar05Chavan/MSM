@@ -21,6 +21,7 @@ class NewsViewModel extends GetxController {
       List<NewsResponseModel> response = await NewsRepo.newsRepo();
       print('NewsResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

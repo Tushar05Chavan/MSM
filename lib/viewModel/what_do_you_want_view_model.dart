@@ -16,33 +16,35 @@ class WhatDoYouWantViewModel extends GetxController {
   // Future<void> whatDoYouWantViewModel(Map<String, dynamic>? model) async {
   //   _apiResponse = ApiResponse.loading(message: 'Loading');
   //   update();
-    // try {
-    //   List<WhatDoYouWantResponseModel> response =
-    //       await WhatDoYouWantRepo.whatDoYouWantRepo();
-    //  // var response = WhatDoYouWantRepo.whatDoYouWantRepo();
-    //   _apiResponse = ApiResponse.complete(response);
-    //   // print('View ModelRESPONSE=$response');
-    // } catch (e) {
-    //   print(".........>$e");
-    //   _apiResponse = ApiResponse.error(message: 'error');
-    // }
-    //update();
+  // try {
+  //   List<WhatDoYouWantResponseModel> response =
+  //       await WhatDoYouWantRepo.whatDoYouWantRepo();
+  //  // var response = WhatDoYouWantRepo.whatDoYouWantRepo();
+  //   _apiResponse = ApiResponse.complete(response);
+  //   // print('View ModelRESPONSE=$response');
+  // } catch (e) {
+  //   print(".........>$e");
+  //   _apiResponse = ApiResponse.error(message: 'error');
+  // }
+  //update();
   //}
 
-    onInit() {
+  onInit() {
     whatDoYouWantViewModel();
   }
 
   Future<void> whatDoYouWantViewModel() async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
     try {
-      List<WhatDoYouWantResponseModel> response = await WhatDoYouWantRepo().whatDoYouWantRepo();
+      List<WhatDoYouWantResponseModel> response =
+          await WhatDoYouWantRepo().whatDoYouWantRepo();
       print('WhatDoYouWantResponseModel RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');
     }
   }
-
 }

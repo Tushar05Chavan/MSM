@@ -20,12 +20,12 @@ class ScholarshipViewModel extends GetxController {
           await ScholarshipRepo().scholarshipRepo();
       print('Scholarship Response Model=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');
+      update();
     }
     update();
   }
-
-
 }

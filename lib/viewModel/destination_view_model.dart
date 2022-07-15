@@ -16,13 +16,17 @@ class DestinationViewModel extends GetxController {
 
   Future<void> destinationViewModel() async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
     try {
-      List<DestinationResponseModel> response = await DestinationRepo().destinationRepo();
+      List<DestinationResponseModel> response =
+          await DestinationRepo().destinationRepo();
       print('DestinationResponseModel RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');
+      update();
     }
   }
 }

@@ -20,6 +20,7 @@ class ForDashboardViewModel extends GetxController {
           await ForDashboardRepo().forDashboardRepo();
       print('ForDashboardResponseModel RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

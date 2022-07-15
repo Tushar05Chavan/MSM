@@ -19,6 +19,7 @@ class GetTilesViewModel extends GetxController {
           await GetTilesDetailsRepo().getTilesDetails(duration: duration);
       print('TilesResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

@@ -506,32 +506,35 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: List.generate(response.feeDetail!.length, (index) {
-                                        return Row(
-                                          children: [
-                                            SvgPicture.asset(
-                                          'assets/icons/Applicationfee.svg',
-                                          height: 15,
-                                          width: 15,
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          '${response.feeDetail![index].feeType}',
-                                          style: const TextStyle(
-                                            color: kGrey,
-                                            fontFamily: 'Poppins',
-                                            fontSize: 14,
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: List.generate(response.feeDetail!.length, (index) {
+                                          return Row(
+                                            children: [
+                                              SvgPicture.asset(
+                                            'assets/icons/Applicationfee.svg',
+                                            height: 15,
+                                            width: 15,
                                           ),
-                                        )
-                                          ],
-                                        );
-                                        
-                                      })
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            '${response.feeDetail![index].feeType}',
+                                           
+                                            style: const TextStyle(
+                                              color: kGrey,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 14,
+                                            ),
+                                          )
+                                            ],
+                                          );
+                                          
+                                        })
+                                      ),
                                     ),
                                     SizedBox(width: 5),
                                     Container(

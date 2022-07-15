@@ -8,6 +8,7 @@ class SearchController extends GetxController {
       Get.put(SearchResultViewModel());
   Future<void> getSearchResults(Map<String, dynamic> body) async {
     await _searchResultViewModel.getSearchResults(body);
+    searchResult.clear();
     searchResult = _searchResultViewModel.apiResponse.data;
     update();
   }

@@ -31,22 +31,21 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               isNotSearchScreen: false,
             ),
             GetBuilder<SearchResultViewModel>(builder: (controller) {
-              print("HEY");
               if (controller.apiResponse.status == Status.LOADING) {
-                return Expanded(
-                    child: Center(
+                return Center(
                   child: CircularProgressIndicator(),
-                ));
+                );
               } else if (controller.apiResponse.status == Status.COMPLETE) {
                 List<SearchResultModel> response = controller.apiResponse.data;
                 return Expanded(
-                    child: searchController.searchResult.isNotEmpty
+                    child: controller.apiResponse.data.isNotEmpty
                         ? ListView.builder(
                             itemCount: searchController.searchResult.length,
                             itemBuilder: (con, index) {
                               final data = searchController.searchResult[index];
                               return Container(
                                 child: Card(
+                                  color: Colors.white,
                                   child: Container(
                                     padding: EdgeInsets.all(10),
                                     child: Column(
@@ -78,7 +77,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                             BorderRadius
                                                                 .circular(20),
                                                         child: Image.network(
-                                                            "https://app.msmunify.com/assets/img/${data.instLogoPath}")))
+                                                            "https://msmqastorage.blob.core.windows.net/files/institution/${data.instLogoPath}")))
                                                 : Container(
                                                     width: 110,
                                                     height: 80,
@@ -287,7 +286,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         : Expanded(
                             child: Center(
                               child: Text(
-                                "No data found",
+                                "No Data found!",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -298,12 +297,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             ),
                           ));
               } else if (controller.apiResponse.status == Status.ERROR) {
-                return Expanded(
-                    child: Center(
+                return Center(
                   child: Text("Error"),
-                ));
+                );
               } else {
-                return Expanded(child: Container());
+                return Container();
               }
             })
           ],
