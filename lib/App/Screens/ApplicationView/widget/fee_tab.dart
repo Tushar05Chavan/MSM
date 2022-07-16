@@ -961,7 +961,12 @@ class _FeeTabState extends State<FeeTab> {
                       source: TableRow(response));
                 } else {
                   if (controller.apiResponse.status == Status.ERROR) {
-                    return const CircularProgressIndicator();
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text('No Data Available'),
+                      ),
+                    );
                   }
                   return const Center(
                     child: CircularProgressIndicator(),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:msm_unify/Api/api_response.dart';
+import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/model/responseModek/application_view_response_model.dart';
 import 'package:msm_unify/model/responseModek/status_log_response_model.dart';
 import 'package:msm_unify/viewModel/status_log_view_model.dart';
@@ -1184,6 +1185,7 @@ class _StatusLogTabState extends State<StatusLogTab> {
             const SizedBox(
               height: 10,
             ),
+            supportSection(),
           ],
         ),
       ),

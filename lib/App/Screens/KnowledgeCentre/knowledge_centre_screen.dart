@@ -176,15 +176,20 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                           ),
                                           child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                                MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                "${response[index].data![index1].documentTitle}",
-                                                style: const TextStyle(
-                                                    color: Color(0xff858796),
-                                                    fontWeight: FontWeight.w600,
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 20),
+                                              Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  "${response[index].data![index1].documentTitle}",
+                                                  textAlign: TextAlign.left,
+                                                  style: const TextStyle(
+                                                      color: Color(0xff858796),
+                                                      fontWeight: FontWeight.w600,
+                                                      fontFamily: 'Poppins',
+                                                      fontSize: 20),
+                                                ),
                                               ),
                                               GestureDetector(
                                                 onTap: () {
@@ -363,21 +368,24 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                                         );
                                                       });
                                                 },
-                                                child: Container(
-                                                  width: Get.width * 0.42,
-                                                  height: Get.height * 0.05,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      color: kRed),
-                                                  child: const Center(
-                                                    child: Text(
-                                                      'Document/Video',
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 16,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(10.0),
+                                                  child: Container(
+                                                    width: Get.width * 0.42,
+                                                    height: Get.height * 0.05,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                12),
+                                                        color: kRed),
+                                                    child: const Center(
+                                                      child: Text(
+                                                        'Document/Video',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 16,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),

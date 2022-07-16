@@ -31,6 +31,7 @@ class TextScoreUpdateViewModel extends GetxController {
           speaking: speaking,
           overAll: overAll);
       _apiResponse = ApiResponse.complete();
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

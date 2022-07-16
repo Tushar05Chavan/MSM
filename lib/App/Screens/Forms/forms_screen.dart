@@ -190,52 +190,76 @@ class _FormScreenState extends State<FormScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 10),
+              //   child: Container(
+              //       height: Get.height * 0.070,
+              //       width: double.infinity,
+              //       padding: const EdgeInsets.symmetric(horizontal: 10),
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(10),
+              //         border: Border.all(color: kGrey4),
+              //       ),
+              //       child: TextFormField(
+              //         controller: _search,
+              //         validator: (search) {
+              //           if (search != null) {
+              //             return "Please Enter Keyword";
+              //           }
+              //         },
+              //         decoration: InputDecoration(
+              //           hintText: "search keyword",
+              //           suffixIcon: IconButton(
+              //             onPressed: () {
+              //               var data = FormInstitutionResponseModel().instName =
+              //                   _search.text;
+              //               institutions.forEach((element) {
+              //                 if (element.instName!.toLowerCase() ==
+              //                     _search.text.toLowerCase()) {
+              //                   print('true000000');
+              //                   _getFormDetailsViewModel
+              //                       .getFormDetailsViewModel(
+              //                           institutionId: 0,
+              //                           keyword: _search.text);
+              //                   setState(() {});
+              //                 } else {
+              //                   print('false000000');
+              //                 }
+              //               });
+              //             },
+              //             icon: Icon(Icons.search,
+              //                 color: Colors.grey.withOpacity(0.5)),
+              //           ),
+              //           border: InputBorder.none,
+              //           hintStyle: TextStyle(
+              //               color: Colors.black.withOpacity(0.2),
+              //               fontFamily: 'Roboto'),
+              //         ),
+              //       )),
+              // ),
+
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                    height: Get.height * 0.070,
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: kGrey4),
-                    ),
-                    child: TextFormField(
-                      controller: _search,
-                      validator: (search) {
-                        if (search != null) {
-                          return "Please Enter Keyword";
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: "search keyword",
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            var data = FormInstitutionResponseModel().instName =
-                                _search.text;
-                            institutions.forEach((element) {
-                              if (element.instName!.toLowerCase() ==
-                                  _search.text.toLowerCase()) {
-                                print('true000000');
-                                _getFormDetailsViewModel
-                                    .getFormDetailsViewModel(
-                                        institutionId: 0,
-                                        keyword: _search.text);
-                                setState(() {});
-                              } else {
-                                print('false000000');
-                              }
-                            });
-                          },
-                          icon: Icon(Icons.search,
-                              color: Colors.grey.withOpacity(0.5)),
-                        ),
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                            color: Colors.black.withOpacity(0.2),
-                            fontFamily: 'Roboto'),
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: _search,
+                  onChanged: (value) {
+                    _getFormDetailsViewModel.getFormDetailsViewModel(institutionId: 0,
+                        keyword: _search.text);
+                  },
+                  decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.black.withOpacity(0.2),
                       ),
-                    )),
+                      hintText: 'Category Search',
+                      suffixIcon: Icon(Icons.search_outlined),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: kRed)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: kRed),
+                      )),
+                ),
               ),
               SizedBox(
                 height: Get.height * 0.025,

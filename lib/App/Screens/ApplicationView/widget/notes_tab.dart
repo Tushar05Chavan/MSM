@@ -36,7 +36,7 @@ class _NotesTabState extends State<NotesTab> {
     Scaffold.of(context).showSnackBar(const SnackBar(
         backgroundColor: kGreen,
         content: Text(
-          'Add Not Successfully',
+          'Add Note Successfully',
           style: TextStyle(
               color: Colors.white, fontFamily: 'Roboto', fontSize: 20),
         )));
@@ -100,6 +100,7 @@ class _NotesTabState extends State<NotesTab> {
                 if (_addNotesApplicationViewModel.apiResponse.status ==
                     Status.COMPLETE) {
                   showInSnackBar();
+                   setState(() {});
                   _notes.clear();
                 } else {
                   if (_addNotesApplicationViewModel.apiResponse.status ==

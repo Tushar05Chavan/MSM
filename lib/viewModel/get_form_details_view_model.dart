@@ -21,6 +21,7 @@ class GetFormDetailsViewModel extends GetxController {
               institutionId: institutionId, keyword: keyword);
       print('GetFormsDetailsResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

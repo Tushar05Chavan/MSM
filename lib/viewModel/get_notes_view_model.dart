@@ -20,6 +20,7 @@ class GetNotesViewModel extends GetxController {
           await GetNotesRepo.getNotesRepo(activityId: activityId);
       print('GetNotesResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

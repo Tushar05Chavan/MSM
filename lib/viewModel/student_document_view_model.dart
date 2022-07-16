@@ -20,6 +20,7 @@ class StudentDocumentViewModel extends GetxController {
               countryId: countryId);
       print('StudentDocumentResponseModel RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

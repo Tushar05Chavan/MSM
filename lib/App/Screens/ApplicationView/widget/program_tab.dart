@@ -7,12 +7,15 @@ import 'package:msm_unify/model/responseModek/application_view_response_model.da
 import 'package:msm_unify/model/responseModek/get_program_detail_response_model.dart';
 import 'package:msm_unify/model/responseModek/get_program_intake_response_model.dart';
 import 'package:msm_unify/model/responseModek/program_mode_response_model.dart';
+import 'package:msm_unify/model/responseModek/update_program_response_model.dart';
 import 'package:msm_unify/viewModel/application_program_of_program_view_model.dart';
 import 'package:msm_unify/viewModel/get_program_detail_view_model.dart';
 import 'package:msm_unify/viewModel/get_program_intake_view_model.dart';
 import 'package:msm_unify/viewModel/program_mode_view_model.dart';
+import 'package:msm_unify/viewModel/update_program_view_model.dart';
 
 import '../../../../viewModel/program_campus_view_model.dart';
+import '../../../../viewModel/update_program_view_model.dart';
 import '../../ApplicationProgramStudent/widget/application_program_info_tab_screen.dart';
 
 class ProgramTab extends StatefulWidget {
@@ -66,6 +69,9 @@ class _ProgramTabState extends State<ProgramTab> {
 
   final GetProgramDetailViewViewModel _getProgramDetailViewViewModel =
       Get.put(GetProgramDetailViewViewModel());
+
+      final UpdateProgramViewModel updateProgramViewModel =
+      Get.put(UpdateProgramViewModel());
   @override
   void initState() {
     print(
@@ -138,6 +144,14 @@ class _ProgramTabState extends State<ProgramTab> {
     getProgramsDetails = _getProgramDetailViewViewModel.apiResponse.data;
     print('response==$getProgramsDetails');
   }
+
+  // UpdateProgramResponseModel? updatePrograms;
+  // Future<void> updateProgram() async {
+  //   await updateProgramViewModel.UpdateProgramViewModel(
+  //       programId: widget.data.programInfo!.programId);
+  //   updatePrograms = updateProgramViewModel.apiResponse.data;
+  //   print('response==$updatePrograms');
+  // }
 
   @override
   Widget build(BuildContext context) {

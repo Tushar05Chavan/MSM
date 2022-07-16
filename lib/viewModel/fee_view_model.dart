@@ -19,6 +19,7 @@ class FeeViewModel extends GetxController {
       List<FeeResponseModel> response = await FeeRepo().feeRepo();
       print('feeRepo RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

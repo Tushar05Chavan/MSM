@@ -16,6 +16,7 @@ class StatusLogViewModel extends GetxController {
           await StatusLogRepo().statusLogRepo(activityId: activityId);
       print('StatusLogResponseModel RESPONSE=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

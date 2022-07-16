@@ -56,7 +56,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
   @override
   void initState() {
     application();
-    _tabController = new TabController(length: 12, vsync: this);
+    _tabController = new TabController(length: 11, vsync: this);
     super.initState();
   }
 
@@ -72,7 +72,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 12,
+        length: 11,
         child: Scaffold(
           key: _key,
           // appBar: buildPreferredSize(context, _key),
@@ -395,9 +395,9 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                             Tab(
                               child: Text('Test Score'),
                             ),
-                            Tab(
-                              child: Text('Credit Card'),
-                            ),
+                            // Tab(
+                            //   child: Text('Credit Card'),
+                            // ),
                             Tab(
                               child: Text('Additional Details'),
                             ),
@@ -433,7 +433,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                       ProgramTab(data: response),
                       EducationTab(data: response),
                       TestScoreTab(data: response),
-                      CreditCardTab(),
+                      //CreditCardTab(),
                       AdditionDetails(),
                       StudayPermitTab(),
                       ApplicationAdvisorTabScreen(data: response),

@@ -29,7 +29,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
+                    child: ListView(
                       children: [
                         Row(children: [
                           const Text(
