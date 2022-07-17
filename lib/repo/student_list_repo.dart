@@ -10,7 +10,8 @@ class StudentListRepo extends ApiURLService {
     var response = await APIService().getResponse(
         url: "${BaseUrl.baseUrl}/Student/ListDetailed",
         apitype: APIType.aPost,
-        body: {"keyword": "all"});
+        body: {"keyword": "all"}
+        );
 
     print('--res ${response}');
     StudentListResponseModel studentListResponseModel =

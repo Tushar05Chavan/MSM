@@ -2031,7 +2031,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Text('${data[index].dueDate}'),
+          child: Text(DateFormat('dd/MM/yyyy').format(DateTime.parse('${data[index].dueDate}'))),
         ),
       ),
       DataCell(

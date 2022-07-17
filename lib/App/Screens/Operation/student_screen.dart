@@ -42,6 +42,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
   ];
   final StudentListViewModel _studentListViewModel =
       Get.put(StudentListViewModel());
+  final TextEditingController _search = TextEditingController();
   @override
   void initState() {
     _studentListViewModel.studentListViewModel();
@@ -223,6 +224,32 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                 TextStyle(color: Colors.grey.withOpacity(0.5)),
                           ),
                         )),
+                     
+              //       Padding(
+              //   padding: const EdgeInsets.all(10),
+              //   child: TextFormField(
+              //     controller: _search,
+              //     onChanged: (value) {
+              //       _studentListViewModel.studentListViewModel(
+              //           keyword: _search.text);
+              //     },
+              //     decoration: InputDecoration(
+              //         hintStyle: TextStyle(
+              //           color: Colors.black.withOpacity(0.2),
+              //         ),
+              //         hintText: 'Category Search',
+              //         suffixIcon: Icon(Icons.search_outlined),
+              //         border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(15),
+              //             borderSide: BorderSide(color: kRed)),
+              //         focusedBorder: OutlineInputBorder(
+              //           borderRadius: BorderRadius.circular(15),
+              //           borderSide: BorderSide(color: kRed),
+              //         )),
+              //   ),
+              // ),
+
+
                     SizedBox(
                       height: Get.height * 0.025,
                     ),

@@ -118,7 +118,7 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                       hintStyle: TextStyle(
                         color: Colors.black.withOpacity(0.2),
                       ),
-                      hintText: 'Category Search',
+                      hintText: 'Category Search here',
                       suffixIcon: Icon(Icons.search_outlined),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
