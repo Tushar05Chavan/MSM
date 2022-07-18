@@ -21,7 +21,6 @@ import '../../../../../viewModel/get_feedback_list_view_model.dart';
 import '../../../../Screens/Forms/forms_screen.dart';
 import '../../../../Screens/KnowledgeCentre/knowledge_centre_screen.dart';
 import '../../../../Screens/Notification/notification_screen.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class SearchBar extends StatefulWidget {
   bool? isNotSearchScreen;
