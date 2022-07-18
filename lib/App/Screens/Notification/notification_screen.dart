@@ -70,7 +70,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // } else {
     final String path = (await getApplicationSupportDirectory()).path;
     final String fileName =
-        //Platform.isWindows ? '$path\\Output.xlsx' : 
+        //Platform.isWindows ? '$path\\Output.xlsx' :
         '$path/Output.xlsx';
     final File file = File(fileName);
     await file.writeAsBytes(bytes, flush: true);
@@ -189,7 +189,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                             .setText('Logged by');
 
                                         // sheet.importList(list, firstRow, firstColumn, isVertical);
-                                       sheet.tableCollection.toString();
+                                        sheet.tableCollection.toString();
                                         print(data[0]);
                                         for (var i = 0; i < data[0]; i++) {
                                           sheet
@@ -211,7 +211,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                           sheet
                                               .getRangeByIndex(i + 2, 5)
                                               .setValue(
-                                                  response.data![i].loggedBy);                             }
+                                                  response.data![i].loggedBy);
+                                        }
 ///////////////////////////////////
                                         final List<int> bytes =
                                             workbook.saveAsStream();
@@ -612,7 +613,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                                 SizedBox(
                                                                   height:
                                                                       Get.height *
-                                                                          0.04,
+                                                                          0.01,
                                                                 ),
                                                                 const Divider(),
                                                                 SizedBox(
@@ -865,7 +866,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                                                       onTap: () {
                                                                                         setState(() {
                                                                                           add1 = 'Not And';
-                                                                                        });
+                                                                                         });
                                                                                       },
                                                                                       child: const Text('Not And'),
                                                                                     ),
@@ -1002,7 +1003,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
-              
               supportSection(),
             ],
           ),
@@ -1166,19 +1166,19 @@ class TableRow extends DataTableSource {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
               child: Html(
-                data: '${data.data![index].queryDetails}',),
-                //textAlign: TextAlign.center,
-                // style:  const TextStyle(
-                //   fontFamily: 'Roboto',
-                //   color: Colors.grey,
-                // ),
-                // overflow: TextOverflow.ellipsis,
-                // maxLines: 1,
+                data: '${data.data![index].queryDetails}',
               ),
+              //textAlign: TextAlign.center,
+              // style:  const TextStyle(
+              //   fontFamily: 'Roboto',
+              //   color: Colors.grey,
+              // ),
+              // overflow: TextOverflow.ellipsis,
+              // maxLines: 1,
             ),
           ),
         ),
-      
+      ),
       DataCell(
         InkWell(
           onTap: () {
@@ -1195,7 +1195,8 @@ class TableRow extends DataTableSource {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                DateFormat('dd/MM/yyyy').format(DateTime.parse('${data.data![index].addStamp}')),
+                DateFormat('dd/MM/yyyy')
+                    .format(DateTime.parse('${data.data![index].addStamp}')),
                 //'${data.data![index].addStamp}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
@@ -1245,5 +1246,4 @@ class TableRow extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
-  
 }

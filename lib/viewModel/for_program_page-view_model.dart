@@ -20,6 +20,7 @@ class ForProgramPageViewModel extends GetxController {
           await ForProgramPageRepo().forProgramPageRepo(programId: programId);
       print('ForProgramPageResponseModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
+      update();
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

@@ -215,6 +215,11 @@ class _StudentListScreenState extends State<StudentListScreen> {
                           border: Border.all(color: kGrey4),
                         ),
                         child: TextFormField(
+                          controller: _search,
+                          onChanged: (value) {
+                             _studentListViewModel.studentListViewModel(
+                               keyword: _search.text);
+                           },
                           decoration: InputDecoration(
                             hintText: "search keyword",
                             suffixIcon: Icon(Icons.search,

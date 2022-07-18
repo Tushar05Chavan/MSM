@@ -9,9 +9,9 @@ import 'package:msm_unify/model/responseModek/for_program_page_response_model.da
 import 'package:msm_unify/viewModel/for_program_page-view_model.dart';
 
 class ProgramDetailScreen extends StatefulWidget {
-  final int? programId;
+  final int programId;
 
-  const ProgramDetailScreen({super.key, this.programId});
+  const ProgramDetailScreen({super.key, required this.programId});
   @override
   _ProgramDetailScreenState createState() => _ProgramDetailScreenState();
 }
@@ -32,7 +32,7 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
 
   @override
   void initState() {
-    _forProgramPageViewModel.forProgramPageViewModel(programId: 34911);
+    _forProgramPageViewModel.forProgramPageViewModel(programId: widget.programId);
     super.initState();
     print('program Id==${widget.programId}');
   }
