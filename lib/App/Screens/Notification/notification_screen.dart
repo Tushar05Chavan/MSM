@@ -140,7 +140,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    // GestureDetector(
+                                    // InkWell(
                                     //   onTap: () async {
                                     //     final xl.Workbook workbook =
                                     //         xl.Workbook();
@@ -167,7 +167,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     //     sheet.getRangeByIndex(2, 2).setValue(
                                     //         response.data![0].notificationType);
 
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () async {
                                         final xl.Workbook workbook =
                                             xl.Workbook();
@@ -576,7 +576,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     const SizedBox(
                                       width: 20,
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         showDialog(
                                             context: context,
@@ -867,7 +867,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                                                       onTap: () {
                                                                                         setState(() {
                                                                                           add1 = 'Not And';
-                                                                                         });
+                                                                                        });
                                                                                       },
                                                                                       child: const Text('Not And'),
                                                                                     ),
@@ -924,7 +924,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                         bottom: 5,
                                                         child: Row(
                                                           children: [
-                                                            GestureDetector(
+                                                            InkWell(
                                                               onTap: () {
                                                                 Get.back();
                                                               },
@@ -940,7 +940,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                                             const SizedBox(
                                                               width: 25,
                                                             ),
-                                                            GestureDetector(
+                                                            InkWell(
                                                               onTap: () {
                                                                 Get.back();
                                                               },

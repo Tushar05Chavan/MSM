@@ -8,19 +8,18 @@ class ForProgramPageViewModel extends GetxController {
 
   ApiResponse get apiResponse => _apiResponse;
 
-  onInit() {
-    forProgramPageViewModel();
-  }
-
-  Future<void> forProgramPageViewModel({int? programId}) async {
+  Future<void> forProgramPageViewModel({required int programId}) async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     update();
     try {
-      ForProgramPageResponseModel response =
-          await ForProgramPageRepo().forProgramPageRepo(programId: programId);
-      print('ForProgramPageResponseModel=>${response}');
-      _apiResponse = ApiResponse.complete(response);
-      update();
+      await ForProgramPageRepo()
+          .forProgramPageRepo(programId: programId)
+          .then((value) {
+        ForProgramPageResponseModel response = value;
+        print('ForProgramPageResponseModel=>${response}');
+        _apiResponse = ApiResponse.complete(response);
+        update();
+      });
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');
@@ -30,7 +29,7 @@ class ForProgramPageViewModel extends GetxController {
 
   List data1 = [];
   Future<void> forProgramPage({int? programId}) async {
-    await forProgramPageViewModel(programId: programId);
+    await forProgramPageViewModel(programId: programId!);
     ForProgramPageResponseModel data = apiResponse.data;
     data1.add(data);
   }

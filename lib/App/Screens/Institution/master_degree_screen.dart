@@ -164,7 +164,7 @@ class _MasterDegreeScreenState extends State<MasterDegreeScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },

@@ -62,7 +62,6 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
 
   ApplicationViewResponseModel? response;
   Future<void> application() async {
-    print("Application idd===${widget.applicationId}");
     await _applicationViewViewModel.applicationViewViewModel(
         applicationId: widget.applicationId);
   }
@@ -89,7 +88,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                     return <Widget>[
                       SliverToBoxAdapter(
                         child: //buildPreferredSize(context, _key),
-                        SearchBar(keyGlobal: _key),
+                            SearchBar(keyGlobal: _key),
                       ),
                       SliverToBoxAdapter(
                         child: Padding(
@@ -99,7 +98,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                               const SizedBox(
                                 height: 25,
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   Get.back();
                                 },
@@ -259,7 +258,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                                         fontFamily: 'Poppins',
                                         fontSize: 13),
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {
                                       showDialog(
                                           context: context,
@@ -313,7 +312,7 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                                                     const SizedBox(
                                                       height: 20,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },

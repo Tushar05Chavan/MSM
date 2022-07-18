@@ -3,6 +3,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:msm_unify/Api/api_response.dart';
+import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/primery_button.dart';
 import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/for_program_page_response_model.dart';
@@ -32,9 +33,10 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
 
   @override
   void initState() {
-    _forProgramPageViewModel.forProgramPageViewModel(programId: widget.programId);
     super.initState();
     print('program Id==${widget.programId}');
+    _forProgramPageViewModel.forProgramPageViewModel(
+        programId: widget.programId);
   }
 
   @override
@@ -202,7 +204,7 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Get.back();
                           },
@@ -380,18 +382,14 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     ListView.builder(
                       shrinkWrap: true,
                       itemCount: response.englishRequirement!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Row(
                           children: const [
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Text(
                               "•",
                               style: TextStyle(
@@ -427,18 +425,14 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     ListView.builder(
                       shrinkWrap: true,
                       itemCount: response.documentRequirement!.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Row(
                           children: const [
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Text(
                               "•",
                               style: TextStyle(
@@ -466,88 +460,81 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                       height: 10,
                     ),
                     Container(
-                      height: Get.height * 0.75,
-                      width: Get.width,
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border:
                             Border.all(color: Colors.black.withOpacity(0.3)),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
+                      child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: SizedBox(
+                            const SizedBox(height: 5),
+                            if (response.instLogoPath != null)
+                              Align(
+                                alignment: Alignment.center,
+                                child: SizedBox(
                                   height: Get.height * 0.135,
                                   width: Get.width * 0.70,
                                   child: Image(
-                                      fit: BoxFit.fill,
-                                      image: NetworkImage(
-                                          'https://appmsmunifyprod.blob.core.windows.net/docs/files/institution/${response.instTile}'))),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Expanded(
-                                      child: Row(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                        //'https://appmsmunifyprod.blob.core.windows.net/docs/files/institution/${response.instLogoPath}'
+                                        'https://msmqastorage.blob.core.windows.net/files/files/institution/${response.instLogoPath}'),
+                                  ),
+                                ),
+                              ),
+                            if (response.instLogoPath != null)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: const Divider(thickness: 1),
+                              ),
+                            Column(children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
-                                        children: List.generate(response.feeDetail!.length, (index) {
+                                        children: List.generate(
+                                            response.feeDetail!.length,
+                                            (index) {
                                           return Row(
                                             children: [
                                               SvgPicture.asset(
-                                            'assets/icons/Applicationfee.svg',
-                                            height: 15,
-                                            width: 15,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            '${response.feeDetail![index].feeType}',
-                                           
-                                            style: const TextStyle(
-                                              color: kGrey,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                            ),
-                                          )
+                                                'assets/icons/Applicationfee.svg',
+                                                height: 15,
+                                                width: 15,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '${response.feeDetail![index].feeType}',
+                                                style: const TextStyle(
+                                                  color: kGrey,
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 14,
+                                                ),
+                                              )
                                             ],
                                           );
-                                          
-                                        })
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: Get.width * 0.30,
-                                      child: Row(
-                                        children:
-                                        
-                                        List.generate(response.feeDetail!.length, (index){
-                                          return 
-                                          Row(
-                                            children: [
-                                              Text(
+                                        })),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: Get.width * 0.30,
+                                    child: Row(
+                                        children: List.generate(
+                                            response.feeDetail!.length,
+                                            (index) {
+                                      return Row(
+                                        children: [
+                                          Text(
                                             'CAD ${response.feeDetail![index].feeAmount}',
                                             style: const TextStyle(
                                                 decoration:
@@ -565,26 +552,23 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                               color: Color(0xff565656),
                                             ),
                                           ),
-                                            ],
-                                          );
-                                        })
-                                        
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(
-                                      children: List.generate(response.feeDetail!.length, (index) {
-                                        return Row(
-                                          children: [
-                                            SvgPicture.asset(
+                                        ],
+                                      );
+                                    })),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                      children: List.generate(
+                                          response.feeDetail!.length, (index) {
+                                    return Row(
+                                      children: [
+                                        SvgPicture.asset(
                                           'assets/icons/TuitionFee.svg',
                                           height: 15,
                                           width: 15,
@@ -600,19 +584,20 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                             fontSize: 14,
                                           ),
                                         )
-                                          ],
-                                        );
-                                      })
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: Get.width * 0.34,
-                                      child: Row(
-                                        children: List.generate(response.feeDetail!.length, (index) {
-                                          return Row(
-                                            children: [
-                                                 const SizedBox(width: 5),
+                                      ],
+                                    );
+                                  })),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: Get.width * 0.34,
+                                    child: Row(
+                                        children: List.generate(
+                                            response.feeDetail!.length,
+                                            (index) {
+                                      return Row(
+                                        children: [
+                                          const SizedBox(width: 5),
                                           Text(
                                             'CAD ${response.feeDetail![index].feeAmount}',
                                             style: const TextStyle(
@@ -621,24 +606,68 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                               color: Color(0xff565656),
                                             ),
                                           )
-                                            ],
-                                          );
-                                        })
+                                        ],
+                                      );
+                                    })),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/icons/costofliving.svg',
+                                        height: 15,
+                                        width: 15,
                                       ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      const Text(
+                                        'Cost of living per year',
+                                        style: TextStyle(
+                                          color: kGrey,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 14,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: Get.width * 0.34,
+                                    child: Row(
+                                      children: const [
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'CAD 10000',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 13,
+                                            color: Color(0xff565656),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                    width: Get.width * 0.50,
+                                    child: Row(
                                       children: [
                                         SvgPicture.asset(
-                                          'assets/icons/costofliving.svg',
+                                          'assets/icons/duration.svg',
                                           height: 15,
                                           width: 15,
                                         ),
@@ -646,7 +675,7 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                           width: 8,
                                         ),
                                         const Text(
-                                          'Cost of living per year',
+                                          'Duration',
                                           style: TextStyle(
                                             color: kGrey,
                                             fontFamily: 'Poppins',
@@ -655,167 +684,108 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                         )
                                       ],
                                     ),
-                                    const SizedBox(width: 5),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: Get.width * 0.34,
-                                      child: Row(
-                                        children: const [
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'CAD 10000',
-                                            style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 13,
-                                              color: Color(0xff565656),
-                                            ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: Get.width * 0.34,
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(width: 5),
+                                        Text(
+                                          '${response.durationTime}',
+                                          style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 13,
+                                            color: Color(0xff565656),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      width: Get.width * 0.50,
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/duration.svg',
-                                            height: 15,
-                                            width: 15,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                    width: Get.width * 0.50,
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/icons/levelofEducation.svg',
+                                          height: 15,
+                                          width: 15,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        const Text(
+                                          'Level of Education',
+                                          style: TextStyle(
+                                            color: kGrey,
+                                            fontFamily: 'Poppins',
+                                            fontSize: 14,
                                           ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          const Text(
-                                            'Duration',
-                                            style: TextStyle(
-                                              color: kGrey,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
-                                    const SizedBox(width: 5),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: Get.width * 0.34,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            '${response.durationTime}',
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 13,
-                                              color: Color(0xff565656),
-                                            ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    width: Get.width * 0.34,
+                                    child: Row(
+                                      children: [
+                                        const SizedBox(width: 5),
+                                        Text(
+                                          '${response.levelOfEducation}',
+                                          style: const TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 13,
+                                            color: Color(0xff565656),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      width: Get.width * 0.50,
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/levelofEducation.svg',
-                                            height: 15,
-                                            width: 15,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          const Text(
-                                            'Level of Education',
-                                            style: TextStyle(
-                                              color: kGrey,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(width: 5),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: Get.width * 0.34,
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            '${response.levelOfEducation}',
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 13,
-                                              color: Color(0xff565656),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                            const SizedBox(
-                              height: 15,
+                                  ),
+                                ],
+                              ),
+                            ]),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: const Divider(thickness: 1),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  children: [
-                                    const Text(
-                                      'Starting Date',
-                                      style: TextStyle(
-                                          color: kGrey,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 14),
-                                    ),
-                                    RichText(
-                                      text: const TextSpan(
-                                          text: 'Sep-2022 -',
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins'),
-                                          children: [
-                                            TextSpan(
-                                                text: 'Open',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'Poppins',
-                                                    fontSize: 12))
-                                          ]),
-                                    ),
-                                  ],
-                                ),
+                                Column(children: [
+                                  const Text(
+                                    'Starting Date',
+                                    style: TextStyle(
+                                        color: kGrey,
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14),
+                                  ),
+                                  RichText(
+                                    text: const TextSpan(
+                                        text: 'Sep-2022 -',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 12,
+                                            fontFamily: 'Poppins'),
+                                        children: [
+                                          TextSpan(
+                                              text: 'Open',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 12))
+                                        ]),
+                                  ),
+                                ]),
                                 Column(
                                   children: const [
                                     Text(
@@ -834,10 +804,8 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
                             Container(
+                              margin: EdgeInsets.only(top: 8),
                               height: Get.height * 0.05,
                               width: Get.width,
                               color: Color(0xffE6EBF3),
@@ -852,24 +820,21 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                               ),
                             ),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text(
-                                  '1. Kavita Wilson - (India)',
-                                  style: TextStyle(
-                                    color: Color(0xff333333),
-                                    fontSize: 14,
-                                    fontFamily: 'Roboto',
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: const Text(
+                                      '1. Kavita Wilson - (India)',
+                                      style: TextStyle(
+                                        color: Color(0xff333333),
+                                        fontSize: 14,
+                                        fontFamily: 'Roboto',
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
+                                  Row(children: [
                                     SvgPicture.asset('assets/icons/email.svg'),
                                     const SizedBox(
                                       width: 5,
@@ -883,65 +848,57 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
                                         fontFamily: 'Roboto',
                                       ),
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const Text(
-                                  '2. Ritu',
-                                  style: TextStyle(
-                                    color: Color(0xff333333),
-                                    fontSize: 14,
-                                    fontFamily: 'Roboto',
+                                  ]),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: const Text(
+                                      '2. Ritu',
+                                      style: TextStyle(
+                                        color: Color(0xff333333),
+                                        fontSize: 14,
+                                        fontFamily: 'Roboto',
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
+                                  Row(children: [
                                     SvgPicture.asset(
                                       'assets/icons/email.svg',
                                       height: 14,
                                       width: 14,
                                     ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      ' etonadmissions@etoncollege.ca ',
-                                      style: TextStyle(
-                                        color:
-                                            Color(0xff333333).withOpacity(0.8),
-                                        fontSize: 14,
-                                        fontFamily: 'Roboto',
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      child: Text(
+                                        ' etonadmissions@etoncollege.ca ',
+                                        style: TextStyle(
+                                          color: Color(0xff333333)
+                                              .withOpacity(0.8),
+                                          fontSize: 14,
+                                          fontFamily: 'Roboto',
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
+                                  ]),
+                                ]),
+                          ]),
+                    ),
+                    PrimeryButton(
+                        callBack: () {
+                          //TODO overrite this with proper defination
+                        },
+                        title: 'apply'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 30),
+                      child: const Text(
+                        'Program Offerings',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Program Offerings',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      height: 25,
                     ),
                     supportSection()
                   ],

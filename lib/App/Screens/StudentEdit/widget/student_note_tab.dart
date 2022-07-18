@@ -93,14 +93,11 @@ class _StdNoteTabState extends State<StdNoteTab> {
                 SizedBox(
                   height: Get.height * 0.05,
                 ),
-                GestureDetector(
-                  onTap: () {
-                     
-                
-              },
+                InkWell(
+                  onTap: () {},
                   child: FlatButton(
-                    onPressed: () { 
-                       _text = _comment.text;
+                    onPressed: () {
+                      _text = _comment.text;
                     },
                     child: Container(
                       padding: const EdgeInsets.all(5),
@@ -108,8 +105,8 @@ class _StdNoteTabState extends State<StdNoteTab> {
                       width: Get.width * 0.29,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(color: kNavy, style: BorderStyle.solid)),
+                          border: Border.all(
+                              color: kNavy, style: BorderStyle.solid)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [

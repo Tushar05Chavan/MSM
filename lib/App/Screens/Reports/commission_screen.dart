@@ -102,8 +102,8 @@ class _ReportCommissionState extends State<ReportCommission> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             // buildPreferredSize(context, _key),
-             SearchBar(keyGlobal: _key),
+              // buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               SizedBox(
                 height: Get.height * 0.025,
               ),
@@ -189,7 +189,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             setState(() {
                                               _advance = true;
@@ -1256,7 +1256,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                                         const SizedBox(
                                                           width: 20,
                                                         ),
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             showDialog(
                                                                 context:
@@ -1559,7 +1559,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                                                             child:
                                                                                 Row(
                                                                               children: [
-                                                                                GestureDetector(
+                                                                                InkWell(
                                                                                   onTap: () {
                                                                                     Get.back();
                                                                                   },
@@ -1571,7 +1571,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                                                                 const SizedBox(
                                                                                   width: 25,
                                                                                 ),
-                                                                                GestureDetector(
+                                                                                InkWell(
                                                                                   onTap: () {
                                                                                     Get.back();
                                                                                   },
@@ -1639,7 +1639,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                         ),
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: GestureDetector(
+                                          child: InkWell(
                                             onTap: () {
                                               setState(() {
                                                 _advance = false;
@@ -1735,7 +1735,7 @@ class _ReportCommissionState extends State<ReportCommission> {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             showDialog(
                                                                 context:

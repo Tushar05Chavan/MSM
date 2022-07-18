@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: GestureDetector(
+                        child: InkWell(
                           onTap: () {
                             Get.back();
                           },

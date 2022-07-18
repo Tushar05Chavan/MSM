@@ -34,8 +34,8 @@ class _DetailsTabScreenState extends State<DetailsTabScreen> {
 
   List<ProvinceCountryResponseModel> provinceState = [];
   Future<void> provinceCountry() async {
-    await _provinceCountryViewModel.provinceCountryViewModel(
-         int.parse(_selectedCountry.toString()));
+    await _provinceCountryViewModel
+        .provinceCountryViewModel(int.parse(_selectedCountry.toString()));
     List<ProvinceCountryResponseModel> response =
         _provinceCountryViewModel.apiResponse.data;
     response.forEach((element) {
@@ -856,7 +856,7 @@ class _DetailsTabScreenState extends State<DetailsTabScreen> {
               indexed == 1.toString() ||
                       indexed == 2.toString() ||
                       indexed == 3.toString()
-                  ? GestureDetector(
+                  ? InkWell(
                       onTap: () {},
                       child: Row(
                         children: [
@@ -887,7 +887,7 @@ class _DetailsTabScreenState extends State<DetailsTabScreen> {
                       indexed == 1.toString() ||
                       indexed == 2.toString() ||
                       indexed == 3.toString()
-                  ? GestureDetector(
+                  ? InkWell(
                       onTap: () {
                         // if (!formGlobalKey.currentState!.validate()) {
                         //   print('Done');

@@ -410,7 +410,7 @@ class _ContactInfoTabScreenState extends State<ContactInfoTabScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.back();
                     },
@@ -432,7 +432,7 @@ class _ContactInfoTabScreenState extends State<ContactInfoTabScreen> {
                   SizedBox(
                     width: Get.width * 0.05,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {},
                     child: Container(
                       width: Get.width * 0.30,
@@ -452,7 +452,7 @@ class _ContactInfoTabScreenState extends State<ContactInfoTabScreen> {
                   const SizedBox(
                     width: 10,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       showDialog(
                         context: context,

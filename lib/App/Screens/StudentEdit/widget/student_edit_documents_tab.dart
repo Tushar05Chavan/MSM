@@ -105,16 +105,17 @@ class _StudentEditDocumentTabScreenState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return SimpleDialog(
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          side:
-                                              const BorderSide(color: kColorPrimary)),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          side: const BorderSide(
+                                              color: kColorPrimary)),
                                       children: [
                                         Container(
                                           padding: const EdgeInsets.all(10),
@@ -123,7 +124,8 @@ class _StudentEditDocumentTabScreenState
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   const Text(
                                                     'Account Manager Details',
@@ -131,7 +133,8 @@ class _StudentEditDocumentTabScreenState
                                                         color: kNavy,
                                                         fontFamily: 'Poppins',
                                                         fontSize: 18,
-                                                        fontWeight: FontWeight.bold),
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                   Flexible(
                                                     child: InkWell(
@@ -140,13 +143,15 @@ class _StudentEditDocumentTabScreenState
                                                         //Get.back();
                                                       },
                                                       child: Container(
-                                                        height: Get.height * 0.03,
+                                                        height:
+                                                            Get.height * 0.03,
                                                         width: Get.width * 0.08,
                                                         decoration: BoxDecoration(
                                                             color: kRed,
                                                             borderRadius:
-                                                                BorderRadius.circular(
-                                                                    5)),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5)),
                                                         child: const Icon(
                                                           Icons.close,
                                                           color: Colors.white,
@@ -166,29 +171,37 @@ class _StudentEditDocumentTabScreenState
                                                     decoration: InputDecoration(
                                                         border: OutlineInputBorder(
                                                             borderRadius:
-                                                                BorderRadius.circular(
-                                                                    15))),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15))),
                                                     validator: (doc) {
                                                       if (doc != null) {
                                                         return "Please Select Document";
                                                       }
                                                     },
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     hint: Text("Documents*"),
                                                     value: _selectedDocument,
-                                                    items: document.map((documents) {
+                                                    items: document
+                                                        .map((documents) {
                                                       return DropdownMenuItem(
                                                           value: documents
                                                               .documentName
                                                               .toString(),
                                                           child: Text(
-                                                            documents.documentName
+                                                            documents
+                                                                .documentName
                                                                 .toString(),
-                                                            style: const TextStyle(
-                                                                color: kGrey4,
-                                                                fontFamily: "Roboto",
-                                                                fontSize: 13),
+                                                            style:
+                                                                const TextStyle(
+                                                                    color:
+                                                                        kGrey4,
+                                                                    fontFamily:
+                                                                        "Roboto",
+                                                                    fontSize:
+                                                                        13),
                                                           ));
                                                     }).toList(),
                                                     onChanged: (newValue) {
@@ -203,7 +216,8 @@ class _StudentEditDocumentTabScreenState
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.spaceAround,
+                                                    MainAxisAlignment
+                                                        .spaceAround,
                                                 children: [
                                                   Container(
                                                     height: Get.height * 0.05,
@@ -212,7 +226,8 @@ class _StudentEditDocumentTabScreenState
                                                       border: Border.all(
                                                           color: Colors.black),
                                                       borderRadius:
-                                                          BorderRadius.circular(12),
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                     child: const Center(
                                                       child: Text(
@@ -270,7 +285,8 @@ class _StudentEditDocumentTabScreenState
                                 border: Border.all(color: kNavy),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: const [
                                   Icon(
                                     Icons.add,
@@ -298,13 +314,15 @@ class _StudentEditDocumentTabScreenState
                             width: 10,
                           ),
                           SvgPicture.asset('assets/icons/Filter.svg'),
-                          GestureDetector(
+                          InkWell(
                             onTap: () async {
                               final xl.Workbook workbook = xl.Workbook();
                               final xl.Worksheet sheet = workbook.worksheets[0];
                               sheet.getRangeByName('A1').setText('Attachment');
                               sheet.getRangeByName('B1').setText('Remarks');
-                              sheet.getRangeByName('C1').setText('Date Uploaded');
+                              sheet
+                                  .getRangeByName('C1')
+                                  .setText('Date Uploaded');
                               sheet.getRangeByName('D1').setText('Upload by');
 
                               // sheet.importList(list, firstRow, firstColumn, isVertical);
@@ -324,7 +342,7 @@ class _StudentEditDocumentTabScreenState
                                     .getRangeByIndex(i + 2, 4)
                                     .setValue(response[i].uploadBy);
                               }
-                  ///////////////////////////////////
+                              ///////////////////////////////////
                               final List<int> bytes = workbook.saveAsStream();
                               workbook.dispose();
 
@@ -366,22 +384,25 @@ class _StudentEditDocumentTabScreenState
                         columns: [
                           DataColumn(
                             label: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               height: Get.height * 0.10,
                               width: Get.width * 0.43,
                               decoration: BoxDecoration(
                                   color: const Color(0xffF5F5F5),
-                                  border: Border.all(color: Colors.white, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
                                           // colorsValue = true;
-                                          Future.delayed(const Duration(seconds: 2),
-                                              () {
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
                                             // colorsValue = false;
                                             setState(() {});
                                           });
@@ -401,8 +422,8 @@ class _StudentEditDocumentTabScreenState
                                         onTap: () {
                                           setState(() {
                                             // colorsValue = true;
-                                            Future.delayed(const Duration(seconds: 1),
-                                                () {
+                                            Future.delayed(
+                                                const Duration(seconds: 1), () {
                                               // colorsValue = false;
                                               setState(() {});
                                             });
@@ -420,15 +441,17 @@ class _StudentEditDocumentTabScreenState
                           ),
                           DataColumn(
                               label: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
                                   width: Get.width * 0.43,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
-                                      border:
-                                          Border.all(color: Colors.white, width: 2)),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Flexible(
                                         child: InkWell(
@@ -436,7 +459,8 @@ class _StudentEditDocumentTabScreenState
                                             setState(() {
                                               // colorsValue = true;
                                               Future.delayed(
-                                                  const Duration(seconds: 2), () {
+                                                  const Duration(seconds: 2),
+                                                  () {
                                                 // colorsValue = false;
                                                 setState(() {});
                                               });
@@ -460,7 +484,8 @@ class _StudentEditDocumentTabScreenState
                                               setState(() {
                                                 // colorsValue = true;
                                                 Future.delayed(
-                                                    const Duration(seconds: 1), () {
+                                                    const Duration(seconds: 1),
+                                                    () {
                                                   // colorsValue = false;
                                                   setState(() {});
                                                 });
@@ -476,22 +501,25 @@ class _StudentEditDocumentTabScreenState
                                   ))),
                           DataColumn(
                             label: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               height: Get.height * 0.10,
                               width: Get.width * 0.53,
                               decoration: BoxDecoration(
                                   color: const Color(0xffF5F5F5),
-                                  border: Border.all(color: Colors.white, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
                                           // colorsValue = true;
-                                          Future.delayed(const Duration(seconds: 2),
-                                              () {
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
                                             // colorsValue = false;
                                             setState(() {});
                                           });
@@ -511,8 +539,8 @@ class _StudentEditDocumentTabScreenState
                                         onTap: () {
                                           setState(() {
                                             // colorsValue = true;
-                                            Future.delayed(const Duration(seconds: 1),
-                                                () {
+                                            Future.delayed(
+                                                const Duration(seconds: 1), () {
                                               // colorsValue = false;
                                               setState(() {});
                                             });
@@ -530,22 +558,25 @@ class _StudentEditDocumentTabScreenState
                           ),
                           DataColumn(
                             label: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               height: Get.height * 0.10,
                               width: Get.width * 0.53,
                               decoration: BoxDecoration(
                                   color: const Color(0xffF5F5F5),
-                                  border: Border.all(color: Colors.white, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
                                           // colorsValue = true;
-                                          Future.delayed(const Duration(seconds: 2),
-                                              () {
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
                                             // colorsValue = false;
                                             setState(() {});
                                           });
@@ -565,8 +596,8 @@ class _StudentEditDocumentTabScreenState
                                         onTap: () {
                                           setState(() {
                                             // colorsValue = true;
-                                            Future.delayed(const Duration(seconds: 1),
-                                                () {
+                                            Future.delayed(
+                                                const Duration(seconds: 1), () {
                                               // colorsValue = false;
                                               setState(() {});
                                             });
@@ -584,22 +615,25 @@ class _StudentEditDocumentTabScreenState
                           ),
                           DataColumn(
                             label: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 2),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
                               height: Get.height * 0.10,
                               width: Get.width * 0.43,
                               decoration: BoxDecoration(
                                   color: const Color(0xffF5F5F5),
-                                  border: Border.all(color: Colors.white, width: 2)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 2)),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
                                           // colorsValue = true;
-                                          Future.delayed(const Duration(seconds: 2),
-                                              () {
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
                                             // colorsValue = false;
                                             setState(() {});
                                           });
@@ -628,7 +662,8 @@ class _StudentEditDocumentTabScreenState
                           height: Get.height * 0.08,
                           width: Get.width,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black.withOpacity(0.2)),
+                            border: Border.all(
+                                color: Colors.black.withOpacity(0.2)),
                           ),
                           child: Row(
                             children: [
@@ -643,7 +678,7 @@ class _StudentEditDocumentTabScreenState
                               const SizedBox(
                                 width: 20,
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   showDialog(
                                       context: context,
@@ -656,34 +691,42 @@ class _StudentEditDocumentTabScreenState
                                                   height: Get.height * 0.80,
                                                   width: Get.width,
                                                   child: StatefulBuilder(
-                                                    builder: (BuildContext context,
-                                                        void Function(void Function())
+                                                    builder: (BuildContext
+                                                            context,
+                                                        void Function(
+                                                                void Function())
                                                             setState) {
                                                       return Column(
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           const Text(
                                                             'Filter Builder',
                                                             style: TextStyle(
-                                                                fontFamily: 'Roboto',
+                                                                fontFamily:
+                                                                    'Roboto',
                                                                 fontSize: 22,
-                                                                color: Colors.black),
+                                                                color: Colors
+                                                                    .black),
                                                           ),
                                                           SizedBox(
-                                                            height: Get.height * 0.04,
+                                                            height: Get.height *
+                                                                0.04,
                                                           ),
                                                           const Divider(),
                                                           SizedBox(
-                                                            height: Get.height * 0.04,
+                                                            height: Get.height *
+                                                                0.04,
                                                           ),
                                                           Row(
                                                             children: [
                                                               PopupMenuButton(
-                                                                  child: Container(
+                                                                  child:
+                                                                      Container(
                                                                     padding:
-                                                                        const EdgeInsets
-                                                                            .all(10),
+                                                                        const EdgeInsets.all(
+                                                                            10),
                                                                     decoration:
                                                                         BoxDecoration(
                                                                       color: Colors
@@ -691,69 +734,54 @@ class _StudentEditDocumentTabScreenState
                                                                           .withOpacity(
                                                                               0.2),
                                                                       borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                                  10),
+                                                                          BorderRadius.circular(
+                                                                              10),
                                                                     ),
-                                                                    child: Text(add
-                                                                        .toString()),
+                                                                    child: Text(
+                                                                        add.toString()),
                                                                   ),
                                                                   itemBuilder:
-                                                                      (context) => [
+                                                                      (context) =>
+                                                                          [
                                                                             PopupMenuItem(
-                                                                              onTap:
-                                                                                  () {
-                                                                                setState(
-                                                                                    () {
-                                                                                  add =
-                                                                                      'Not And';
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  add = 'Not And';
                                                                                 });
                                                                               },
-                                                                              child: const Text(
-                                                                                  'Not And'),
+                                                                              child: const Text('Not And'),
                                                                             ),
                                                                             PopupMenuItem(
-                                                                              onTap:
-                                                                                  () {
-                                                                                setState(
-                                                                                    () {
-                                                                                  add =
-                                                                                      'or';
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  add = 'or';
                                                                                 });
                                                                               },
-                                                                              child: const Text(
-                                                                                  'or'),
+                                                                              child: const Text('or'),
                                                                             ),
                                                                             PopupMenuItem(
-                                                                              onTap:
-                                                                                  () {
-                                                                                setState(
-                                                                                    () {
-                                                                                  add =
-                                                                                      'Not or';
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  add = 'Not or';
                                                                                 });
                                                                               },
-                                                                              child: const Text(
-                                                                                  'Not or'),
+                                                                              child: const Text('Not or'),
                                                                             ),
                                                                             PopupMenuItem(
-                                                                              onTap:
-                                                                                  () {
-                                                                                setState(
-                                                                                    () {
-                                                                                  add =
-                                                                                      'And';
+                                                                              onTap: () {
+                                                                                setState(() {
+                                                                                  add = 'And';
                                                                                 });
                                                                               },
-                                                                              child: const Text(
-                                                                                  'And'),
+                                                                              child: const Text('And'),
                                                                             ),
                                                                           ]),
                                                               const SizedBox(
                                                                 width: 10,
                                                               ),
                                                               PopupMenuButton(
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   padding:
                                                                       const EdgeInsets
                                                                           .all(10),
@@ -764,14 +792,17 @@ class _StudentEditDocumentTabScreenState
                                                                             .green
                                                                             .withOpacity(
                                                                                 0.5),
-                                                                        fontSize: 25),
+                                                                        fontSize:
+                                                                            25),
                                                                   ),
                                                                 ),
                                                                 itemBuilder:
-                                                                    (context) => [
+                                                                    (context) =>
+                                                                        [
                                                                   PopupMenuItem(
                                                                     onTap: () {
-                                                                      setState(() {
+                                                                      setState(
+                                                                          () {
                                                                         _addCondition =
                                                                             true;
                                                                       });
@@ -781,7 +812,8 @@ class _StudentEditDocumentTabScreenState
                                                                   ),
                                                                   PopupMenuItem(
                                                                     onTap: () {
-                                                                      setState(() {
+                                                                      setState(
+                                                                          () {
                                                                         _addGroup =
                                                                             true;
                                                                       });
@@ -803,18 +835,22 @@ class _StudentEditDocumentTabScreenState
                                                                       width: 5,
                                                                     ),
                                                                     InkWell(
-                                                                      onTap: () {
-                                                                        setState(() {
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
                                                                           _addGroup =
                                                                               false;
                                                                         });
                                                                       },
                                                                       child:
                                                                           const Icon(
-                                                                        Icons.close,
+                                                                        Icons
+                                                                            .close,
                                                                         color: Colors
                                                                             .red,
-                                                                        size: 25,
+                                                                        size:
+                                                                            25,
                                                                       ),
                                                                     ),
                                                                     const SizedBox(
@@ -824,20 +860,16 @@ class _StudentEditDocumentTabScreenState
                                                                         child:
                                                                             Container(
                                                                           padding:
-                                                                              const EdgeInsets.all(
-                                                                                  10),
+                                                                              const EdgeInsets.all(10),
                                                                           decoration:
                                                                               BoxDecoration(
-                                                                            color: Colors
-                                                                                .red
-                                                                                .withOpacity(
-                                                                                    0.2),
+                                                                            color:
+                                                                                Colors.red.withOpacity(0.2),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(
-                                                                                    10),
+                                                                                BorderRadius.circular(10),
                                                                           ),
-                                                                          child: Text(
-                                                                              add1.toString()),
+                                                                          child:
+                                                                              Text(add1.toString()),
                                                                         ),
                                                                         itemBuilder:
                                                                             (context) =>
@@ -882,40 +914,35 @@ class _StudentEditDocumentTabScreenState
                                                                       child:
                                                                           Container(
                                                                         padding:
-                                                                            const EdgeInsets
-                                                                                .all(10),
-                                                                        child: Text(
+                                                                            const EdgeInsets.all(10),
+                                                                        child:
+                                                                            Text(
                                                                           "+",
                                                                           style: TextStyle(
-                                                                              color: Colors
-                                                                                  .green
-                                                                                  .withOpacity(
-                                                                                      0.5),
-                                                                              fontSize:
-                                                                                  25),
+                                                                              color: Colors.green.withOpacity(0.5),
+                                                                              fontSize: 25),
                                                                         ),
                                                                       ),
                                                                       itemBuilder:
                                                                           (context) =>
                                                                               [
                                                                         PopupMenuItem(
-                                                                          onTap: () {
-                                                                            setState(
-                                                                                () {
-                                                                              _addCondition =
-                                                                                  true;
+                                                                          onTap:
+                                                                              () {
+                                                                            setState(() {
+                                                                              _addCondition = true;
                                                                             });
                                                                           },
-                                                                          child: const Text(
-                                                                              'Add Condition'),
+                                                                          child:
+                                                                              const Text('Add Condition'),
                                                                         ),
                                                                         PopupMenuItem(
-                                                                          onTap: () {
-                                                                            setState(
-                                                                                () {});
+                                                                          onTap:
+                                                                              () {
+                                                                            setState(() {});
                                                                           },
-                                                                          child: const Text(
-                                                                              'Add Group'),
+                                                                          child:
+                                                                              const Text('Add Group'),
                                                                         ),
                                                                       ],
                                                                     ),
@@ -932,18 +959,22 @@ class _StudentEditDocumentTabScreenState
                                                                       width: 5,
                                                                     ),
                                                                     InkWell(
-                                                                      onTap: () {
-                                                                        setState(() {
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
                                                                           _addCondition =
                                                                               false;
                                                                         });
                                                                       },
                                                                       child:
                                                                           const Icon(
-                                                                        Icons.close,
+                                                                        Icons
+                                                                            .close,
                                                                         color: Colors
                                                                             .red,
-                                                                        size: 25,
+                                                                        size:
+                                                                            25,
                                                                       ),
                                                                     ),
                                                                     const SizedBox(
@@ -953,20 +984,16 @@ class _StudentEditDocumentTabScreenState
                                                                         child:
                                                                             Container(
                                                                           padding:
-                                                                              const EdgeInsets.all(
-                                                                                  10),
+                                                                              const EdgeInsets.all(10),
                                                                           decoration:
                                                                               BoxDecoration(
-                                                                            color: Colors
-                                                                                .red
-                                                                                .withOpacity(
-                                                                                    0.2),
+                                                                            color:
+                                                                                Colors.red.withOpacity(0.2),
                                                                             borderRadius:
-                                                                                BorderRadius.circular(
-                                                                                    10),
+                                                                                BorderRadius.circular(10),
                                                                           ),
-                                                                          child: Text(
-                                                                              add1.toString()),
+                                                                          child:
+                                                                              Text(add1.toString()),
                                                                         ),
                                                                         itemBuilder:
                                                                             (context) =>
@@ -1009,18 +1036,15 @@ class _StudentEditDocumentTabScreenState
                                                                     ),
                                                                     Container(
                                                                       padding:
-                                                                          const EdgeInsets
-                                                                              .all(10),
+                                                                          const EdgeInsets.all(
+                                                                              10),
                                                                       decoration:
                                                                           BoxDecoration(
                                                                         color: Colors
                                                                             .green
-                                                                            .withOpacity(
-                                                                                0.5),
+                                                                            .withOpacity(0.5),
                                                                         borderRadius:
-                                                                            BorderRadius
-                                                                                .circular(
-                                                                                    10),
+                                                                            BorderRadius.circular(10),
                                                                       ),
                                                                       child: const Text(
                                                                           'Contains'),
@@ -1038,7 +1062,7 @@ class _StudentEditDocumentTabScreenState
                                                   bottom: 5,
                                                   child: Row(
                                                     children: [
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {
                                                           Get.back();
                                                         },
@@ -1052,7 +1076,7 @@ class _StudentEditDocumentTabScreenState
                                                       const SizedBox(
                                                         width: 25,
                                                       ),
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {
                                                           Get.back();
                                                         },
@@ -1091,18 +1115,16 @@ class _StudentEditDocumentTabScreenState
                       supportSection(),
                     ]);
                   } else if (controller.apiResponse.status == Status.ERROR) {
-                    return Center(child: Padding(
+                    return Center(
+                        child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('No Data Available'),
                     ));
-                    
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                  
                 },
-                
               ),
             ),
           ],

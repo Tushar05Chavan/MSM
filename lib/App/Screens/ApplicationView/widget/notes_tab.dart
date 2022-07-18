@@ -86,7 +86,7 @@ class _NotesTabState extends State<NotesTab> {
             const SizedBox(
               height: 35,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 var body = {
                   "ActivityType": "1",
@@ -100,7 +100,7 @@ class _NotesTabState extends State<NotesTab> {
                 if (_addNotesApplicationViewModel.apiResponse.status ==
                     Status.COMPLETE) {
                   showInSnackBar();
-                   setState(() {});
+                  setState(() {});
                   _notes.clear();
                 } else {
                   if (_addNotesApplicationViewModel.apiResponse.status ==

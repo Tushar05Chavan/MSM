@@ -60,7 +60,7 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Get.back();
                   },
@@ -178,21 +178,24 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.all(10.0),
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
                                                 child: Text(
                                                   "${response[index].data![index1].documentTitle}",
                                                   textAlign: TextAlign.left,
                                                   style: const TextStyle(
                                                       color: Color(0xff858796),
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontFamily: 'Poppins',
                                                       fontSize: 20),
                                                 ),
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   _getKnowledgeByIdViewModel
                                                       .getKnowledgeByIdViewModel(
@@ -246,7 +249,7 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                                                                 style: const TextStyle(color: kNavy, fontFamily: 'Poppins', fontWeight: FontWeight.w600),
                                                                               ),
                                                                             ),
-                                                                            GestureDetector(
+                                                                            InkWell(
                                                                               onTap: () {
                                                                                 Get.back();
                                                                               },
@@ -323,7 +326,7 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                                                                       const SizedBox(
                                                                                         width: 10,
                                                                                       ),
-                                                                                      GestureDetector(
+                                                                                      InkWell(
                                                                                           onTap: () async {
                                                                                             String url = 'newsData[index].link';
 
@@ -370,14 +373,15 @@ class _KnowledgeCenterScreenState extends State<KnowledgeCenterScreen> {
                                                       });
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
                                                   child: Container(
                                                     width: Get.width * 0.42,
                                                     height: Get.height * 0.05,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                12),
+                                                            BorderRadius
+                                                                .circular(12),
                                                         color: kRed),
                                                     child: const Center(
                                                       child: Text(

@@ -178,7 +178,7 @@ class _ApplicationAdvisorTabScreenState
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },
@@ -206,7 +206,7 @@ class _ApplicationAdvisorTabScreenState
                     SizedBox(
                       width: Get.width * 0.05,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {},
                       child: Container(
                         width: Get.width * 0.40,

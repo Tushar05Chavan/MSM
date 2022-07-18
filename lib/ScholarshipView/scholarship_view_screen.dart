@@ -93,7 +93,7 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
                     SearchBar(keyGlobal: _key),
                     Padding(
                       padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           Get.back();
                         },
@@ -167,7 +167,7 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         _carouselController.previousPage(
                                           duration: const Duration(seconds: 1),
@@ -184,7 +184,7 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
                                       ),
                                     ),
                                     const SizedBox(width: 15),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         log('${controller.selectedPage}');
                                         _carouselController.nextPage(
@@ -627,7 +627,7 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
                                     const SizedBox(
                                       width: 20,
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         _scholarshipDetailViewModel
                                             .scholarshipProgramInfo()
@@ -1175,7 +1175,7 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
                                                 ]),
                                           ),
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             print(
                                                 'programId = ${response[index].programs![0].programId}');

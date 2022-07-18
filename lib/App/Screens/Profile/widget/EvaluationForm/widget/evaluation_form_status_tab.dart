@@ -276,7 +276,7 @@ class _EvaluationFormStatusState extends State<EvaluationFormStatusTabScreen> {
                     const SizedBox(
                       width: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                             context: context,
@@ -673,7 +673,7 @@ class _EvaluationFormStatusState extends State<EvaluationFormStatusTabScreen> {
                                         bottom: 5,
                                         child: Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -687,7 +687,7 @@ class _EvaluationFormStatusState extends State<EvaluationFormStatusTabScreen> {
                                             const SizedBox(
                                               width: 25,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -723,7 +723,7 @@ class _EvaluationFormStatusState extends State<EvaluationFormStatusTabScreen> {
             SizedBox(
               height: Get.height * 0.025,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 Get.to(AgentEvalutionFormScreen());
               },

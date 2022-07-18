@@ -271,7 +271,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                       children: [
                                         Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -294,7 +294,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                             ),
                                           ],
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             edit = false;
                                             showDialog(
@@ -334,7 +334,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                         children: [
                                                                           Row(
                                                                             // mainAxisAlignment:
-                                                                              //  MainAxisAlignment.spaceBetween,
+                                                                            //  MainAxisAlignment.spaceBetween,
                                                                             children: [
                                                                               const Flexible(
                                                                                 child: Text(
@@ -345,9 +345,9 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                                 ),
                                                                               ),
                                                                               Padding(
-                                                                                padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                                                                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                                                                 child: Flexible(
-                                                                                  child: GestureDetector(
+                                                                                  child: InkWell(
                                                                                     onTap: () {
                                                                                       Get.back();
                                                                                     },
@@ -776,7 +776,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                               ),
                                                                               Row(
                                                                                 children: [
-                                                                                  GestureDetector(
+                                                                                  InkWell(
                                                                                     onTap: () {
                                                                                       print('first name: ${_first.text}');
                                                                                       print('middle name: ${_middleName.text}');
@@ -891,7 +891,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                               ),
                                                                             ),
                                                                             Flexible(
-                                                                              child: GestureDetector(
+                                                                              child: InkWell(
                                                                                 onTap: () {
                                                                                   Get.back();
                                                                                 },
@@ -1196,7 +1196,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                               children: [
                                                                                 Row(
                                                                                   children: [
-                                                                                    GestureDetector(
+                                                                                    InkWell(
                                                                                       onTap: () {
                                                                                         setState(() {
                                                                                           edit = false;
@@ -1217,7 +1217,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                                     ),
                                                                                   ],
                                                                                 ),
-                                                                                GestureDetector(
+                                                                                InkWell(
                                                                                   onTap: () {
                                                                                     setState(() {
                                                                                       edit = true;
@@ -1355,7 +1355,9 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 ),
                                               ),
                                               Text(
-                                                DateFormat('dd/MM/yyyy').format(DateTime.parse('${resp.genInfo!.dateOfBirth}')),
+                                                DateFormat('dd/MM/yyyy').format(
+                                                    DateTime.parse(
+                                                        '${resp.genInfo!.dateOfBirth}')),
                                                 //'${resp.genInfo!.dateOfBirth}',
                                                 style: const TextStyle(
                                                   color: kGrey,
@@ -1496,7 +1498,9 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                 ),
                                               ),
                                               Text(
-                                                DateFormat('dd/MM/yyyy').format(DateTime.parse('${resp.genInfo!.passportExpiryDate}')),
+                                                DateFormat('dd/MM/yyyy').format(
+                                                    DateTime.parse(
+                                                        '${resp.genInfo!.passportExpiryDate}')),
                                                 //'${resp.genInfo!.passportExpiryDate}',
                                                 style: const TextStyle(
                                                   color: kGrey,
@@ -1650,7 +1654,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                     ),
                                     Align(
                                       alignment: Alignment.centerRight,
-                                      child: GestureDetector(
+                                      child: InkWell(
                                         onTap: () {
                                           setState(() {
                                             emergency = true;
@@ -1748,7 +1752,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                   children: [
                                     Row(
                                       children: [
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             setState(() {
                                               emergency = false;
@@ -1773,7 +1777,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                         ),
                                       ],
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         showDialog(
                                           context: context,
@@ -1808,7 +1812,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          GestureDetector(
+                                                          InkWell(
                                                             onTap: () {
                                                               Get.back();
                                                             },
@@ -2082,7 +2086,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                                                         height:
                                                             Get.height * 0.02,
                                                       ),
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {},
                                                         child: Container(
                                                           width:

@@ -32,12 +32,9 @@ class AppData extends GetxController {
     final rawJson = jsonDecode(box.read('loginUserData')!);
     loginResponseModel = LoginResponseModel.fromJson(rawJson);
     await PreferenceManager.setToken(loginResponseModel.token.toString());
-    print('Set Token at Login${PreferenceManager.getToken()}');
-    print(
-        'Get.find<AppData>().loginResponseModel.rslt!.emailId.toString()${loginResponseModel.rslt!.emailId.toString()}');
+
     await PreferenceManager.setEmailId(
         loginResponseModel.rslt!.emailId.toString());
-    print('SET EMAIL ID>>>>>>>>>>>>  ${PreferenceManager.getEmailId()}');
     Get.to(() => const DashboardPage());
   }
 }

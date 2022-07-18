@@ -132,7 +132,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                   color: kGrey,
                 ),
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Get.to(const ScholarshipViewScreen());
                 },
@@ -159,7 +159,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               print('SCHOLARSHIP RESPONSE === ${response}');
               return Column(
                 children: List.generate(response.length, (index) {
-                  return GestureDetector(
+                  return InkWell(
                     onTap: () {
                       Get.to(() => const ScholarshipViewScreen());
                     },
@@ -203,7 +203,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                           const SizedBox(
                             height: 5,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Get.to(() => const ScholarshipViewScreen());
                             },
@@ -238,7 +238,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               //   shrinkWrap: true,
               //   itemCount: response.length,
               //   itemBuilder: (BuildContext context, int index) {
-              //     return GestureDetector(
+              //     return InkWell(
               //       onTap: () {
               //         Get.to(() => const ScholarshipViewScreen());
               //       },
@@ -282,7 +282,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               //             const SizedBox(
               //               height: 5,
               //             ),
-              //             GestureDetector(
+              //             InkWell(
               //               onTap: () {
               //                 Get.to(() => const ScholarshipViewScreen());
               //               },
@@ -489,7 +489,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               const SizedBox(
                 height: 15,
               ),
-              GestureDetector(
+              InkWell(
                 onTap: () {
                   Get.to(const FeeWaierList());
                 },
@@ -533,7 +533,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                         children: List.generate(4, (index) {
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () async {
                           SelectedIndex = index;
                           await _getTilesViewModel.getTilesViewModel(
@@ -582,7 +582,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                   //     physics: NeverScrollableScrollPhysics(),
                   //     scrollDirection: Axis.horizontal,
                   //     itemBuilder: (context, index) {
-                  //       return GestureDetector(
+                  //       return InkWell(
                   //         onTap: () async {
                   //           SelectedIndex = index;
                   //           await _getTilesViewModel.getTilesViewModel(
@@ -1064,7 +1064,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                       color: kDarkBlue,
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(AddStudentScreen());
                     },
@@ -1124,7 +1124,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                       onTap: () {
                                         Get.to(ApplicationViewScreen(
                                           applicationId:
@@ -1179,7 +1179,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   Get.to(ApplicationListScreen(
                                     recentData: recentData,
@@ -1232,7 +1232,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                     //               ),
                     //               overflow: TextOverflow.ellipsis,
                     //             ),
-                    //             GestureDetector(
+                    //             InkWell(
                     //                 onTap: () {
                     //                   Get.to(ApplicationViewScreen(
                     //                     applicationId:
@@ -1287,7 +1287,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                     //         const SizedBox(
                     //           height: 15,
                     //         ),
-                    //         GestureDetector(
+                    //         InkWell(
                     //           onTap: () {
                     //             Get.to(ApplicationListScreen(
                     //               recentData: recentData,
@@ -1449,7 +1449,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                 color: kRedLight,
                               ),
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () async {
                                 String url = 'newsData[index].link';
                                 print('url==${newsData[index].link}');
@@ -1519,7 +1519,7 @@ class _DashboardBodyState extends State<DashboardBody> {
               //                 color: kRedLight,
               //               ),
               //             ),
-              //             GestureDetector(
+              //             InkWell(
               //               onTap: () async {
               //                 String url = 'newsData[index].link';
               //                 print('url==${newsData[index].link}');
@@ -1602,104 +1602,131 @@ class _DashboardBodyState extends State<DashboardBody> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  data[index].instImagePath == null ||
-                                          data[index].instImagePath == ''
-                                      ? Container(
-                                          height: 110,
-                                          width: Get.width * 0.9,
-                                          decoration: const BoxDecoration(
-                                              color: Colors.redAccent,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                              ),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      'https://cdn.britannica.com/85/13085-050-C2E88389/Corpus-Christi-College-University-of-Cambridge-England.jpg'))),
-                                        )
-                                      : Container(
-                                          width: Get.width * 0.9,
-                                          height: 110,
-                                          decoration: BoxDecoration(
-                                              color: Colors.redAccent,
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                              ),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      '${'https://appmsmunifyprod.blob.core.windows.net/docs/files/institution/'}${data[index].instImagePath}'))),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    data[index].instImagePath == null ||
+                                            data[index].instImagePath == ''
+                                        ? Container(
+                                            height: 110,
+                                            width: Get.width * 0.9,
+                                            decoration: const BoxDecoration(
+                                                color: Colors.redAccent,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        'https://cdn.britannica.com/85/13085-050-C2E88389/Corpus-Christi-College-University-of-Cambridge-England.jpg'))),
+                                          )
+                                        : Container(
+                                            width: Get.width * 0.9,
+                                            height: 110,
+                                            decoration: BoxDecoration(
+                                                color: Colors.redAccent,
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        '${'https://appmsmunifyprod.blob.core.windows.net/docs/files/institution/'}${data[index].instImagePath}'))),
+                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        '${data[index].programName}',
+                                        textAlign: TextAlign.center,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                          height: 3,
+                                          fontWeight: FontWeight.w600,
+                                          color: kDarkBlue,
                                         ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      '${data[index].programName}',
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16,
-                                        height: 3,
-                                        fontWeight: FontWeight.w600,
-                                        color: kDarkBlue,
                                       ),
                                     ),
-                                  ),
-                                  const Divider(),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      'Next Intake- '
-                                      '${data[index].intakeName} ',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: kGrey,
+                                    const Divider(),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        'Next Intake- '
+                                        '${data[index].intakeName} ',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: kGrey,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      'Duration- '
-                                      '${data[index].durationTime}',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        color: kGrey,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Text(
+                                        'Duration- '
+                                        '${data[index].durationTime}',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: kGrey,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const Divider(),
-                                  const SizedBox(
-                                    height: 7,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            'assets/icons/Institution - Gray.svg'),
-                                        const SizedBox(width: 10),
-                                        SizedBox(
-                                          width: Get.width * 0.65,
-                                          child: Text(
-                                            '${data[index].institutionName}',
+                                    const Divider(),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/icons/Institution - Gray.svg'),
+                                          const SizedBox(width: 10),
+                                          SizedBox(
+                                            width: Get.width * 0.65,
+                                            child: Text(
+                                              '${data[index].institutionName}',
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: kGrey,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                              'assets/icons/Location - Gray.svg'),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            '${data[index].countryName}',
                                             overflow: TextOverflow.ellipsis,
-                                            maxLines: 2,
                                             style: const TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 12,
@@ -1707,67 +1734,39 @@ class _DashboardBodyState extends State<DashboardBody> {
                                               color: kGrey,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            'assets/icons/Location - Gray.svg'),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '${data[index].countryName}',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
-                                            color: kGrey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // showDialog(
-                                      //     context: context,
-                                      //     builder: (context) {
-                                      //       return AlertDialog(
-                                      //         content: Container(
-                                      //           height: Get.height * 0.10,
-                                      //           width: Get.width,
-                                      //           child: const Center(
-                                      //             child:
-                                      //                 Text('Not implemented'),
-                                      //           ),
-                                      //         ),
-                                      //       );
-                                      //     });
-                                      Get.to(ProgramDetailScreen(
-                                        programId: data[index].programId!,
-                                      ));
-                                    },
-                                    child: Container(
-                                      height: 35,
-                                      width: Get.width,
-                                      decoration: const BoxDecoration(
+                                    const Spacer(),
+                                    InkWell(
+                                      onTap: () {
+                                        // showDialog(
+                                        //     context: context,
+                                        //     builder: (context) {
+                                        //       return AlertDialog(
+                                        //         content: Container(
+                                        //           height: Get.height * 0.10,
+                                        //           width: Get.width,
+                                        //           child: const Center(
+                                        //             child:
+                                        //                 Text('Not implemented'),
+                                        //           ),
+                                        //         ),
+                                        //       );
+                                        //     });
+                                        Get.to(ProgramDetailScreen(
+                                          programId: data[index].programId!,
+                                        ));
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        height: 35,
+                                        width: Get.width,
+                                        decoration: const BoxDecoration(
                                           color: kRedLight,
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10),
-                                          )),
-                                      child: const Center(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
                                         child: Text(
                                           'Explore More',
                                           style: TextStyle(
@@ -1778,10 +1777,8 @@ class _DashboardBodyState extends State<DashboardBody> {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
+                                    )
+                                  ]),
                             ),
                           ),
                         ),
@@ -1792,7 +1789,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               _pageController.previousPage(
                                 duration: const Duration(seconds: 1),
@@ -1809,7 +1806,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                             ),
                           ),
                           const SizedBox(width: 15),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               log('${_pageController.page}');
                               _pageController.nextPage(

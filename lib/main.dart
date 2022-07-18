@@ -27,9 +27,6 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    // print('${Get.find<AppData>().loginResponseModel.rslt!.emailId}');
-
-    print('PreferenceManager.getEmailId()${PreferenceManager.getEmailId()}');
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         builder: (BuildContext context, child) {

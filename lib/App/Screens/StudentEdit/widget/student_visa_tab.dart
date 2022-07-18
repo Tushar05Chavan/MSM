@@ -90,7 +90,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       showDialog(
                         context: context,
@@ -119,7 +119,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                                   fontFamily: 'Poppins',
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -716,7 +716,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                       const SizedBox(
                         width: 20,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           showDialog(
                               context: context,
@@ -1122,7 +1122,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                           bottom: 5,
                                           child: Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -1136,7 +1136,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                               const SizedBox(
                                                 width: 25,
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -1169,16 +1169,18 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 children: const [
                   Text(
-                                    'Number of items: 0',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black,
-                                        fontFamily: 'Poppins'),
-                                  ),
+                    'Number of items: 0',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontFamily: 'Poppins'),
+                  ),
                 ],
               ),
               SizedBox(

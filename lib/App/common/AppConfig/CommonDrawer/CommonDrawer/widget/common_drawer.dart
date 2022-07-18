@@ -40,7 +40,7 @@ Drawer commonDrawer(BuildContext context) {
                 const SizedBox(
                   height: 10,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Get.back();
                   },
@@ -124,7 +124,7 @@ Drawer commonDrawer(BuildContext context) {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const StudentListScreen());
                               },
@@ -145,7 +145,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(ApplicationScreen());
                               },
@@ -166,7 +166,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const DeferralRequestScreen());
                               },
@@ -187,7 +187,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const RefundScreen());
                               },
@@ -234,7 +234,7 @@ Drawer commonDrawer(BuildContext context) {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const GrowthAnalysisScreen());
                               },
@@ -255,7 +255,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const StudentAnalysisScreen());
                               },
@@ -276,7 +276,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const ConversionRatioScreen());
                               },
@@ -297,7 +297,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const ReportCommission());
                               },
@@ -318,7 +318,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(
                                     const InstitutionIntakeWiseSummaryScreen());
@@ -340,7 +340,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(
                                   const PendingOfferScreen(),
@@ -363,7 +363,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(RefundTrackerScreen());
                               },
@@ -384,7 +384,7 @@ Drawer commonDrawer(BuildContext context) {
                             const SizedBox(
                               height: 5,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const SummaryScreen());
                               },
@@ -431,7 +431,7 @@ Drawer commonDrawer(BuildContext context) {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.to(const RetrieveAppScreen());
                               },
@@ -477,7 +477,7 @@ Drawer commonDrawer(BuildContext context) {
                         color: kGrey, fontSize: 16, fontFamily: 'Roboto'),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showDialog(
                       context: context,
@@ -622,7 +622,7 @@ Drawer commonDrawer(BuildContext context) {
                 ),
                 Row(
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,

@@ -55,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         alignment: Alignment.centerRight,
                         child: Container(
                           padding: EdgeInsets.all(20),
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               Get.to(LoginScreen());
                             },

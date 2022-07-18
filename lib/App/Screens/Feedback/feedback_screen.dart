@@ -51,12 +51,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                               decoration: BoxDecoration(
                                   color: kRed,
                                   borderRadius: BorderRadius.circular(5)),
-                                  child: const Icon(
-                                  Icons.close,
-                                  color: Colors.white,
-                                  size: 22,
-                                ),
-                              
+                              child: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 22,
+                              ),
                             ),
                           ),
                         ]),
@@ -100,19 +99,18 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           ],
                         ),
                         Container(
+                          alignment: Alignment.center,
                           height: Get.height * 0.05,
                           width: Get.width * 0.20,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: kRed),
-                          child: const Center(
-                            child: Text(
-                              'Update',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 15),
-                            ),
+                          child: Text(
+                            'Update',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Roboto',
+                                fontSize: 14),
                           ),
                         ),
                         Row(
@@ -120,7 +118,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                             TextButton(
                               onPressed: () {},
                               child: const Text(
-                                'Recent Feedbacks',
+                                'Recent Feedbacksasd',
                                 style: TextStyle(color: kRed),
                               ),
                             ),

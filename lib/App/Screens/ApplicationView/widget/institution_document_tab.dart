@@ -866,7 +866,7 @@ class _InstitutionDocumentTabState extends State<InstitutionDocumentTab> {
                     const SizedBox(
                       width: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                             context: context,
@@ -1263,7 +1263,7 @@ class _InstitutionDocumentTabState extends State<InstitutionDocumentTab> {
                                         bottom: 5,
                                         child: Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -1277,7 +1277,7 @@ class _InstitutionDocumentTabState extends State<InstitutionDocumentTab> {
                                             const SizedBox(
                                               width: 25,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -1313,7 +1313,7 @@ class _InstitutionDocumentTabState extends State<InstitutionDocumentTab> {
             const SizedBox(
               height: 10,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 showDialog(
                     context: context,
@@ -1340,7 +1340,7 @@ class _InstitutionDocumentTabState extends State<InstitutionDocumentTab> {
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         Get.back();
                                       },

@@ -85,7 +85,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {
                                       setState(() {
                                         show = true;
@@ -1148,7 +1148,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           showDialog(
                                               context: context,
@@ -1479,7 +1479,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                                                           bottom: 5,
                                                           child: Row(
                                                             children: [
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1496,7 +1496,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                                                               const SizedBox(
                                                                 width: 25,
                                                               ),
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1558,7 +1558,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
-                                child: GestureDetector(
+                                child: InkWell(
                                   onTap: () {
                                     setState(() {
                                       show = false;
@@ -1649,7 +1649,7 @@ class _StudentAnalysisScreenState extends State<StudentAnalysisScreen> {
                                           ),
                                           Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   showDialog(
                                                       context: context,

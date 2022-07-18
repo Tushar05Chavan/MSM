@@ -64,7 +64,7 @@ class _ApplicationProgramStudentScreenState
                               children: [
                                 Row(
                                   children: [
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         Get.back();
                                       },
@@ -103,7 +103,7 @@ class _ApplicationProgramStudentScreenState
                                       fontFamily: 'Poppins'),
                                 ),
                                 Flexible(
-                                  child: GestureDetector(
+                                  child: InkWell(
                                     onTap: () {
                                       Get.to(AddStudentScreen());
                                     },

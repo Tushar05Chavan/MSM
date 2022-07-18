@@ -108,7 +108,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                           ),
                         ),
                         Flexible(
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               Get.to(AddStudentScreen());
                             },
@@ -176,27 +176,28 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                       height: 20,
                     ),
                     Padding(
-                padding: const EdgeInsets.all(10),
-                child: TextFormField(
-                  controller: _search,
-                  onChanged: (value) {
-                    _applicationViewModel.applicationViewModel(keyword: _search.text);
-                  },
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.2),
+                      padding: const EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: _search,
+                        onChanged: (value) {
+                          _applicationViewModel.applicationViewModel(
+                              keyword: _search.text);
+                        },
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            hintText: 'Category Search',
+                            suffixIcon: Icon(Icons.search_outlined),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(color: kRed)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: BorderSide(color: kRed),
+                            )),
                       ),
-                      hintText: 'Category Search',
-                      suffixIcon: Icon(Icons.search_outlined),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: kRed)),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: BorderSide(color: kRed),
-                      )),
-                ),
-              ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -220,7 +221,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () async {
                                       final xl.Workbook workbook =
                                           xl.Workbook();
@@ -1315,7 +1316,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           showDialog(
                                               context: context,
@@ -1646,7 +1647,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                                           bottom: 5,
                                                           child: Row(
                                                             children: [
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1663,7 +1664,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                                                               const SizedBox(
                                                                 width: 25,
                                                               ),
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1764,7 +1765,7 @@ class TableRow extends DataTableSource {
   DataRow? getRow(int index) {
     return DataRow(cells: [
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1784,7 +1785,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1804,7 +1805,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1824,7 +1825,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1844,7 +1845,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1864,7 +1865,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1884,7 +1885,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1904,7 +1905,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,
@@ -1937,7 +1938,7 @@ class TableRow extends DataTableSource {
             itemBuilder: (BuildContext) => [
               PopupMenuItem(
                   onTap: () {},
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       showDialog(
                           context: BuildContext,
@@ -1970,7 +1971,7 @@ class TableRow extends DataTableSource {
                                                     fontWeight:
                                                         FontWeight.w600),
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -2121,7 +2122,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(ApplicationViewScreen(
               applicationId: data!.data![index].applicationId,

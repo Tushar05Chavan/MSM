@@ -106,7 +106,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          GestureDetector(
+                                          InkWell(
                                             onTap: () {
                                               setState(() {
                                                 _advance = true;
@@ -721,7 +721,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                                               const SizedBox(
                                                 width: 20,
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   showDialog(
                                                       context: context,
@@ -1031,7 +1031,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                                                                   bottom: 5,
                                                                   child: Row(
                                                                     children: [
-                                                                      GestureDetector(
+                                                                      InkWell(
                                                                         onTap:
                                                                             () {
                                                                           Get.back();
@@ -1048,7 +1048,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                                                                         width:
                                                                             25,
                                                                       ),
-                                                                      GestureDetector(
+                                                                      InkWell(
                                                                         onTap:
                                                                             () {
                                                                           Get.back();
@@ -1120,7 +1120,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
-                                child: GestureDetector(
+                                child: InkWell(
                                   onTap: () {
                                     setState(() {
                                       _advance = false;
@@ -1211,7 +1211,7 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
                                           ),
                                           Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   showDialog(
                                                       context: context,

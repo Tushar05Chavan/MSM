@@ -168,7 +168,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },
@@ -255,7 +255,7 @@ class _InstituteProfileScreenState extends State<InstituteProfileScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     Get.to(MasterDegreeScreen());
                   },

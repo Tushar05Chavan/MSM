@@ -59,7 +59,7 @@ class _CreditCardTabState extends State<CreditCardTab> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showDialog(
                         context: context,

@@ -26,4 +26,20 @@ class GetFeedBackListViewModel extends GetxController {
     }
     update();
   }
+
+  Future<bool> postFeedBackModel(Map<String, dynamic> map) async {
+    late int response;
+    _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
+    try {
+      await GetFeedbackListRepo.feedbackAdd(map: map).then((value) {
+        response = value;
+      });
+    } catch (e) {
+      print(".........>$e");
+    } finally {
+      onInit();
+    }
+    return response > 0;
+  }
 }

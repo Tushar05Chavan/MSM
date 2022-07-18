@@ -70,14 +70,10 @@ class _ProgramTabState extends State<ProgramTab> {
   final GetProgramDetailViewViewModel _getProgramDetailViewViewModel =
       Get.put(GetProgramDetailViewViewModel());
 
-      final UpdateProgramViewModel updateProgramViewModel =
+  final UpdateProgramViewModel updateProgramViewModel =
       Get.put(UpdateProgramViewModel());
   @override
   void initState() {
-    print(
-        'widget.data.programInfo!.intekId${widget.data.genInfo!.applicationId}');
-    print(
-        'widget.data.programInfo!.programid${widget.data.programInfo!.programId}');
     // getProgramCampus();
     getProgram();
     getMode();
@@ -196,7 +192,7 @@ class _ProgramTabState extends State<ProgramTab> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showDialog(
                       context: context,
@@ -937,7 +933,7 @@ class _ProgramTabState extends State<ProgramTab> {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {},
                                     child: Container(
                                       width: Get.width * 0.20,

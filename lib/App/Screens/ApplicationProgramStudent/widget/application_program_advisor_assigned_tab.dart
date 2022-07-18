@@ -163,7 +163,7 @@ class _AppAdvisorAssignTabState extends State<AppAdvisorAssignTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },
@@ -185,7 +185,7 @@ class _AppAdvisorAssignTabState extends State<AppAdvisorAssignTab> {
                     SizedBox(
                       width: Get.width * 0.05,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {},
                       child: Container(
                         width: Get.width * 0.30,
@@ -205,7 +205,7 @@ class _AppAdvisorAssignTabState extends State<AppAdvisorAssignTab> {
                     const SizedBox(
                       width: 10,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,

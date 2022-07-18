@@ -6,6 +6,7 @@ import 'package:msm_unify/App/Screens/NewUserTask/new_user_task_screen.dart';
 import 'package:msm_unify/App/Screens/search_program/controller/search_controller.dart';
 import 'package:msm_unify/App/Screens/search_program/search_program_screen.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/controller/app_bar_controller.dart';
+import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/primery_button.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/studiesDialog.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/destination_response_model.dart';
@@ -123,7 +124,7 @@ class _SearchBarState extends State<SearchBar> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children:
                                     List.generate(data.data.length, (index) {
-                                  return GestureDetector(
+                                  return InkWell(
                                       onTap: () {
                                         destinationTextController.text =
                                             data.data[index].name;
@@ -238,7 +239,7 @@ class _SearchBarState extends State<SearchBar> {
                 ),
                 Row(
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(const KnowledgeCenterScreen());
                       },
@@ -251,7 +252,7 @@ class _SearchBarState extends State<SearchBar> {
                     const SizedBox(
                       width: 8,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(const FormScreen());
                       },
@@ -264,7 +265,7 @@ class _SearchBarState extends State<SearchBar> {
                     const SizedBox(
                       width: 8,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,
@@ -351,22 +352,18 @@ class _SearchBarState extends State<SearchBar> {
                                           ),
                                         ],
                                       ),
-                                      Container(
-                                        height: Get.height * 0.05,
-                                        width: Get.width * 0.20,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: kRed),
-                                        child: const Center(
-                                          child: Text(
-                                            'Update',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'Roboto',
-                                                fontSize: 15),
-                                          ),
-                                        ),
+                                      PrimeryButton(
+                                        callBack: () {
+                                          getFeedBackListViewModel
+                                              .postFeedBackModel({
+                                            "Message": _cmtController.text,
+                                            "AttachmentPath": ""
+                                          }).then((value) {
+                                            Get.back();
+                                          });
+                                        },
+                                        title: 'Update',
+                                        color: kRed,
                                       ),
                                       Row(
                                         children: [
@@ -395,40 +392,33 @@ class _SearchBarState extends State<SearchBar> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      height: Get.height * 0.02,
-                                                    ),
-                                                    Text(
-                                                        '${response[0].feedbackMessage}',
-                                                        style: TextStyle(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            fontFamily:
-                                                                'Roboto',
-                                                            fontSize: 15)),
-                                                    SizedBox(
-                                                      height: Get.height * 0.02,
-                                                    ),
-                                                    Container(
-                                                      height: Get.height * 0.2,
-                                                      width: Get.width,
-                                                      child: Image(
-                                                        fit: BoxFit.fill,
-                                                        image: NetworkImage(
-                                                            'https://msmqastorage.blob.core.windows.net/files/files/feedback/${response[0].attachmentPath}'),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    height: Get.height * 0.02,
+                                                  ),
+                                                  Text(
+                                                      '${response[0].feedbackMessage}',
+                                                      style: TextStyle(
+                                                          color: Colors.black
+                                                              .withOpacity(0.5),
+                                                          fontFamily: 'Roboto',
+                                                          fontSize: 15)),
+                                                  SizedBox(
+                                                    height: Get.height * 0.02,
+                                                  ),
+                                                  // Container(
+                                                  //   height: Get.height * 0.2,
+                                                  //   width: Get.width,
+                                                  //   child: Image(
+                                                  //     fit: BoxFit.fill,
+                                                  //     image: NetworkImage(
+                                                  //         'https://msmqastorage.blob.core.windows.net/files/files/feedback/${response[0].attachmentPath}'),
+                                                  //   ),
+                                                  // ),
+                                                ],
                                               ),
                                             );
                                           } else {
@@ -463,7 +453,7 @@ class _SearchBarState extends State<SearchBar> {
                     const SizedBox(
                       width: 8,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(NewUserTaskScreen());
                       },
@@ -478,7 +468,7 @@ class _SearchBarState extends State<SearchBar> {
                     ),
                     GetBuilder<GetNotificationCountViewModel>(
                       builder: (controller) {
-                        return GestureDetector(
+                        return InkWell(
                           onTap: () {
                             Get.to(const NotificationScreen());
                           },
@@ -520,7 +510,7 @@ class _SearchBarState extends State<SearchBar> {
                     const SizedBox(
                       width: 8,
                     ),
-                    // GestureDetector(
+                    // InkWell(
                     //   onTap: () {},
                     //   child: Container(
                     //     height: Get.height * 0.03,
@@ -582,7 +572,7 @@ class _SearchBarState extends State<SearchBar> {
                     // const SizedBox(
                     //   width: 8,
                     // ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         widget.keyGlobal.currentState!.openEndDrawer();
                       },
@@ -805,7 +795,7 @@ class _SearchBarState extends State<SearchBar> {
                               }),
                         ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           var body = {
                             "Nationality": selectedCountryCode,
@@ -942,7 +932,7 @@ destinationDialog(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children:
                                     List.generate(data.data.length, (index) {
-                                  return GestureDetector(
+                                  return InkWell(
                                       onTap: () {
                                         destinationTextController.text =
                                             data.data[index].name;
@@ -1044,7 +1034,7 @@ PreferredSize buildPreferredSize(
               ),
               Row(
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(const KnowledgeCenterScreen());
                     },
@@ -1057,7 +1047,7 @@ PreferredSize buildPreferredSize(
                   const SizedBox(
                     width: 8,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(const FormScreen());
                     },
@@ -1070,7 +1060,7 @@ PreferredSize buildPreferredSize(
                   const SizedBox(
                     width: 8,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       showDialog(
                         context: context,
@@ -1227,6 +1217,7 @@ PreferredSize buildPreferredSize(
                                                     child: Image(
                                                       fit: BoxFit.fill,
                                                       image: NetworkImage(
+                                                          //'https://msmqastorage.blob.core.windows.net/files/files/feedback/${response[0].attachmentPath}'),
                                                           'https://msmqastorage.blob.core.windows.net/files/files/feedback/${response[0].attachmentPath}'),
                                                     ),
                                                   ),
@@ -1265,7 +1256,7 @@ PreferredSize buildPreferredSize(
                   const SizedBox(
                     width: 8,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(NewUserTaskScreen());
                     },
@@ -1280,7 +1271,7 @@ PreferredSize buildPreferredSize(
                   ),
                   GetBuilder<GetNotificationCountViewModel>(
                     builder: (controller) {
-                      return GestureDetector(
+                      return InkWell(
                         onTap: () {
                           Get.to(const NotificationScreen());
                         },
@@ -1322,7 +1313,7 @@ PreferredSize buildPreferredSize(
                   const SizedBox(
                     width: 8,
                   ),
-                  // GestureDetector(
+                  // InkWell(
                   //   onTap: () {},
                   //   child: Container(
                   //     height: Get.height * 0.03,
@@ -1384,7 +1375,7 @@ PreferredSize buildPreferredSize(
                   // const SizedBox(
                   //   width: 8,
                   // ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       key.currentState!.openEndDrawer();
                     },

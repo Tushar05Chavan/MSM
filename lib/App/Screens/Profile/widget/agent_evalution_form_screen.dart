@@ -176,7 +176,7 @@ class _AgentEvalutionFormScreenState extends State<AgentEvalutionFormScreen> {
               ),
               Row(
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.back();
                     },

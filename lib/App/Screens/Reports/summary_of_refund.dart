@@ -204,7 +204,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             setState(() {
                                               _advance = true;
@@ -1231,7 +1231,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                                         const SizedBox(
                                                           width: 20,
                                                         ),
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             showDialog(
                                                                 context:
@@ -1534,7 +1534,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                                                             child:
                                                                                 Row(
                                                                               children: [
-                                                                                GestureDetector(
+                                                                                InkWell(
                                                                                   onTap: () {
                                                                                     Get.back();
                                                                                   },
@@ -1546,7 +1546,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                                                                 const SizedBox(
                                                                                   width: 25,
                                                                                 ),
-                                                                                GestureDetector(
+                                                                                InkWell(
                                                                                   onTap: () {
                                                                                     Get.back();
                                                                                   },
@@ -1600,7 +1600,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                         ),
                                         Align(
                                           alignment: Alignment.centerRight,
-                                          child: GestureDetector(
+                                          child: InkWell(
                                             onTap: () {
                                               setState(() {
                                                 _advance = false;
@@ -1696,7 +1696,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                                     ),
                                                     Row(
                                                       children: [
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             showDialog(
                                                                 context:

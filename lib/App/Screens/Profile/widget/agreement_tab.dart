@@ -441,7 +441,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                       const SizedBox(
                         width: 20,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           showDialog(
                               context: context,
@@ -847,7 +847,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                                           bottom: 5,
                                           child: Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -861,7 +861,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                                               const SizedBox(
                                                 width: 25,
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },

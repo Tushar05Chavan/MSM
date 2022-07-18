@@ -638,7 +638,7 @@ class _BranchScreenState extends State<BranchScreen> {
                       const SizedBox(
                         width: 20,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           showDialog(
                               context: context,
@@ -1044,7 +1044,7 @@ class _BranchScreenState extends State<BranchScreen> {
                                           bottom: 5,
                                           child: Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -1058,7 +1058,7 @@ class _BranchScreenState extends State<BranchScreen> {
                                               const SizedBox(
                                                 width: 25,
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -1097,7 +1097,7 @@ class _BranchScreenState extends State<BranchScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       showDialog(
                         context: context,
@@ -1523,7 +1523,7 @@ class TableRow extends DataTableSource {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
+            child: InkWell(
                 onTap: () {
                   showDialog(
                       context: BuildContext,
@@ -1553,7 +1553,7 @@ class TableRow extends DataTableSource {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           Get.back();
                                         },

@@ -50,10 +50,10 @@ class _CommonCountryState extends State<CommonCountry> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
                 validator: (value) {
-                                          if (value == null) {
-                                            return "Country of education is required";
-                                          }
-                                        },
+                  if (value == null) {
+                    return "Country of education is required";
+                  }
+                },
                 borderRadius: BorderRadius.circular(5),
                 hint: Text('Country of Education'),
                 value: widget.selectedCountry,
@@ -68,7 +68,6 @@ class _CommonCountryState extends State<CommonCountry> {
                 }).toList(),
                 onChanged: (String? newValue) {
                   widget.selectedCountry = newValue;
-                  print('widget>>>>>${widget.selectedCountry}');
                   widget.onchange!(widget.selectedCountry!);
                 }),
           ),

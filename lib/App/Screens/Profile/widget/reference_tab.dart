@@ -553,7 +553,7 @@ class _ReferenceTabScreenState extends State<ReferenceTabScreen> {
                     const SizedBox(
                       width: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                             context: context,
@@ -950,7 +950,7 @@ class _ReferenceTabScreenState extends State<ReferenceTabScreen> {
                                         bottom: 5,
                                         child: Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -964,7 +964,7 @@ class _ReferenceTabScreenState extends State<ReferenceTabScreen> {
                                             const SizedBox(
                                               width: 25,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -1002,7 +1002,7 @@ class _ReferenceTabScreenState extends State<ReferenceTabScreen> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   showDialog(
                       context: context,
@@ -1031,7 +1031,7 @@ class _ReferenceTabScreenState extends State<ReferenceTabScreen> {
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             Get.back();
                                           },
@@ -1284,7 +1284,7 @@ class TableRow extends DataTableSource {
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           Get.back();
                                         },
@@ -1414,7 +1414,7 @@ class TableRow extends DataTableSource {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {},
                                     child: Container(
                                       height: Get.height * 0.04,
@@ -1566,7 +1566,7 @@ class TableRow extends DataTableSource {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
+            child: InkWell(
                 onTap: () {
                   showDialog(
                       context: BuildContext,
@@ -1576,7 +1576,7 @@ class TableRow extends DataTableSource {
                               side: const BorderSide(color: Color(0xffe8252a)),
                               borderRadius: BorderRadius.circular(10)),
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.back();
                               },

@@ -56,7 +56,7 @@ class _NewDeferralRequestState extends State<NewDeferralRequest> {
                       children: [
                         Row(
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Get.back();
                               },

@@ -179,7 +179,7 @@ class _ChangePassScreenState extends State<ChangePassScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.back();
                     },

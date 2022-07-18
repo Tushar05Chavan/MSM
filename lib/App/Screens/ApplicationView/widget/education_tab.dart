@@ -97,7 +97,6 @@ class _EducationTabState extends State<EducationTab> {
 
   @override
   Widget build(BuildContext context) {
-    print('_selectedCountryEducation${_selectedCountryEducation}');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -147,7 +146,6 @@ class _EducationTabState extends State<EducationTab> {
                   }).toList(),
                   onChanged: (newValue) {
                     _selectedDegreeEducation = newValue as String?;
-                    print('countryOfEducation==$_selectedDegreeEducation');
                   }),
             ),
             const SizedBox(
@@ -213,16 +211,8 @@ class _EducationTabState extends State<EducationTab> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
-                  print('applicatioId==${widget.data.genInfo!.applicationId}');
-                  print(
-                      'countryOfEducation==${int.parse(_selectedCountryEducation.toString())} ');
-                  print(
-                      'highestLevelEdu==${int.parse(_selectedDegreeEducation.toString())}');
-                  print(
-                      'gradeScheme==${int.parse(_selectedGradeEducation.toString())}');
-                  print('gradeAverage==${_gradeAverage.text}');
                   _educationUpdateViewModel.educationUpdateViewModel(
                     applicationId: widget.data.genInfo!.applicationId,
                     countryOfEducation:
@@ -286,7 +276,7 @@ class _EducationTabState extends State<EducationTab> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   showDialog(
                       context: context,
@@ -313,7 +303,7 @@ class _EducationTabState extends State<EducationTab> {
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           Get.back();
                                         },

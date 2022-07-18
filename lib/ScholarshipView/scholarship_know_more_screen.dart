@@ -71,7 +71,7 @@ class _ScholarshipKnowMoreScreenState extends State<ScholarshipKnowMoreScreen> {
               SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Get.back();
                   },
@@ -206,7 +206,7 @@ class _ScholarshipKnowMoreScreenState extends State<ScholarshipKnowMoreScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {},
                             child: Container(
                               height: Get.height * 0.040,
@@ -1056,7 +1056,7 @@ class _ScholarshipKnowMoreScreenState extends State<ScholarshipKnowMoreScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {},
                                     child: Container(
                                       height: Get.height * 0.045,
@@ -1079,7 +1079,7 @@ class _ScholarshipKnowMoreScreenState extends State<ScholarshipKnowMoreScreen> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () {},
                                     child: Container(
                                       height: Get.height * 0.045,

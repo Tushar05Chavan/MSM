@@ -541,7 +541,7 @@ class _ProgramInfoTabState extends State<ProgramInfoTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {},
                       child: Container(
                         width: Get.width * 0.35,
@@ -561,7 +561,7 @@ class _ProgramInfoTabState extends State<ProgramInfoTab> {
                     const SizedBox(
                       width: 15,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,

@@ -995,7 +995,7 @@ class _FeeTabState extends State<FeeTab> {
                     const SizedBox(
                       width: 20,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                             context: context,
@@ -1392,7 +1392,7 @@ class _FeeTabState extends State<FeeTab> {
                                         bottom: 5,
                                         child: Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -1406,7 +1406,7 @@ class _FeeTabState extends State<FeeTab> {
                                             const SizedBox(
                                               width: 25,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.back();
                                               },
@@ -1442,7 +1442,7 @@ class _FeeTabState extends State<FeeTab> {
             const SizedBox(
               height: 10,
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 showDialog(
                     context: context,
@@ -1469,7 +1469,7 @@ class _FeeTabState extends State<FeeTab> {
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         Get.back();
                                       },

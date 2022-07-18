@@ -253,7 +253,7 @@ class _AppEducationTabState extends State<AppEducationTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,
@@ -886,7 +886,7 @@ class _AppEducationTabState extends State<AppEducationTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },
@@ -908,7 +908,7 @@ class _AppEducationTabState extends State<AppEducationTab> {
                     SizedBox(
                       width: Get.width * 0.05,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {},
                       child: Container(
                         width: Get.width * 0.30,
@@ -928,7 +928,7 @@ class _AppEducationTabState extends State<AppEducationTab> {
                     const SizedBox(
                       width: 10,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,

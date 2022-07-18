@@ -68,7 +68,7 @@ class _FormScreenState extends State<FormScreen> {
     // } else {
     final String path = (await getApplicationSupportDirectory()).path;
     final String fileName =
-        //Platform.isWindows ? '$path\\Output.xlsx' : 
+        //Platform.isWindows ? '$path\\Output.xlsx' :
         '$path/Output.xlsx';
     final File file = File(fileName);
     await file.writeAsBytes(bytes, flush: true);
@@ -94,11 +94,11 @@ class _FormScreenState extends State<FormScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             // buildPreferredSize(context, _key),
-             SearchBar(keyGlobal: _key),
+              // buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Get.back();
                   },
@@ -244,8 +244,8 @@ class _FormScreenState extends State<FormScreen> {
                 child: TextFormField(
                   controller: _search,
                   onChanged: (value) {
-                    _getFormDetailsViewModel.getFormDetailsViewModel(institutionId: 0,
-                        keyword: _search.text);
+                    _getFormDetailsViewModel.getFormDetailsViewModel(
+                        institutionId: 0, keyword: _search.text);
                   },
                   decoration: InputDecoration(
                       hintStyle: TextStyle(
@@ -265,7 +265,7 @@ class _FormScreenState extends State<FormScreen> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
-              
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -281,19 +281,20 @@ class _FormScreenState extends State<FormScreen> {
                           return Column(
                             children: [
                               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/Filter.svg',
-                      height: 30,
-                      width: 30,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                     GestureDetector(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/icons/Filter.svg',
+                                      height: 30,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
                                       onTap: () async {
                                         final xl.Workbook workbook =
                                             xl.Workbook();
@@ -316,21 +317,20 @@ class _FormScreenState extends State<FormScreen> {
                                         //     .setText('Logged by');
 
                                         // sheet.importList(list, firstRow, firstColumn, isVertical);
-                                       sheet.tableCollection.toString();
+                                        sheet.tableCollection.toString();
                                         print(data[0]);
                                         for (var i = 0; i < data[0]; i++) {
                                           sheet
                                               .getRangeByIndex(i + 2, 1)
-                                              .setValue(response
-                                                  [i].docTitle);
+                                              .setValue(response[i].docTitle);
                                           sheet
                                               .getRangeByIndex(i + 2, 2)
-                                              .setValue(response
-                                                  [i].institutionName);
+                                              .setValue(
+                                                  response[i].institutionName);
                                           sheet
                                               .getRangeByIndex(i + 2, 3)
-                                              .setValue(response
-                                                  [i].docDescription);
+                                              .setValue(
+                                                  response[i].docDescription);
                                           // sheet
                                           //     .getRangeByIndex(i + 2, 4)
                                           //     .setValue(
@@ -339,7 +339,7 @@ class _FormScreenState extends State<FormScreen> {
                                           //     .getRangeByIndex(i + 2, 5)
                                           //     .setValue(
                                           //         response.data![i].loggedBy);
-                                                                               }
+                                        }
 ///////////////////////////////////
                                         final List<int> bytes =
                                             workbook.saveAsStream();
@@ -370,12 +370,12 @@ class _FormScreenState extends State<FormScreen> {
                                         width: 35,
                                       ),
                                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
                               PaginatedDataTable(
                                   onRowsPerPageChanged: (perPage) {},
                                   columnSpacing: 0,
@@ -602,7 +602,7 @@ class _FormScreenState extends State<FormScreen> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           showDialog(
                                               context: context,
@@ -933,7 +933,7 @@ class _FormScreenState extends State<FormScreen> {
                                                           bottom: 5,
                                                           child: Row(
                                                             children: [
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -950,7 +950,7 @@ class _FormScreenState extends State<FormScreen> {
                                                               const SizedBox(
                                                                 width: 25,
                                                               ),
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },

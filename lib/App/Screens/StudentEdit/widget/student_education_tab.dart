@@ -145,7 +145,6 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
               ),
               CommonCountry(
                 hintText: 'Country of Education',
-                
                 selectedCountry: _selectedCountryEducation,
                 onchange: (String val) {
                   setState(() {
@@ -162,13 +161,12 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
-                                          if (value == null) {
-                                            return "Highest level of education is required";
-                                          }
-                                        },
+                      if (value == null) {
+                        return "Highest level of education is required";
+                      }
+                    },
                     borderRadius: BorderRadius.circular(5),
-                    hint: Text(
-                        "Highest Level of Education"),
+                    hint: Text("Highest Level of Education"),
                     value: _selectedDegreeEducation,
                     items: levelOfEdu.map((countryEducation) {
                       return DropdownMenuItem(
@@ -195,10 +193,10 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     validator: (value) {
-                                          if (value == null) {
-                                            return "Select grade scheme";
-                                          }
-                                        },
+                      if (value == null) {
+                        return "Select grade scheme";
+                      }
+                    },
                     borderRadius: BorderRadius.circular(5),
                     hint: Text("Grading Scheme"),
                     value: _selectedGradeEducation,
@@ -249,7 +247,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     // print('Student ID=====${widget.data!.genInfo!.studentId}');
                     // print(
@@ -310,7 +308,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     showDialog(
                         context: context,
@@ -337,7 +335,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             Get.back();
                                           },

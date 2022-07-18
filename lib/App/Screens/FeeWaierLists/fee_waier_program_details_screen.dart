@@ -35,7 +35,7 @@ class _FeeWaierProgramDetailsScreenState
   @override
   void initState() {
     _forProgramPageViewModel.forProgramPageViewModel(
-        programId: widget.programId);
+        programId: widget.programId!);
     super.initState();
     print('program Id==${widget.programId}');
   }
@@ -213,7 +213,7 @@ class _FeeWaierProgramDetailsScreenState
                         const SizedBox(
                           height: 20,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             Get.back();
                           },
@@ -1275,7 +1275,7 @@ class _FeeWaierProgramDetailsScreenState
                                         const SizedBox(
                                           width: 8,
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {},
                                           child: Container(
                                             height: Get.height * 0.045,
@@ -1296,7 +1296,7 @@ class _FeeWaierProgramDetailsScreenState
                                             ),
                                           ),
                                         ),
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {},
                                           child: Container(
                                             height: Get.height * 0.045,

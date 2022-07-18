@@ -178,7 +178,7 @@ class _UserScreenState extends State<UserScreen> {
                     SizedBox(
                       height: Get.height * 0.02,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },
@@ -219,7 +219,7 @@ class _UserScreenState extends State<UserScreen> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(() => AddUserScreen());
                       },
@@ -705,7 +705,7 @@ class _UserScreenState extends State<UserScreen> {
                         const SizedBox(
                           width: 20,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             showDialog(
                                 context: context,
@@ -1100,7 +1100,7 @@ class _UserScreenState extends State<UserScreen> {
                                             bottom: 5,
                                             child: Row(
                                               children: [
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },
@@ -1114,7 +1114,7 @@ class _UserScreenState extends State<UserScreen> {
                                                 const SizedBox(
                                                   width: 25,
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },

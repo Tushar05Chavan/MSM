@@ -17,4 +17,15 @@ class GetFeedbackListRepo extends ApiURLService {
     // print('=========jjjj${tilesResponseModel.first}');
     return getFeedbackListResponseModel;
   }
+
+  static Future<int> feedbackAdd({required Map<String, dynamic> map}) async {
+    String response = await APIService().getResponse(
+        url: "${BaseUrl.baseUrl}/Feedback/add",
+        apitype: APIType.aPost,
+        body: map);
+
+    print('--res ${response}');
+
+    return int.parse(response);
+  }
 }

@@ -53,7 +53,7 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.to(ApplicationProgramStudentScreen(
                           data: widget.data,
@@ -517,15 +517,15 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                         ],
                       );
                     } else if (controller.apiResponse.status == Status.ERROR) {
-                return Center(child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('No Data Available'),
-                ));
-                
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );                  
+                      return Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('No Data Available'),
+                      ));
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                 ),
                 Padding(
@@ -549,7 +549,7 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                         const SizedBox(
                           width: 20,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             showDialog(
                                 context: context,
@@ -944,7 +944,7 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                                             bottom: 5,
                                             child: Row(
                                               children: [
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },
@@ -958,7 +958,7 @@ class _StdApplicationScreenState extends State<StdApplicationScreen> {
                                                 const SizedBox(
                                                   width: 25,
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },

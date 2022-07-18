@@ -282,7 +282,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           setState(() {
                                             _advance = true;
@@ -786,7 +786,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                                       const SizedBox(
                                                         width: 20,
                                                       ),
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {
                                                           showDialog(
                                                               context: context,
@@ -1089,7 +1089,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                                                           child:
                                                                               Row(
                                                                             children: [
-                                                                              GestureDetector(
+                                                                              InkWell(
                                                                                 onTap: () {
                                                                                   Get.back();
                                                                                 },
@@ -1101,7 +1101,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                                                               const SizedBox(
                                                                                 width: 25,
                                                                               ),
-                                                                              GestureDetector(
+                                                                              InkWell(
                                                                                 onTap: () {
                                                                                   Get.back();
                                                                                 },
@@ -1155,7 +1155,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                       ),
                                       Align(
                                         alignment: Alignment.centerRight,
-                                        child: GestureDetector(
+                                        child: InkWell(
                                           onTap: () {
                                             setState(() {
                                               _advance = false;
@@ -1250,7 +1250,7 @@ class _PendingOfferScreenState extends State<PendingOfferScreen> {
                                                   ),
                                                   Row(
                                                     children: [
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {
                                                           showDialog(
                                                               context: context,

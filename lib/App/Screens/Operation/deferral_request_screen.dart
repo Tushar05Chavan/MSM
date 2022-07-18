@@ -853,7 +853,7 @@ class _DeferralRequestScreenState extends State<DeferralRequestScreen> {
                             const SizedBox(
                               width: 20,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -1248,7 +1248,7 @@ class _DeferralRequestScreenState extends State<DeferralRequestScreen> {
                                                 bottom: 5,
                                                 child: Row(
                                                   children: [
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1262,7 +1262,7 @@ class _DeferralRequestScreenState extends State<DeferralRequestScreen> {
                                                     const SizedBox(
                                                       width: 25,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1412,7 +1412,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             Get.to(NewDeferralRequest(
               applicationId: data![index].applicationId,

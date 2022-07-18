@@ -251,9 +251,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                 onChanged: (newValue) {
                                   intakes.clear();
                                   _selectedInstitution = newValue as String?;
-                                  getIntake().then(
-                                          (value) =>
-                                          setState(() {}));
+                                  getIntake().then((value) => setState(() {}));
                                 }),
                           ),
                         ),
@@ -326,7 +324,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             setState(() {
                                               show = true;
@@ -1751,7 +1749,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                             const SizedBox(
                                               width: 20,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 showDialog(
                                                     context: context,
@@ -2065,7 +2063,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                                                 bottom: 5,
                                                                 child: Row(
                                                                   children: [
-                                                                    GestureDetector(
+                                                                    InkWell(
                                                                       onTap:
                                                                           () {
                                                                         Get.back();
@@ -2082,7 +2080,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                                                     const SizedBox(
                                                                       width: 25,
                                                                     ),
-                                                                    GestureDetector(
+                                                                    InkWell(
                                                                       onTap:
                                                                           () {
                                                                         Get.back();
@@ -2140,7 +2138,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                       ),
                                       Align(
                                         alignment: Alignment.centerRight,
-                                        child: GestureDetector(
+                                        child: InkWell(
                                           onTap: () {
                                             setState(() {
                                               show = false;
@@ -2235,7 +2233,7 @@ class _RefundTrackerScreenState extends State<RefundTrackerScreen> {
                                                   ),
                                                   Row(
                                                     children: [
-                                                      GestureDetector(
+                                                      InkWell(
                                                         onTap: () {
                                                           showDialog(
                                                               context: context,

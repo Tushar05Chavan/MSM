@@ -522,7 +522,7 @@ class _RefundScreenState extends State<RefundScreen> {
                             const SizedBox(
                               width: 20,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -917,7 +917,7 @@ class _RefundScreenState extends State<RefundScreen> {
                                                 bottom: 5,
                                                 child: Row(
                                                   children: [
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -931,7 +931,7 @@ class _RefundScreenState extends State<RefundScreen> {
                                                     const SizedBox(
                                                       width: 25,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1083,7 +1083,7 @@ class TableRow extends DataTableSource {
                     )),
                 PopupMenuItem(
                     onTap: () {},
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         showDialog(
                             context: BuildContext,
@@ -1116,7 +1116,7 @@ class TableRow extends DataTableSource {
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },
@@ -1144,7 +1144,7 @@ class TableRow extends DataTableSource {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     showDialog(
                                                       context: context,
@@ -1182,7 +1182,7 @@ class TableRow extends DataTableSource {
                                                                             fontWeight:
                                                                                 FontWeight.w600),
                                                                       ),
-                                                                      GestureDetector(
+                                                                      InkWell(
                                                                         onTap:
                                                                             () {
                                                                           Get.back();
@@ -1714,7 +1714,7 @@ class TableRow extends DataTableSource {
                                                     const SizedBox(
                                                       width: 20,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         showDialog(
                                                             context: context,
@@ -2015,7 +2015,7 @@ class TableRow extends DataTableSource {
                                                                         child:
                                                                             Row(
                                                                           children: [
-                                                                            GestureDetector(
+                                                                            InkWell(
                                                                               onTap: () {
                                                                                 Get.back();
                                                                               },
@@ -2027,7 +2027,7 @@ class TableRow extends DataTableSource {
                                                                             const SizedBox(
                                                                               width: 25,
                                                                             ),
-                                                                            GestureDetector(
+                                                                            InkWell(
                                                                               onTap: () {
                                                                                 Get.back();
                                                                               },
@@ -2176,7 +2176,7 @@ class TableRow1 extends DataTableSource {
                     )),
                 PopupMenuItem(
                     onTap: () {},
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         showDialog(
                           context: context,
@@ -2201,7 +2201,7 @@ class TableRow1 extends DataTableSource {
                                                 fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w600),
                                           ),
-                                          GestureDetector(
+                                          InkWell(
                                             onTap: () {
                                               Get.back();
                                             },
@@ -2315,7 +2315,7 @@ class TableRow1 extends DataTableSource {
                     )),
                 PopupMenuItem(
                     onTap: () {},
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         showDialog(
                           context: context,

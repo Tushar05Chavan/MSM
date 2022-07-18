@@ -37,7 +37,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
             SearchBar(keyGlobal: _key),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   Get.back();
                 },
@@ -122,7 +122,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       ),
                     ),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Get.to(NewStudentScreen());
                     },

@@ -510,7 +510,7 @@ class _RetrieveAppScreenState extends State<RetrieveAppScreen> {
                       const SizedBox(
                         width: 20,
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           showDialog(
                               context: context,
@@ -916,7 +916,7 @@ class _RetrieveAppScreenState extends State<RetrieveAppScreen> {
                                           bottom: 5,
                                           child: Row(
                                             children: [
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -930,7 +930,7 @@ class _RetrieveAppScreenState extends State<RetrieveAppScreen> {
                                               const SizedBox(
                                                 width: 25,
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -1067,7 +1067,7 @@ class TableRow extends DataTableSource {
           ),
           child: Padding(
             padding: const EdgeInsets.all(6),
-            child: GestureDetector(
+            child: InkWell(
               onTap: () {
                 showDialog(
                   context: BuildContext,

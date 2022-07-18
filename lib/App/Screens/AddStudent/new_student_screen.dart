@@ -89,7 +89,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
   _onPageViewChange(int page) {
     indexed = page.toString();
     setState(() {});
-    print('index===$indexed');
   }
 
   final ProvinceCountryViewModel _provinceCountryViewModel =
@@ -276,8 +275,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                             _selectedTitle =
                                                 newValue as String?;
                                           });
-                                          print(
-                                              'selected tile==$_selectedTitle');
                                         }),
                                   ),
                                   const SizedBox(
@@ -285,11 +282,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                   ),
                                   commontextfiled(
                                       controller: _firstName,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return " First Name is required";
-                                        }
-                                      },
+                                      validator: (value) => value!.isEmpty
+                                          ? " First Name is required"
+                                          : null,
                                       hintText: 'First Name'),
                                   // TextFormField(
                                   //   validator: (fName) {
@@ -514,8 +509,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                           setState(() {
                                             _selectedLanguage =
                                                 newValue as String?;
-                                            print(
-                                                'FIRST LANGUAGE==$_selectedLanguage');
                                           });
                                         }),
                                   ),
@@ -677,8 +670,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                           setState(() {
                                             _selectedCitizenship =
                                                 newValue as String?;
-                                            print(
-                                                'selected citizenship===$_selectedCitizenship');
                                           });
                                         }),
                                   ),
@@ -761,7 +752,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        GestureDetector(
+                                        InkWell(
                                           onTap: () {
                                             if (formGlobalKey.currentState!
                                                 .validate()) {
@@ -1044,8 +1035,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                         value: _checkboxListTile,
                                         onChanged: (value) {
                                           setState(() {
-                                            print(
-                                                'data==${_residentialAddress.text}');
                                             _checkboxListTile =
                                                 !_checkboxListTile;
                                             _mailingAddress.text =
@@ -1171,9 +1160,6 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                               setState(() {
                                                 _mailingSelectedProvinceState =
                                                     newValue as String?;
-
-                                                print(
-                                                    '_selectedProvinceState==${_mailingSelectedProvinceState}');
                                               });
                                             }),
                                       ),
@@ -1242,7 +1228,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   indexed = 0.toString();
@@ -1268,7 +1254,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                             const SizedBox(
                                               width: 8,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 if (formGlobalKey.currentState!
                                                     .validate()) {
@@ -1552,7 +1538,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   indexed = 1.toString();
@@ -1578,10 +1564,9 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                             const SizedBox(
                                               width: 8,
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () async {
                                                 //final snackBar = SnackBar(content: Text('Student Added Successfully'));
-                                                
 
                                                 if (formGlobalKey.currentState!
                                                     .validate()) {
@@ -1700,10 +1685,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                       await AddNewStudentRepo
                                                           .addNewStudentRepo(
                                                               map);
-                                                  print(
-                                                      'RESPONSE=fsf=${APIService().code}');
                                                   if (milan) {
-                                                    print('DOne=====');
                                                     // showInSnackBar();
                                                     //const Center(child: CircularProgressIndicator());
 
@@ -1711,7 +1693,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                         const StudentListScreen());
                                                   } else {
                                                     //showInErrorSnackBar();
-                                                    print('error');
+
                                                   }
                                                 }
                                               },

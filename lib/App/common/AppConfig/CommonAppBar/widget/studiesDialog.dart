@@ -115,7 +115,7 @@ class _StudiesDialogState extends State<StudiesDialog> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(data.data.length, (index) {
-                    return GestureDetector(
+                    return InkWell(
                         onTap: () {
                           widget.onSubmit(data.data[index]);
 

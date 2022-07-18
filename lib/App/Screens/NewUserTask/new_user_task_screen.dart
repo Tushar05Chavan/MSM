@@ -32,7 +32,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     "Afghanistan",
     "Argentina"
   ];
-  
+
   String? _selectedPartner;
   String? _selectedOwner;
   String? _selectedType;
@@ -131,14 +131,14 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             // buildPreferredSize(context, _key),
+              // buildPreferredSize(context, _key),
               SearchBar(keyGlobal: _key),
               const SizedBox(
                 height: 10,
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: GestureDetector(
+                child: InkWell(
                   onTap: () {
                     Get.back();
                   },
@@ -280,7 +280,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                               FocusScope.of(context).requestFocus(FocusNode());
 
                               date = (await showDatePicker(
-                                  context: context,   
+                                  context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime.now()))!;
@@ -317,7 +317,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         _getUserTaskViewModel.getUserTaskViewModel(
                             toDate: _toDate.text,
@@ -353,7 +353,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -388,7 +388,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                               fontFamily:
                                                                   'Poppins'),
                                                         ),
-                                                        GestureDetector(
+                                                        InkWell(
                                                           onTap: () {
                                                             Get.back();
                                                           },
@@ -1071,11 +1071,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                       children: [
                         GetBuilder<GetUserTaskViewModel>(
                           builder: (controller) {
-                            if (controller.apiResponse.status == Status.COMPLETE) {
+                            if (controller.apiResponse.status ==
+                                Status.COMPLETE) {
                               List<GetUserTaskResponseModel> response =
                                   controller.apiResponse.data;
 
-                                 return PaginatedDataTable(
+                              return PaginatedDataTable(
                                   onRowsPerPageChanged: (perPage) {},
                                   columnSpacing: 0,
                                   availableRowsPerPage: [5],
@@ -1093,10 +1094,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1123,7 +1126,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       setState(() {
                                                         // colorsValue = true;
                                                         Future.delayed(
-                                                            Duration(seconds: 1),
+                                                            Duration(
+                                                                seconds: 1),
                                                             () {
                                                           // colorsValue = false;
                                                           setState(() {});
@@ -1146,10 +1150,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1166,7 +1172,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                   child: const Text(
                                                     'Type',
                                                     maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     softWrap: false,
                                                     style: TextStyle(
                                                       fontFamily: 'Roboto',
@@ -1179,7 +1186,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       setState(() {
                                                         // colorsValue = true;
                                                         Future.delayed(
-                                                            Duration(seconds: 1),
+                                                            Duration(
+                                                                seconds: 1),
                                                             () {
                                                           // colorsValue = false;
                                                           setState(() {});
@@ -1212,8 +1220,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                 setState(() {
                                                   // colorsValue = true;
                                                   Future.delayed(
-                                                      const Duration(seconds: 2),
-                                                      () {
+                                                      const Duration(
+                                                          seconds: 2), () {
                                                     // colorsValue = false;
                                                     setState(() {});
                                                   });
@@ -1232,7 +1240,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                   setState(() {
                                                     // colorsValue = true;
                                                     Future.delayed(
-                                                        Duration(seconds: 1), () {
+                                                        Duration(seconds: 1),
+                                                        () {
                                                       // colorsValue = false;
                                                       setState(() {});
                                                     });
@@ -1256,10 +1265,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1287,7 +1298,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                         // colorsValue = true;
                                                         Future.delayed(
                                                             const Duration(
-                                                                seconds: 1), () {
+                                                                seconds: 1),
+                                                            () {
                                                           // colorsValue = false;
                                                           setState(() {});
                                                         });
@@ -1309,10 +1321,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1339,7 +1353,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       setState(() {
                                                         // colorsValue = true;
                                                         Future.delayed(
-                                                            Duration(seconds: 1),
+                                                            Duration(
+                                                                seconds: 1),
                                                             () {
                                                           // colorsValue = false;
                                                           setState(() {});
@@ -1362,10 +1377,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1392,7 +1409,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       setState(() {
                                                         // colorsValue = true;
                                                         Future.delayed(
-                                                            Duration(seconds: 1),
+                                                            Duration(
+                                                                seconds: 1),
                                                             () {
                                                           // colorsValue = false;
                                                           setState(() {});
@@ -1415,10 +1433,12 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             decoration: BoxDecoration(
                                                 color: const Color(0xffF5F5F5),
                                                 border: Border.all(
-                                                    color: Colors.white, width: 2)),
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 InkWell(
                                                   onTap: () {
@@ -1445,7 +1465,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       setState(() {
                                                         // colorsValue = true;
                                                         Future.delayed(
-                                                            Duration(seconds: 1),
+                                                            Duration(
+                                                                seconds: 1),
                                                             () {
                                                           // colorsValue = false;
                                                           setState(() {});
@@ -1462,7 +1483,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                   ],
                                   source: TableRow(response));
                             } else {
-                              if (controller.apiResponse.status == Status.ERROR) {
+                              if (controller.apiResponse.status ==
+                                  Status.ERROR) {
                                 return const Center(
                                   child: Text('No Data Found'),
                                 );
@@ -1473,8 +1495,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                           },
                         ),
                       ],
-                     ),
-                     Padding(
+                    ),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       child: Container(
                         height: Get.height * 0.08,
@@ -1496,7 +1518,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                             const SizedBox(
                               width: 20,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -1891,7 +1913,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                 bottom: 5,
                                                 child: Row(
                                                   children: [
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1905,7 +1927,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                     const SizedBox(
                                                       width: 25,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -2032,7 +2054,8 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Text(DateFormat('dd/MM/yyyy').format(DateTime.parse('${data[index].dueDate}'))),
+          child: Text(DateFormat('dd/MM/yyyy')
+              .format(DateTime.parse('${data[index].dueDate}'))),
         ),
       ),
       DataCell(

@@ -487,7 +487,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Get.back();
                             },
@@ -510,7 +510,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                           SizedBox(
                             width: Get.width * 0.05,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {},
                             child: Container(
                               width: Get.width * 0.30,
@@ -530,7 +530,7 @@ class _PersonalInfoTabState extends State<PersonalInfoTab> {
                           const SizedBox(
                             width: 10,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               showDialog(
                                 context: context,

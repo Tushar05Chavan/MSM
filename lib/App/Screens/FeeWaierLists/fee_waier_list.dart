@@ -179,7 +179,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
                                     _carouselController.previousPage(
                                       duration: const Duration(seconds: 1),
@@ -196,7 +196,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                                   ),
                                 ),
                                 const SizedBox(width: 15),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
                                     log('${controller.selectedPage}');
                                     _carouselController.nextPage(
@@ -210,7 +210,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                                     height: 25,
                                     width: 25,
                                     color: controller.selectedPage ==
-                                        bannerResponse.length - 1
+                                            bannerResponse.length - 1
                                         ? Colors.grey
                                         : kRedLight,
                                   ),
@@ -1063,7 +1063,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                                                         ]),
                                                   ),
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     // _forProgramPageViewModel.forProgramPage(programId:);
                                                     // Get.to(
@@ -2543,7 +2543,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                       builder: (controller) => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               _carouselController.previousPage(
                                 duration: const Duration(seconds: 1),
@@ -2560,7 +2560,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                             ),
                           ),
                           const SizedBox(width: 15),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               log('${controller.selectedPage}');
                               _carouselController.nextPage(
@@ -3212,7 +3212,7 @@ class _FeeWaierListState extends State<FeeWaierList>
                                                     ]),
                                               ),
                                             ),
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 Get.to(
                                                     FeeWaierProgramDetailsScreen());

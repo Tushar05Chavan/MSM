@@ -83,7 +83,7 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
                           width: 8,
                         ),
                         Flexible(
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               setState(() {
                                 gmo = true;
@@ -116,7 +116,7 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
                           width: 8,
                         ),
                         Flexible(
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               setState(() {
                                 gmo = false;
@@ -1027,7 +1027,7 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
                             const SizedBox(
                               width: 20,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -1422,7 +1422,7 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
                                                 bottom: 5,
                                                 child: Row(
                                                   children: [
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1436,7 +1436,7 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
                                                     const SizedBox(
                                                       width: 25,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1596,7 +1596,7 @@ class TableRow extends DataTableSource {
                 vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
               ),
             ),
-            child: GestureDetector(
+            child: InkWell(
               onTap: () {
                 showDialog(
                     context: buildContext,

@@ -185,7 +185,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                     SizedBox(
                       height: Get.height * 0.02,
                     ),
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         Get.back();
                       },

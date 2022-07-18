@@ -561,7 +561,7 @@ class _CommissionTabScreenState extends State<CommissionTabScreen> {
                             const SizedBox(
                               width: 20,
                             ),
-                            GestureDetector(
+                            InkWell(
                               onTap: () {
                                 showDialog(
                                     context: context,
@@ -956,7 +956,7 @@ class _CommissionTabScreenState extends State<CommissionTabScreen> {
                                                 bottom: 5,
                                                 child: Row(
                                                   children: [
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -970,7 +970,7 @@ class _CommissionTabScreenState extends State<CommissionTabScreen> {
                                                     const SizedBox(
                                                       width: 25,
                                                     ),
-                                                    GestureDetector(
+                                                    InkWell(
                                                       onTap: () {
                                                         Get.back();
                                                       },
@@ -1105,7 +1105,7 @@ class TableRow extends DataTableSource {
         ),
       ),
       DataCell(
-        GestureDetector(
+        InkWell(
           onTap: () {
             showDialog(
               context: BuildContext,
@@ -1132,7 +1132,7 @@ class TableRow extends DataTableSource {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const Spacer(),
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
                                     Get.back();
                                   },
@@ -1215,14 +1215,14 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: GestureDetector(
+          child: InkWell(
             onTap: () {
               // Get.to(const CommissionDetailScreen());
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showDialog(
                       context: (BuildContext),
@@ -1260,7 +1260,7 @@ class TableRow extends DataTableSource {
                                                 ),
                                               ),
                                               Flexible(
-                                                child: GestureDetector(
+                                                child: InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },

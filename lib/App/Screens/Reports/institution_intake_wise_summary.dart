@@ -141,7 +141,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                GestureDetector(
+                                InkWell(
                                   onTap: () {
                                     setState(() {
                                       show = true;
@@ -1682,7 +1682,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                                     const SizedBox(
                                       width: 20,
                                     ),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         showDialog(
                                             context: context,
@@ -2030,7 +2030,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                                                         bottom: 5,
                                                         child: Row(
                                                           children: [
-                                                            GestureDetector(
+                                                            InkWell(
                                                               onTap: () {
                                                                 Get.back();
                                                               },
@@ -2046,7 +2046,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                                                             const SizedBox(
                                                               width: 25,
                                                             ),
-                                                            GestureDetector(
+                                                            InkWell(
                                                               onTap: () {
                                                                 Get.back();
                                                               },
@@ -2107,7 +2107,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                             ),
                             Align(
                               alignment: Alignment.centerRight,
-                              child: GestureDetector(
+                              child: InkWell(
                                 onTap: () {
                                   setState(() {
                                     show = false;
@@ -2195,7 +2195,7 @@ class _InstitutionIntakeWiseSummaryScreenState
                                         ),
                                         Row(
                                           children: [
-                                            GestureDetector(
+                                            InkWell(
                                               onTap: () {
                                                 showDialog(
                                                     context: context,

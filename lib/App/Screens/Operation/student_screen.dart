@@ -133,7 +133,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                           ),
                         ),
                         Flexible(
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () {
                               Get.to(() => NewStudentScreen());
                             },
@@ -218,9 +218,9 @@ class _StudentListScreenState extends State<StudentListScreen> {
                         child: TextFormField(
                           controller: _search,
                           onChanged: (value) {
-                             _studentListViewModel.studentListViewModel(
-                               keyword: _search.text);
-                           },
+                            _studentListViewModel.studentListViewModel(
+                                keyword: _search.text);
+                          },
                           decoration: InputDecoration(
                             hintText: "search keyword",
                             suffixIcon: Icon(Icons.search,
@@ -230,31 +230,30 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                 TextStyle(color: Colors.grey.withOpacity(0.5)),
                           ),
                         )),
-                     
-              //       Padding(
-              //   padding: const EdgeInsets.all(10),
-              //   child: TextFormField(
-              //     controller: _search,
-              //     onChanged: (value) {
-              //       _studentListViewModel.studentListViewModel(
-              //           keyword: _search.text);
-              //     },
-              //     decoration: InputDecoration(
-              //         hintStyle: TextStyle(
-              //           color: Colors.black.withOpacity(0.2),
-              //         ),
-              //         hintText: 'Category Search',
-              //         suffixIcon: Icon(Icons.search_outlined),
-              //         border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(15),
-              //             borderSide: BorderSide(color: kRed)),
-              //         focusedBorder: OutlineInputBorder(
-              //           borderRadius: BorderRadius.circular(15),
-              //           borderSide: BorderSide(color: kRed),
-              //         )),
-              //   ),
-              // ),
 
+                    //       Padding(
+                    //   padding: const EdgeInsets.all(10),
+                    //   child: TextFormField(
+                    //     controller: _search,
+                    //     onChanged: (value) {
+                    //       _studentListViewModel.studentListViewModel(
+                    //           keyword: _search.text);
+                    //     },
+                    //     decoration: InputDecoration(
+                    //         hintStyle: TextStyle(
+                    //           color: Colors.black.withOpacity(0.2),
+                    //         ),
+                    //         hintText: 'Category Search',
+                    //         suffixIcon: Icon(Icons.search_outlined),
+                    //         border: OutlineInputBorder(
+                    //             borderRadius: BorderRadius.circular(15),
+                    //             borderSide: BorderSide(color: kRed)),
+                    //         focusedBorder: OutlineInputBorder(
+                    //           borderRadius: BorderRadius.circular(15),
+                    //           borderSide: BorderSide(color: kRed),
+                    //         )),
+                    //   ),
+                    // ),
 
                     SizedBox(
                       height: Get.height * 0.025,
@@ -280,7 +279,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  GestureDetector(
+                                  InkWell(
                                     onTap: () async {
                                       final xl.Workbook workbook =
                                           xl.Workbook();
@@ -834,7 +833,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                       const SizedBox(
                                         width: 20,
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           showDialog(
                                               context: context,
@@ -1165,7 +1164,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                                           bottom: 5,
                                                           child: Row(
                                                             children: [
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1182,7 +1181,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
                                                               const SizedBox(
                                                                 width: 25,
                                                               ),
-                                                              GestureDetector(
+                                                              InkWell(
                                                                 onTap: () {
                                                                   Get.back();
                                                                 },
@@ -1398,7 +1397,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: GestureDetector(
+          child: InkWell(
             onTap: () {
               showDialog(
                   context: BuildContext,

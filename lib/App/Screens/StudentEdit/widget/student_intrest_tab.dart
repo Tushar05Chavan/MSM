@@ -87,7 +87,7 @@ class _StdInterestTabState extends State<StdInterestTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
+                    InkWell(
                       onTap: () {
                         showDialog(
                           context: context,
@@ -118,7 +118,7 @@ class _StdInterestTabState extends State<StdInterestTab> {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                              GestureDetector(
+                                              InkWell(
                                                 onTap: () {
                                                   Get.back();
                                                 },
@@ -145,7 +145,6 @@ class _StdInterestTabState extends State<StdInterestTab> {
                                           DropdownButtonHideUnderline(
                                             child: DropdownButtonHideUnderline(
                                               child: DropdownButtonFormField(
-                                                
                                                   isExpanded: true,
                                                   borderRadius:
                                                       BorderRadius.circular(5),
@@ -534,7 +533,7 @@ class _StdInterestTabState extends State<StdInterestTab> {
                         const SizedBox(
                           width: 20,
                         ),
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             showDialog(
                                 context: context,
@@ -929,7 +928,7 @@ class _StdInterestTabState extends State<StdInterestTab> {
                                             bottom: 5,
                                             child: Row(
                                               children: [
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },
@@ -943,7 +942,7 @@ class _StdInterestTabState extends State<StdInterestTab> {
                                                 const SizedBox(
                                                   width: 25,
                                                 ),
-                                                GestureDetector(
+                                                InkWell(
                                                   onTap: () {
                                                     Get.back();
                                                   },

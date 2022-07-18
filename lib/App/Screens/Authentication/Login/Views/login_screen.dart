@@ -153,7 +153,7 @@ class LoginScreen extends GetView<LoginController> {
                                   color: Colors.black,
                                 ),
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   Get.to(const ForgotPasswordScreen());
                                 },

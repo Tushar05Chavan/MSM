@@ -118,7 +118,7 @@ class _TestScoreTabState extends State<TestScoreTab> {
                 const SizedBox(
                   width: 5,
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {
                     showDialog(
                       context: context,
@@ -1536,7 +1536,7 @@ class _TestScoreTabState extends State<TestScoreTab> {
                                       SizedBox(
                                         height: Get.height * 0.05,
                                       ),
-                                      GestureDetector(
+                                      InkWell(
                                         onTap: () {
                                           _textScoreUpdateViewModel
                                               .textScoreUpdateViewModel(
