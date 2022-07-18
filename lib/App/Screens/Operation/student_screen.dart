@@ -110,7 +110,8 @@ class _StudentListScreenState extends State<StudentListScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -215,6 +216,11 @@ class _StudentListScreenState extends State<StudentListScreen> {
                           border: Border.all(color: kGrey4),
                         ),
                         child: TextFormField(
+                          controller: _search,
+                          onChanged: (value) {
+                             _studentListViewModel.studentListViewModel(
+                               keyword: _search.text);
+                           },
                           decoration: InputDecoration(
                             hintText: "search keyword",
                             suffixIcon: Icon(Icons.search,

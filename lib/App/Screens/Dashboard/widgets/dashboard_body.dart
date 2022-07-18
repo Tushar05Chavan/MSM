@@ -1755,7 +1755,7 @@ class _DashboardBodyState extends State<DashboardBody> {
                                       //       );
                                       //     });
                                       Get.to(ProgramDetailScreen(
-                                        programId: data[index].programId,
+                                        programId: data[index].programId!,
                                       ));
                                     },
                                     child: Container(

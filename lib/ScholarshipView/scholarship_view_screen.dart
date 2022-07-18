@@ -89,7 +89,8 @@ class _ScholarshipViewScreenState extends State<ScholarshipViewScreen>
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    buildPreferredSize(context, _key),
+                    //buildPreferredSize(context, _key),
+                    SearchBar(keyGlobal: _key),
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: GestureDetector(

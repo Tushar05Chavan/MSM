@@ -10,10 +10,10 @@ class ApplicationViewModel extends GetxController {
   ApiResponse get apiResponse => _apiResponse;
 
   onInit() {
-    applicationViewModel();
+    applicationViewModel(keyword : '');
   }
 
-  Future<void> applicationViewModel() async {
+  Future<void> applicationViewModel({String? keyword}) async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     update();
     try {

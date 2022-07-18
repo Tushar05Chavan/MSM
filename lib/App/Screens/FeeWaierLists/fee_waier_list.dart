@@ -129,7 +129,7 @@ class _FeeWaierListState extends State<FeeWaierList>
               appBar: AppBar(
                 backgroundColor: kColorPrimary,
                 titleSpacing: 10.0,
-                title: const Text("Application Fee Waiers"),
+                title: const Text("Application Fee Waivers"),
               ),
               body: Column(
                 children: [

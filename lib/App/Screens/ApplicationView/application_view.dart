@@ -88,7 +88,8 @@ class _ApplicationViewScreenState extends State<ApplicationViewScreen>
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return <Widget>[
                       SliverToBoxAdapter(
-                        child: buildPreferredSize(context, _key),
+                        child: //buildPreferredSize(context, _key),
+                        SearchBar(keyGlobal: _key),
                       ),
                       SliverToBoxAdapter(
                         child: Padding(

@@ -256,7 +256,8 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                         SliverToBoxAdapter(
                           child: Column(
                             children: [
-                              buildPreferredSize(context, _key),
+                              //buildPreferredSize(context, _key),
+                              SearchBar(keyGlobal: _key),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(

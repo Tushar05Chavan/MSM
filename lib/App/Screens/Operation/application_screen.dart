@@ -11,6 +11,7 @@ import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer
 import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/operation_application_response_model.dart';
+import 'package:msm_unify/viewModel/operation_application_view_model.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xl;
@@ -72,6 +73,10 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
     OpenFile.open(fileName);
   }
 
+  final TextEditingController _search = TextEditingController();
+  final ApplicationViewModel _applicationViewModel =
+      Get.put(ApplicationViewModel());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -82,7 +87,8 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -169,14 +175,28 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          suffixIcon: const Icon(Icons.search_outlined),
-                          hintText: 'Search Keyword',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          )),
-                    ),
+                    Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextFormField(
+                  controller: _search,
+                  onChanged: (value) {
+                    _applicationViewModel.applicationViewModel(keyword: _search.text);
+                  },
+                  decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: Colors.black.withOpacity(0.2),
+                      ),
+                      hintText: 'Category Search',
+                      suffixIcon: Icon(Icons.search_outlined),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: kRed)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(color: kRed),
+                      )),
+                ),
+              ),
                     const SizedBox(
                       height: 20,
                     ),
