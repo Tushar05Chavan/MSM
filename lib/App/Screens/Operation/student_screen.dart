@@ -110,7 +110,8 @@ class _StudentListScreenState extends State<StudentListScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(

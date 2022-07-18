@@ -48,7 +48,8 @@ class _ConversionRatioScreenState extends State<ConversionRatioScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               SizedBox(
                 height: Get.height * 0.025,
               ),

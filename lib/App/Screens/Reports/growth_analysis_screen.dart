@@ -47,7 +47,8 @@ class _GrowthAnalysisScreenState extends State<GrowthAnalysisScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(

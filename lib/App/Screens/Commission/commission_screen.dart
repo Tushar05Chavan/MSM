@@ -57,7 +57,8 @@ class _CommissionTabScreenState extends State<CommissionTabScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(

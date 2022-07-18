@@ -45,7 +45,8 @@ class _NewDeferralRequestState extends State<NewDeferralRequest> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(

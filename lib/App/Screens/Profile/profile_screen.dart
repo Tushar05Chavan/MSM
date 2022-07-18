@@ -55,7 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
-                      buildPreferredSize(context, _key),
+                      ///buildPreferredSize(context, _key),
+                      SearchBar(keyGlobal: _key),
                       const SizedBox(
                         height: 10,
                       ),

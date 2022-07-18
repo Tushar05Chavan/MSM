@@ -48,7 +48,8 @@ class _NewInstituteListScreenState extends State<NewInstituteListScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildPreferredSize(context, _key),
+              //buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(

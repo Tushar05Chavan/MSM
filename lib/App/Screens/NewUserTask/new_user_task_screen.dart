@@ -131,7 +131,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildPreferredSize(context, _key),
+             // buildPreferredSize(context, _key),
+              SearchBar(keyGlobal: _key),
               const SizedBox(
                 height: 10,
               ),
