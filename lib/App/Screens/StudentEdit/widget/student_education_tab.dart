@@ -542,7 +542,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2024)))!;
                                               _startDate.text =
                                                   formatter.format(date);
                                             },
@@ -581,7 +581,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2030)))!;
                                               _endDate.text =
                                                   formatter.format(date);
                                             },
@@ -620,7 +620,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2027)))!;
                                               _degreeawarded.text =
                                                   formatter.format(date);
                                             },
