@@ -80,7 +80,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
   String? selectedState;
   String? selectedState1;
   String? selectedCountry1;
-  String? selectedCountry2;
+  String? selectedCountry2 = '';
   String? selectedFirstLanguage;
   String? selectedCountryCode;
   String? selectedCountryOfCitizenship;

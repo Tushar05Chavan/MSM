@@ -12,6 +12,7 @@ import 'package:msm_unify/viewModel/level_of_education_view_model.dart';
 
 import '../../../../model/responseModek/grade_response_model.dart';
 import '../../../../model/responseModek/level_of_education_response_model.dart';
+import '../../../../repo/level_of_education_repo.dart';
 import '../../../../viewModel/grade_view_model.dart';
 import '../../../../viewModel/student_education_province_view_model.dart';
 import '../../../../viewModel/student_education_update_view_model.dart';
@@ -668,21 +669,68 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    Align(
-                                      alignment: Alignment.center,
-                                      child: Container(
-                                        height: Get.height * 0.035,
-                                        width: Get.width * 0.20,
-                                        decoration: BoxDecoration(
-                                          color: kRed,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'Add',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                    InkWell(
+                                      onTap: () async {
+                                        Map<String, dynamic> _map = {
+                                          "SchoolId": 0,
+                                          "ParentId": "44238",
+                                          "ParentType": 6,
+                                          "LevelOfEducation": 1108,
+                                          "LevelOfEducationName": "Grade 12",
+                                          "CountryOfInstitution": 1,
+                                          "CountryOfInstitutionName": "",
+                                          "NameOfInstitution": "aktu",
+                                          "Language": "Acholi",
+                                          "AttendendFrom":
+                                              "2022-07-05T00:00:00.000Z",
+                                          "AttendendTo":
+                                              "2022-07-31T00:00:00.000Z",
+                                          "Degree":
+                                              "Associate of Arts for Transfer",
+                                          "DegreeAwardedOn":
+                                              "2022-07-15T00:00:00.000Z",
+                                          "Addres": "Bihar board",
+                                          "City": "patna",
+                                          "Province": 42,
+                                          "Pincode": "",
+                                          "Marks": [
+                                            {
+                                              "SubjectId": 6,
+                                              "SubjectName": "Accounts",
+                                              "MaxMarks": "",
+                                              "MinMarks": "",
+                                              "ObtainMarks": "7",
+                                              "GradeId": 0,
+                                              "GradeName": ""
+                                            }
+                                          ],
+                                          "StreamId": 0
+                                        };
+                                        final LevelOfEducationViewModel
+                                            _levelOfEducationViewModel =
+                                            Get.put(
+                                                LevelOfEducationViewModel());
+                                        await _levelOfEducationViewModel
+                                            .educationHistoryModel(map: _map);
+
+                                        setState(() {});
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Container(
+                                          height: Get.height * 0.035,
+                                          width: Get.width * 0.20,
+                                          decoration: BoxDecoration(
+                                            color: kRed,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              'Add',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
                                           ),
                                         ),
                                       ),

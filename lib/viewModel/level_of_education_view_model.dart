@@ -26,4 +26,17 @@ class LevelOfEducationViewModel extends GetxController {
     }
     update();
   }
+
+  Future<void> educationHistoryModel(
+      {required Map<String, dynamic> map}) async {
+    _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
+    try {
+      bool response = await LevelOfEducationRepo.educationHistoryRepo(map: map);
+    } catch (e) {
+      print(".........>$e");
+      _apiResponse = ApiResponse.error(message: 'error');
+    }
+    update();
+  }
 }
