@@ -23,4 +23,23 @@ class GetUserTaskRepo extends ApiURLService {
     print('=========jjjj${getUserTaskResponseModel.first}');
     return getUserTaskResponseModel;
   }
+
+
+  Future<String> addUserTaskRepo(
+      {int? assignedTo, String? fromDate, String? toDate}) async {
+    var response = await APIService().getResponse(
+        url: "${BaseUrl.baseUrl}/Task/Add",
+        apitype: APIType.aPost,
+        body: {
+          "AssignedTo": assignedTo ?? 81,
+          "FromDate": fromDate,
+          "ToDate": toDate ?? DateTime.now().toString(),
+          "TaskPriority": -1,
+          "FilterRoleId": ""
+        });
+    List<GetUserTaskResponseModel> getUserTaskResponseModel =
+        getUserTaskResponseModelFromJson(jsonEncode(response));
+    print('=========jjjj${getUserTaskResponseModel.first}');
+    return response;
+  }
 }

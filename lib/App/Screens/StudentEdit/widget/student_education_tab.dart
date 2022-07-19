@@ -40,12 +40,16 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
 
   final TextEditingController _endDate = TextEditingController();
   final TextEditingController _degreeawarded = TextEditingController();
+  
+
   String? _selectedDegreeEducation;
   String? _selectedGradeEducation;
   String? _selectedCountryEducation;
   String? _selectedLevelOfEducation;
   String? _selectedPrimaryLanguage;
   String? _selectedProvince;
+
+  final TextEditingController _degreeawardedprogram = TextEditingController();
 
   final GradeViewModel _gradeViewModel = Get.put(GradeViewModel());
 
@@ -642,8 +646,9 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       height: 15,
                                     ),
                                     TextFormField(
-                                      validator: (fName) {
-                                        if (fName != null) {
+                                      //controller: _degreeawardedprogram,
+                                      validator: (value) {
+                                        if (value != null) {
                                           return "Name Of Institution";
                                         }
                                       },
@@ -673,25 +678,25 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       onTap: () async {
                                         Map<String, dynamic> _map = {
                                           "SchoolId": 0,
-                                          "ParentId": "44238",
+                                          "ParentId": widget.data!.genInfo!.studentId,
                                           "ParentType": 6,
-                                          "LevelOfEducation": 1108,
-                                          "LevelOfEducationName": "Grade 12",
+                                          "LevelOfEducation": _selectedLevelOfEducation,
+                                          "LevelOfEducationName": widget.data!.eduInfo!.highestLevelOfEducationName,
                                           "CountryOfInstitution": 1,
                                           "CountryOfInstitutionName": "",
                                           "NameOfInstitution": "aktu",
-                                          "Language": "Acholi",
+                                          "Language": _selectedPrimaryLanguage.toString(),
                                           "AttendendFrom":
-                                              "2022-07-05T00:00:00.000Z",
+                                              _startDate.text,
                                           "AttendendTo":
-                                              "2022-07-31T00:00:00.000Z",
+                                               _endDate.text,
                                           "Degree":
-                                              "Associate of Arts for Transfer",
+                                              _degreeawardedprogram.text,
                                           "DegreeAwardedOn":
-                                              "2022-07-15T00:00:00.000Z",
+                                              _degreeawarded.text,
                                           "Addres": "Bihar board",
                                           "City": "patna",
-                                          "Province": 42,
+                                          "Province": _selectedProvince,
                                           "Pincode": "",
                                           "Marks": [
                                             {
@@ -714,6 +719,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             .educationHistoryModel(map: _map);
 
                                         setState(() {});
+                                        Get.back();
                                       },
                                       child: Align(
                                         alignment: Alignment.center,

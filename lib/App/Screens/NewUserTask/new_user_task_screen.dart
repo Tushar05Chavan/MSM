@@ -926,9 +926,9 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                       lastDate:
                                                                           DateTime
                                                                               .now()))!;
-                                                                  // _fromDate.text =
-                                                                  //     formatter
-                                                                  //         .format(date);
+                                                                  _fromDate.text =
+                                                                      formatter
+                                                                          .format(date);
                                                                 },
                                                               ),
                                                               focusedBorder:
