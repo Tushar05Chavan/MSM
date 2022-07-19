@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:msm_unify/App/Screens/AddStudent/add_student_screen.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/common_app_bar.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
@@ -207,7 +208,9 @@ class _ScholarshipKnowMoreScreenState extends State<ScholarshipKnowMoreScreen> {
                             height: 20,
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(AddStudentScreen());
+                            },
                             child: Container(
                               height: Get.height * 0.040,
                               width: Get.width * 0.28,

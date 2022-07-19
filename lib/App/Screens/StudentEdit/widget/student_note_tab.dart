@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/App/common/AppConfig/support_section.dart';
+import 'package:msm_unify/model/responseModek/get_student_notes_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_note_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_view_response_model.dart';
+import 'package:msm_unify/viewModel/add_student_notes_view_model.dart';
+import 'package:msm_unify/viewModel/get_notes_view_model.dart';
+import 'package:msm_unify/viewModel/get_student_notes_view_model.dart';
 import 'package:msm_unify/viewModel/student_note_view_model.dart';
 
 import '../../../common/color_constant.dart';
@@ -17,17 +21,38 @@ class StdNoteTab extends StatefulWidget {
 }
 
 class _StdNoteTabState extends State<StdNoteTab> {
-  final _comment = TextEditingController();
-  String _text = "";
+  
+ final GetStudentNotesViewModel _getStudentNotesViewModel = Get.put(GetStudentNotesViewModel());
 
-  final StudentNoteViewModel studentNoteViewModel =
-      Get.put(StudentNoteViewModel());
+  final AddStudentNotesViewModel _addStudentNotesViewModel =
+      Get.put(AddStudentNotesViewModel());
 
   @override
   void initState() {
-    studentNoteViewModel.studentNoteViewModel(
+    _getStudentNotesViewModel.getStudentNotesViewModel(
         activityId: widget.data!.genInfo!.studentId);
     super.initState();
+  }
+
+    TextEditingController _notes = TextEditingController();
+  void showInSnackBar() {
+    Scaffold.of(context).showSnackBar(const SnackBar(
+        backgroundColor: kGreen,
+        content: Text(
+          'Add Note Successfully',
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Roboto', fontSize: 20),
+        )));
+  }
+
+  void showInErrorSnackBar() {
+    Scaffold.of(context).showSnackBar(const SnackBar(
+        backgroundColor: kRed,
+        content: Text(
+          'Somthing Went Wrong',
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Roboto', fontSize: 20),
+        )));
   }
 
   @override
@@ -63,7 +88,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: TextFormField(
-                      controller: _comment,
+                      controller: _notes,
                       cursorColor: kRed,
                       decoration: InputDecoration(
                           hintStyle: TextStyle(
@@ -94,11 +119,28 @@ class _StdNoteTabState extends State<StdNoteTab> {
                   height: Get.height * 0.05,
                 ),
                 InkWell(
-                  onTap: () {},
-                  child: FlatButton(
-                    onPressed: () {
-                      _text = _comment.text;
-                    },
+                  onTap: () {
+                var body = {
+                  "ActivityType": "10",
+                  "StatusId": 0,
+                  "Priority": -1,
+                  "ApplicationId": "${widget.data!.genInfo!.studentId}",
+                  "Remark": _notes.text,
+                };
+                _addStudentNotesViewModel
+                    .addStudentNotesViewModel(body);
+                if (_addStudentNotesViewModel.apiResponse.status ==
+                    Status.COMPLETE) {
+                  showInSnackBar();
+                  setState(() {});
+                  _notes.clear();
+                } else {
+                  if (_addStudentNotesViewModel.apiResponse.status ==
+                      Status.ERROR) {
+                    showInErrorSnackBar();
+                  }
+                }
+              },
                     child: Container(
                       padding: const EdgeInsets.all(5),
                       height: Get.height * 0.05,
@@ -126,14 +168,14 @@ class _StdNoteTabState extends State<StdNoteTab> {
                       ),
                     ),
                   ),
-                ),
+               
                 SizedBox(
                   height: Get.height * 0.07,
                 ),
-                GetBuilder<StudentNoteViewModel>(
+                GetBuilder<GetStudentNotesViewModel>(
                   builder: (controller) {
                     if (controller.apiResponse.status == Status.COMPLETE) {
-                      List<StudentNoteResponseModel> response =
+                      List<GetStudentNotesResponseModel> response =
                           controller.apiResponse.data;
                       print('RESPONSEEEE>>>>> $response');
                       return Container(
@@ -147,7 +189,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        "${response[index].activityStamp}/${response[index].displayName}",
+                                        "${response[index].activityRemark}/${response[index].activityStamp}/${response[index].displayName}",
                                         style: const TextStyle(
                                             fontFamily: 'Roboto',
                                             fontSize: 16,

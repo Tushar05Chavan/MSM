@@ -1112,7 +1112,7 @@ class _StudentEditDocumentTabScreenState
                       const SizedBox(
                         height: 30,
                       ),
-                      supportSection(),
+                     
                     ]);
                   } else if (controller.apiResponse.status == Status.ERROR) {
                     return Center(
@@ -1125,8 +1125,10 @@ class _StudentEditDocumentTabScreenState
                     child: CircularProgressIndicator(),
                   );
                 },
+                
               ),
             ),
+             supportSection(),
           ],
         ),
       ),
