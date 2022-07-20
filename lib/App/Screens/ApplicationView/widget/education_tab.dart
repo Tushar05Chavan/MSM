@@ -406,9 +406,12 @@ class _EducationTabState extends State<EducationTab> {
                                     height: 15,
                                   ),
                                   CommonLanguage(
-                                      hintText: 'Primary Language',
-                                      selectedLanguage:
-                                          _selectedPrimaryLanguage),
+                                    hintText: 'Primary Language',
+                                    selectedLanguage: _selectedPrimaryLanguage,
+                                    callBack: (value) {
+                                      _selectedPrimaryLanguage = value;
+                                    },
+                                  ),
                                   const SizedBox(
                                     height: 15,
                                   ),

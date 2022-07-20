@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/common_app_bar.dart';
+import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/primery_button.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer.dart';
 import 'package:msm_unify/App/common/AppConfig/common_textfiled.dart';
 import 'package:msm_unify/App/common/AppConfig/support_section.dart';
@@ -32,6 +33,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     "Afghanistan",
     "Argentina"
   ];
+  String dateFormate = 'DD/MM/YYYY';
 
   String? _selectedPartner;
   String? _selectedOwner;
@@ -253,8 +255,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                     const SizedBox(
                       height: 7,
                     ),
-                    const Text(
-                      'DD/MM/YYYY',
+                    Text(
+                      dateFormate,
                       style: TextStyle(
                         color: Color(0xff808080),
                         fontFamily: 'Roboto',
@@ -303,8 +305,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                     const SizedBox(
                       height: 7,
                     ),
-                    const Text(
-                      'DD/MM/YYYY',
+                    Text(
+                      dateFormate,
                       style: TextStyle(
                         color: Color(0xff808080),
                         fontFamily: 'Roboto',
@@ -359,674 +361,696 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return SimpleDialog(
-                                        shape: RoundedRectangleBorder(
-                                            side: const BorderSide(
-                                                color: Color(0xffe8252a)),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Container(
-                                              height: Get.height * 0.70,
-                                              width: Get.width,
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                          shape: RoundedRectangleBorder(
+                                              side: const BorderSide(
+                                                  color: Color(0xffe8252a)),
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Container(
+                                                height: Get.height * 0.70,
+                                                width: Get.width,
+                                                child: SingleChildScrollView(
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        const Text(
-                                                          'Task',
-                                                          style: TextStyle(
-                                                              color: kNavy,
-                                                              fontSize: 14,
-                                                              fontFamily:
-                                                                  'Poppins'),
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            Get.back();
-                                                          },
-                                                          child: Container(
-                                                            height: Get.height *
-                                                                0.03,
-                                                            width: Get.width *
-                                                                0.07,
-                                                            decoration: BoxDecoration(
-                                                                color: kRed,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5)),
-                                                            child: const Icon(
-                                                              Icons.close,
-                                                              color:
-                                                                  Colors.white,
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text(
+                                                              'Task',
+                                                              style: TextStyle(
+                                                                  color: kNavy,
+                                                                  fontSize: 14,
+                                                                  fontFamily:
+                                                                      'Poppins'),
                                                             ),
-                                                          ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                Get.back();
+                                                              },
+                                                              child: Container(
+                                                                height:
+                                                                    Get.height *
+                                                                        0.03,
+                                                                width:
+                                                                    Get.width *
+                                                                        0.07,
+                                                                decoration: BoxDecoration(
+                                                                    color: kRed,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5)),
+                                                                child:
+                                                                    const Icon(
+                                                                  Icons.close,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              isExpanded: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                labelText:
-                                                                    'Owner',
-                                                                border:
-                                                                    OutlineInputBorder(
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    labelText:
+                                                                        'Owner',
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                    ),
+                                                                  ),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint:
-                                                                  const Text(
+                                                                              5),
+                                                                  hint: const Text(
                                                                       "jay/infoeduglobal@gmail.com"),
-                                                              value:
-                                                                  _selectedOwner,
-                                                              items: _assignee
-                                                                  .map(
-                                                                      (assignee) {
-                                                                return DropdownMenuItem(
-                                                                    value:
-                                                                        assignee,
-                                                                    child: Text(
-                                                                      assignee,
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedOwner =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              isExpanded: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                labelText:
-                                                                    'Assigned To *',
-                                                                border:
-                                                                    OutlineInputBorder(
+                                                                  value:
+                                                                      _selectedOwner,
+                                                                  items: _assignee
+                                                                      .map(
+                                                                          (assignee) {
+                                                                    return DropdownMenuItem(
+                                                                        value:
+                                                                            assignee,
+                                                                        child:
+                                                                            Text(
+                                                                          assignee,
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedOwner =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    labelText:
+                                                                        'Assigned To *',
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                    ),
+                                                                  ),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
+                                                                              5),
+                                                                  hint: const Text(
+                                                                      "jay/infoeduglobal@gmail.com"),
+                                                                  value:
+                                                                      _selectedAssignedTo,
+                                                                  items: assignee
+                                                                      .map(
+                                                                          (assigneeTo) {
+                                                                    return DropdownMenuItem(
+                                                                        value: assigneeTo
+                                                                            .userId
+                                                                            .toString(),
+                                                                        child:
+                                                                            Text(
+                                                                          assigneeTo
+                                                                              .displayName
+                                                                              .toString(),
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedAssignedTo =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
                                                                               15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint: const Text(
-                                                                  "jay/infoeduglobal@gmail.com"),
-                                                              value:
-                                                                  _selectedAssignedTo,
-                                                              items: assignee.map(
-                                                                  (assigneeTo) {
-                                                                return DropdownMenuItem(
-                                                                    value: assigneeTo
-                                                                        .userId
-                                                                        .toString(),
-                                                                    child: Text(
-                                                                      assigneeTo
-                                                                          .displayName
-                                                                          .toString(),
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedAssignedTo =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              isExpanded: true,
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(
+                                                                    ),
+                                                                  ),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius: BorderRadius
-                                                                  .circular(5),
-                                                              hint: const Text(
-                                                                  "Type *"),
-                                                              value:
-                                                                  _selectedType,
-                                                              items:
-                                                                  getUserTaskTypes
+                                                                              5),
+                                                                  hint: const Text(
+                                                                      "Type *"),
+                                                                  value:
+                                                                      _selectedType,
+                                                                  items: getUserTaskTypes
                                                                       .map(
                                                                           (type) {
-                                                                return DropdownMenuItem(
-                                                                    value: type
-                                                                        .taskTypeId
-                                                                        .toString(),
-                                                                    child: Text(
-                                                                      type.taskTypeName
-                                                                          .toString(),
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedType =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                labelText:
-                                                                    'Priority *',
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint: const Text(
-                                                                  "Low"),
-                                                              value:
-                                                                  _selectedLow,
-                                                              items: _low
-                                                                  .map((law) {
-                                                                return DropdownMenuItem(
-                                                                    value: law,
-                                                                    child: Text(
-                                                                      law,
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedLow =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                labelText:
-                                                                    'Status',
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint: const Text(
-                                                                  "Not Started"),
-                                                              value:
-                                                                  _selectedStatus,
-                                                              items: _status
-                                                                  .map(
-                                                                      (status) {
-                                                                return DropdownMenuItem(
-                                                                    value:
-                                                                        status,
-                                                                    child: Text(
-                                                                      status,
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedStatus =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextFormField(
-                                                      controller: _fromDate,
-                                                      validator: (date) {
-                                                        if (date != null) {
-                                                          return "Enter valid date";
-                                                        }
-                                                      },
-                                                      cursorColor: kRed,
-                                                      decoration:
-                                                          InputDecoration(
-                                                              suffixIcon:
-                                                                  IconButton(
-                                                                icon: Icon(Icons
-                                                                    .today),
-                                                                onPressed:
-                                                                    () async {
-                                                                  DateTime
-                                                                      date =
-                                                                      DateTime(
-                                                                          1900);
-                                                                  FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          FocusNode());
-
-                                                                  date = (await showDatePicker(
-                                                                      context:
-                                                                          context,
-                                                                      initialDate:
-                                                                          DateTime
-                                                                              .now(),
-                                                                      firstDate:
-                                                                          DateTime(
-                                                                              1900),
-                                                                      lastDate:
-                                                                          DateTime
-                                                                              .now()))!;
-                                                                  _fromDate
-                                                                          .text =
-                                                                      formatter
-                                                                          .format(
-                                                                              date);
-                                                                },
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
+                                                                    return DropdownMenuItem(
+                                                                        value: type
+                                                                            .taskTypeId
+                                                                            .toString(),
+                                                                        child:
+                                                                            Text(
+                                                                          type.taskTypeName
+                                                                              .toString(),
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedType =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    labelText:
+                                                                        'Priority *',
+                                                                    border:
+                                                                        OutlineInputBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               15),
-                                                                      borderSide:
-                                                                          const BorderSide(
-                                                                        color: Colors
-                                                                            .black,
-                                                                      )),
-                                                              hintStyle: TextStyle(
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                  fontFamily:
-                                                                      'Roboto'),
-                                                              hintText:
-                                                                  '02/06/2022',
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                              )),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    const Text(
-                                                      'DD/MM/YYYY',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff808080),
-                                                        fontFamily: 'Roboto',
-                                                        fontSize: 11,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(
+                                                                    ),
+                                                                  ),
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint: const Text(
-                                                                  "Start Hours *"),
-                                                              value:
-                                                                  _selectedStartHours,
-                                                              items: _startHours
-                                                                  .map(
-                                                                      (startHours) {
-                                                                return DropdownMenuItem(
-                                                                    value:
-                                                                        startHours,
-                                                                    child: Text(
-                                                                      startHours,
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedStartHours =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    DropdownButtonHideUnderline(
-                                                      child:
-                                                          DropdownButtonFormField(
-                                                              decoration:
-                                                                  InputDecoration(
-                                                                border:
-                                                                    OutlineInputBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                ),
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5),
-                                                              hint: const Text(
-                                                                  "Start Minutes *"),
-                                                              value:
-                                                                  _selectedMinutes,
-                                                              items: _minutes
-                                                                  .map(
-                                                                      (minutes) {
-                                                                return DropdownMenuItem(
-                                                                    value:
-                                                                        minutes,
-                                                                    child: Text(
-                                                                      minutes,
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              kGrey4,
-                                                                          fontFamily:
-                                                                              "Roboto",
-                                                                          fontSize:
-                                                                              13),
-                                                                    ));
-                                                              }).toList(),
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                setState(() {
-                                                                  _selectedMinutes =
-                                                                      newValue
-                                                                          as String?;
-                                                                });
-                                                              }),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    commontextfiled(
-                                                        hintText: 'Subject *'),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextFormField(
-                                                      maxLines: 4,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        hintText: 'Description',
-                                                        hintStyle: TextStyle(
-                                                          color: Colors.black
-                                                              .withOpacity(0.2),
+                                                                              5),
+                                                                  hint:
+                                                                      const Text(
+                                                                          "Low"),
+                                                                  value:
+                                                                      _selectedLow,
+                                                                  items: _low
+                                                                      .map(
+                                                                          (law) {
+                                                                    return DropdownMenuItem(
+                                                                        value:
+                                                                            law,
+                                                                        child:
+                                                                            Text(
+                                                                          law,
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedLow =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
                                                         ),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
+                                                        const SizedBox(
+                                                          height: 20,
                                                         ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    TextFormField(
-                                                      controller: _fromDate,
-                                                      validator: (date) {
-                                                        if (date != null) {
-                                                          return "Enter valid date";
-                                                        }
-                                                      },
-                                                      cursorColor: kRed,
-                                                      decoration:
-                                                          InputDecoration(
-                                                              suffixIcon:
-                                                                  IconButton(
-                                                                icon: Icon(Icons
-                                                                    .today),
-                                                                onPressed:
-                                                                    () async {
-                                                                  DateTime
-                                                                      date =
-                                                                      DateTime(
-                                                                          1900);
-                                                                  FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          FocusNode());
-
-                                                                  date = (await showDatePicker(
-                                                                      context:
-                                                                          context,
-                                                                      initialDate:
-                                                                          DateTime
-                                                                              .now(),
-                                                                      firstDate:
-                                                                          DateTime(
-                                                                              1900),
-                                                                      lastDate:
-                                                                          DateTime
-                                                                              .now()))!;
-                                                                  // _fromDate.text =
-                                                                  //     formatter
-                                                                  //         .format(date);
-                                                                },
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    labelText:
+                                                                        'Status',
+                                                                    border:
+                                                                        OutlineInputBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               15),
-                                                                      borderSide:
-                                                                          const BorderSide(
-                                                                        color: Colors
-                                                                            .black,
-                                                                      )),
-                                                              hintStyle: TextStyle(
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                  fontFamily:
-                                                                      'Roboto'),
-                                                              hintText:
-                                                                  'Reminder date',
-                                                              border:
-                                                                  OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                              )),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    const Text(
-                                                      'DD/MM/YYYY',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff808080),
-                                                        fontFamily: 'Roboto',
-                                                        fontSize: 11,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    CheckboxListTile(
-                                                      activeColor:
-                                                          Colors.orange,
-                                                      controlAffinity:
-                                                          ListTileControlAffinity
-                                                              .leading,
-                                                      title: const Text(
-                                                          'Recurring'),
-                                                      value: _checkboxListTile,
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          _checkboxListTile =
-                                                              !_checkboxListTile;
-                                                        });
-                                                      },
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Container(
-                                                        height:
-                                                            Get.height * 0.04,
-                                                        width: Get.width * 0.20,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: kRedLight,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
+                                                                    ),
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  hint: const Text(
+                                                                      "Not Started"),
+                                                                  value:
+                                                                      _selectedStatus,
+                                                                  items: _status
+                                                                      .map(
+                                                                          (status) {
+                                                                    return DropdownMenuItem(
+                                                                        value:
+                                                                            status,
+                                                                        child:
+                                                                            Text(
+                                                                          status,
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedStatus =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
                                                         ),
-                                                        child: const Center(
-                                                          child: Text(
-                                                            'Add',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _fromDate,
+                                                          validator: (date) {
+                                                            if (date != null) {
+                                                              return "Enter valid date";
+                                                            }
+                                                          },
+                                                          cursorColor: kRed,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  suffixIcon:
+                                                                      IconButton(
+                                                                    icon: Icon(Icons
+                                                                        .today),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      DateTime
+                                                                          date =
+                                                                          DateTime(
+                                                                              1900);
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(
+                                                                              FocusNode());
+
+                                                                      date = (await showDatePicker(
+                                                                          context:
+                                                                              context,
+                                                                          initialDate: DateTime
+                                                                              .now(),
+                                                                          firstDate: DateTime(
+                                                                              1900),
+                                                                          lastDate:
+                                                                              DateTime.now()))!;
+                                                                      _fromDate
+                                                                              .text =
+                                                                          formatter
+                                                                              .format(date);
+                                                                    },
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              15),
+                                                                          borderSide:
+                                                                              const BorderSide(
+                                                                            color:
+                                                                                Colors.black,
+                                                                          )),
+                                                                  hintStyle: TextStyle(
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                      fontFamily:
+                                                                          'Roboto'),
+                                                                  hintText:
+                                                                      '02/06/2022',
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                  )),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 7,
+                                                        ),
+                                                        Text(
+                                                          dateFormate,
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                                0xff808080),
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            fontSize: 11,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 7,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                    ),
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  hint: const Text(
+                                                                      "Start Hours *"),
+                                                                  value:
+                                                                      _selectedStartHours,
+                                                                  items: _startHours
+                                                                      .map(
+                                                                          (startHours) {
+                                                                    return DropdownMenuItem(
+                                                                        value:
+                                                                            startHours,
+                                                                        child:
+                                                                            Text(
+                                                                          startHours,
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedStartHours =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        DropdownButtonHideUnderline(
+                                                          child:
+                                                              DropdownButtonFormField(
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                    ),
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  hint: const Text(
+                                                                      "Start Minutes *"),
+                                                                  value:
+                                                                      _selectedMinutes,
+                                                                  items: _minutes
+                                                                      .map(
+                                                                          (minutes) {
+                                                                    return DropdownMenuItem(
+                                                                        value:
+                                                                            minutes,
+                                                                        child:
+                                                                            Text(
+                                                                          minutes,
+                                                                          style: const TextStyle(
+                                                                              color: kGrey4,
+                                                                              fontFamily: "Roboto",
+                                                                              fontSize: 13),
+                                                                        ));
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (newValue) {
+                                                                    setState(
+                                                                        () {
+                                                                      _selectedMinutes =
+                                                                          newValue
+                                                                              as String?;
+                                                                    });
+                                                                  }),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        commontextfiled(
+                                                            hintText:
+                                                                'Subject *'),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        TextFormField(
+                                                          maxLines: 4,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            hintText:
+                                                                'Description',
+                                                            hintStyle:
+                                                                TextStyle(
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.2),
+                                                            ),
+                                                            border:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        TextFormField(
+                                                          controller: _fromDate,
+                                                          validator: (date) {
+                                                            if (date != null) {
+                                                              return "Enter valid date";
+                                                            }
+                                                          },
+                                                          cursorColor: kRed,
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  suffixIcon:
+                                                                      IconButton(
+                                                                    icon: Icon(Icons
+                                                                        .today),
+                                                                    onPressed:
+                                                                        () async {
+                                                                      DateTime
+                                                                          date =
+                                                                          DateTime(
+                                                                              1900);
+                                                                      FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(
+                                                                              FocusNode());
+
+                                                                      date = (await showDatePicker(
+                                                                          context:
+                                                                              context,
+                                                                          initialDate: DateTime
+                                                                              .now(),
+                                                                          firstDate: DateTime(
+                                                                              1900),
+                                                                          lastDate:
+                                                                              DateTime.now()))!;
+                                                                      // _fromDate.text =
+                                                                      //     formatter
+                                                                      //         .format(date);
+                                                                    },
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              15),
+                                                                          borderSide:
+                                                                              const BorderSide(
+                                                                            color:
+                                                                                Colors.black,
+                                                                          )),
+                                                                  hintStyle: TextStyle(
+                                                                      color: Colors
+                                                                          .black
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                      fontFamily:
+                                                                          'Roboto'),
+                                                                  hintText:
+                                                                      'Reminder date',
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            15),
+                                                                  )),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 20),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  vertical: 8),
+                                                          child: Text(
+                                                            dateFormate,
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff808080),
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                fontSize: 10),
+                                                          ),
+                                                        ),
+                                                        CheckboxListTile(
+                                                          activeColor:
+                                                              Colors.orange,
+                                                          controlAffinity:
+                                                              ListTileControlAffinity
+                                                                  .leading,
+                                                          title: const Text(
+                                                              'Recurring'),
+                                                          value:
+                                                              _checkboxListTile,
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                              _checkboxListTile =
+                                                                  !_checkboxListTile;
+                                                            });
+                                                          },
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 7),
+                                                        PrimeryButton(
+                                                            callBack: () {
+                                                              Map<String,
+                                                                      dynamic>
+                                                                  _map = {
+                                                                "TaskId": 0,
+                                                                "ParentId":
+                                                                    null,
+                                                                "ParentType": 3,
+                                                                "TaskSubject":
+                                                                    "abcd",
+                                                                "DueDate":
+                                                                    "2022-07-20T19:12:20.333Z",
+                                                                "minDueDate":
+                                                                    "2022-07-20T19:12:20.333Z",
+                                                                "TaskStatus": 1,
+                                                                "NoOfEmail":
+                                                                    null,
+                                                                "TaskPriority":
+                                                                    0,
+                                                                "TaskDescription":
+                                                                    "description txt",
+                                                                "ReminderDate":
+                                                                    "",
+                                                                "minReminderDate":
+                                                                    "",
+                                                                "maxReminderDate":
+                                                                    "",
+                                                                "isRecurring":
+                                                                    false,
+                                                                "RecurringMode":
+                                                                    -1,
+                                                                "RecurranceStart":
+                                                                    "",
+                                                                "minRecurranceStart":
+                                                                    "",
+                                                                "RecurranceEnd":
+                                                                    "",
+                                                                "minRecurranceEnd":
+                                                                    "",
+                                                                "AssignedTo":
+                                                                    81,
+                                                                "TaskOwner": 81,
+                                                                "TaskResponse":
+                                                                    "",
+                                                                "TaskType": 27,
+                                                                "DueHours":
+                                                                    "00",
+                                                                "DueMinutes":
+                                                                    "01",
+                                                                "ActualHours":
+                                                                    null,
+                                                                "ActualMinutes":
+                                                                    null
+                                                              };
+                                                            },
+                                                            title: 'Add',
+                                                            color: kRedLight)
+                                                      ]),
                                                 ),
                                               ),
-                                            ),
-                                          )
-                                        ],
-                                      );
+                                            )
+                                          ]);
                                     });
                               },
                               child: Container(

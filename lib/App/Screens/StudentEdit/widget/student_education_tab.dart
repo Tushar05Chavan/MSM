@@ -519,10 +519,15 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                     CommonLanguage(
                                         hintText: 'Primary Language',
                                         selectedLanguage:
-                                            _selectedPrimaryLanguage),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
+                                            _selectedPrimaryLanguage,
+                                        callBack: (value) {
+                                          {
+                                            setState(() =>
+                                                _selectedPrimaryLanguage =
+                                                    value);
+                                          }
+                                        }),
+                                    const SizedBox(height: 15),
                                     TextFormField(
                                       controller: _startDate,
                                       cursorColor: kRed,
@@ -673,7 +678,8 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       onTap: () async {
                                         Map<String, dynamic> _map = {
                                           "SchoolId": 0,
-                                          "ParentId": "44238",
+                                          "ParentId":
+                                              widget.data!.genInfo!.studentId,
                                           "ParentType": 6,
                                           "LevelOfEducation": 1108,
                                           "LevelOfEducationName": "Grade 12",
