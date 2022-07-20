@@ -4,7 +4,8 @@ import 'package:msm_unify/services/api_service.dart';
 import 'package:msm_unify/services/api_url.dart';
 
 class StudentListRepo extends ApiURLService {
-  static Future<StudentListResponseModel> studentListRepo() async {
+  static Future<StudentListResponseModel> studentListRepo(
+    {required String keyword}) async {
     // Map<String, dynamic> body = {"keyword": "all"};
     final body = '{"keyword":"all"}';
     var response = await APIService().getResponse(

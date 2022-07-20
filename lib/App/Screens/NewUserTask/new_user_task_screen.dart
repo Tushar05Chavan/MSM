@@ -25,6 +25,7 @@ class NewUserTaskScreen extends StatefulWidget {
 
 class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   String? _selectedCountry;
+  late final GetUserTaskResponseModel? data;
   final List<String> _country = [
     'Yemen',
     'India',
@@ -76,6 +77,9 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final TextEditingController _fromDate = TextEditingController();
   final TextEditingController _toDate = TextEditingController();
+  final TextEditingController subject = TextEditingController();
+  final TextEditingController description = TextEditingController();
+
   bool _checkboxListTile = false;
   String? add;
   String? add1;
@@ -101,12 +105,23 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     _toDate.text = DateTime.now().toString();
     getUserAssignee();
     getUserTaskType();
+    getUserTask();
     // DateFormat.MMMd().format(_toDate).toString();
     super.initState();
   }
 
   final GetUserTaskViewModel _getUserTaskViewModel =
       Get.put(GetUserTaskViewModel());
+  List<GetUserTaskViewModel> getUsertask = [];
+  Future<void> getUserTask() async {
+    await _getUserTaskViewModel.getUserTaskViewModel();
+    List<GetUserTaskResponseModel> response =
+        _getUserTaskViewModel.apiResponse.data;
+    response.forEach((element) {
+      //getUsertask.add(element);
+    });
+    setState(() {});
+  }
 
   final GetUserTaskTypeViewModel _getUserTaskTypeViewModel =
       Get.put(GetUserTaskTypeViewModel());
@@ -865,11 +880,18 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                       height: 20,
                                                     ),
                                                     commontextfiled(
+                                                        validator: (value) {
+                                                          if (value != null) {
+                                                            return "Subject";
+                                                          }
+                                                        },
+                                                        controller: subject,
                                                         hintText: 'Subject *'),
                                                     const SizedBox(
                                                       height: 20,
                                                     ),
                                                     TextFormField(
+                                                      controller: description,
                                                       maxLines: 4,
                                                       decoration:
                                                           InputDecoration(
@@ -926,9 +948,11 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                       lastDate:
                                                                           DateTime
                                                                               .now()))!;
-                                                                  _fromDate.text =
+                                                                  _fromDate
+                                                                          .text =
                                                                       formatter
-                                                                          .format(date);
+                                                                          .format(
+                                                                              date);
                                                                 },
                                                               ),
                                                               focusedBorder:
@@ -995,26 +1019,77 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                     const SizedBox(
                                                       height: 7,
                                                     ),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Container(
-                                                        height:
-                                                            Get.height * 0.04,
-                                                        width: Get.width * 0.20,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: kRedLight,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        child: const Center(
-                                                          child: Text(
-                                                            'Add',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        Map<String, dynamic>
+                                                            _map = {
+                                                          "TaskId": 0,
+                                                          "ParentId": null,
+                                                          "ParentType": 3,
+                                                          "TaskSubject":
+                                                              "something",
+                                                          "DueDate":
+                                                              "2022-07-20T05:24:11.902Z",
+                                                          "minDueDate":
+                                                              "2022-07-20T05:24:11.903Z",
+                                                          "TaskStatus": 1,
+                                                          "NoOfEmail": null,
+                                                          "TaskPriority": 0,
+                                                          "TaskDescription": "Amazing",
+                                                          "ReminderDate": "",
+                                                          "minReminderDate": "",
+                                                          "maxReminderDate": "",
+                                                          "isRecurring": false,
+                                                          "RecurringMode": -1,
+                                                          "RecurranceStart": "",
+                                                          "minRecurranceStart":
+                                                              "",
+                                                          "RecurranceEnd": "",
+                                                          "minRecurranceEnd":
+                                                              "",
+                                                          "AssignedTo": 81,
+                                                          "TaskOwner": 81,
+                                                          "TaskResponse": "",
+                                                          "TaskType": 27,
+                                                          "DueHours": "10",
+                                                          "DueMinutes": "06",
+                                                          "ActualHours": null,
+                                                          "ActualMinutes": null
+                                                        };
+                                                        final GetUserTaskViewModel
+                                                            getUserTaskViewModel =
+                                                            Get.put(
+                                                                GetUserTaskViewModel());
+                                                        await getUserTaskViewModel
+                                                            .addTaskViewModel(
+                                                                map: _map);
+
+                                                        setState(() {});
+                                                        Get.back();
+                                                      },
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Container(
+                                                          height:
+                                                              Get.height * 0.04,
+                                                          width:
+                                                              Get.width * 0.20,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: kRedLight,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Text(
+                                                              'Add',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),

@@ -40,6 +40,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
 
   final TextEditingController _endDate = TextEditingController();
   final TextEditingController _degreeawarded = TextEditingController();
+  final TextEditingController institution = TextEditingController();
   
 
   String? _selectedDegreeEducation;
@@ -154,6 +155,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                 onchange: (String val) {
                   setState(() {
                     _selectedCountryEducation = val;
+                    print(_selectedCountryEducation);
                   });
                 },
               ),
@@ -400,6 +402,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             setState(() {
                                               _selectedLevelOfEducation =
                                                   newValue as String?;
+                                                  print(_selectedLevelOfEducation.toString());
                                             });
                                           }),
                                     ),
@@ -446,6 +449,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             provinceState.clear();
                                             _selectedCountryEducation =
                                                 newValue as String?;
+                                                print(_selectedCountryEducation.toString());
 
                                             provinceCountry().then(
                                                 (value) => setState(() {}));
@@ -455,11 +459,14 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       height: 15,
                                     ),
                                     TextFormField(
+
+                                      controller: institution,
                                       validator: (fName) {
                                         if (fName != null) {
                                           return "Name Of Institution";
                                         }
                                       },
+                                      
                                       cursorColor: kRed,
                                       decoration: InputDecoration(
                                           focusedBorder: OutlineInputBorder(
@@ -477,6 +484,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                           )),
+                                          
                                     ),
                                     const SizedBox(
                                       height: 15,
@@ -523,7 +531,9 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                     CommonLanguage(
                                         hintText: 'Primary Language',
                                         selectedLanguage:
-                                            _selectedPrimaryLanguage),
+                                            _selectedPrimaryLanguage
+                                            ),
+                                            
                                     const SizedBox(
                                       height: 15,
                                     ),
@@ -685,7 +695,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                           "CountryOfInstitution": 1,
                                           "CountryOfInstitutionName": "",
                                           "NameOfInstitution": "aktu",
-                                          "Language": _selectedPrimaryLanguage.toString(),
+                                          "Language": '',
                                           "AttendendFrom":
                                               _startDate.text,
                                           "AttendendTo":

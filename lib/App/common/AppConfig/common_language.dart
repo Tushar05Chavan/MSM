@@ -7,9 +7,10 @@ import 'package:msm_unify/viewModel/language_view_model.dart';
 class CommonLanguage extends StatefulWidget {
   String? selectedLanguage;
   String? hintText;
+  Function? callback;
 
   CommonLanguage(
-      {super.key, required this.selectedLanguage, required this.hintText});
+      {super.key, required this.selectedLanguage, required this.hintText, this.callback});
 
   @override
   _CommonLanguageState createState() => _CommonLanguageState();
@@ -60,6 +61,7 @@ class _CommonLanguageState extends State<CommonLanguage> {
                 onChanged: (newValue) {
                   setState(() {
                     widget.selectedLanguage = newValue as String?;
+                    print(widget.selectedLanguage);
                   });
                 }),
           ),
