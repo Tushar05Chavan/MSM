@@ -27,4 +27,19 @@ class GetUserTaskViewModel extends GetxController {
     }
     update();
   }
+
+
+
+    Future<void> addTaskViewModel(
+      {required Map<String, dynamic> map}) async {
+    _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
+    try {
+      bool response = await GetUserTaskRepo.addTaskRepo(map: map);
+    } catch (e) {
+      print(".........>$e");
+      _apiResponse = ApiResponse.error(message: 'error');
+    }
+    update();
+  }
 }

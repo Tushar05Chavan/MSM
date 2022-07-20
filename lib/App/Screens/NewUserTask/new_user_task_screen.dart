@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:msm_unify/Api/api_response.dart';
@@ -7,7 +6,6 @@ import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/common_app_ba
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/primery_button.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer.dart';
 import 'package:msm_unify/App/common/AppConfig/common_textfiled.dart';
-import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/get_user_task_type_response_model.dart';
 import 'package:msm_unify/model/responseModek/user_assignee_response_model.dart';
@@ -26,6 +24,7 @@ class NewUserTaskScreen extends StatefulWidget {
 
 class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   String? _selectedCountry;
+  late final GetUserTaskResponseModel? data;
   final List<String> _country = [
     'Yemen',
     'India',
@@ -78,6 +77,9 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final TextEditingController _fromDate = TextEditingController();
   final TextEditingController _toDate = TextEditingController();
+  final TextEditingController subject = TextEditingController();
+  final TextEditingController description = TextEditingController();
+
   bool _checkboxListTile = false;
   String? add;
   String? add1;
@@ -103,12 +105,23 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     _toDate.text = DateTime.now().toString();
     getUserAssignee();
     getUserTaskType();
+    getUserTask();
     // DateFormat.MMMd().format(_toDate).toString();
     super.initState();
   }
 
   final GetUserTaskViewModel _getUserTaskViewModel =
       Get.put(GetUserTaskViewModel());
+  List<GetUserTaskViewModel> getUsertask = [];
+  Future<void> getUserTask() async {
+    await _getUserTaskViewModel.getUserTaskViewModel();
+    List<GetUserTaskResponseModel> response =
+        _getUserTaskViewModel.apiResponse.data;
+    response.forEach((element) {
+      //getUsertask.add(element);
+    });
+    setState(() {});
+  }
 
   final GetUserTaskTypeViewModel _getUserTaskTypeViewModel =
       Get.put(GetUserTaskTypeViewModel());
@@ -881,9 +894,66 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
+<<<<<<< HEAD
                                                                           10),
                                                             ),
                                                           ),
+=======
+                                                                          5),
+                                                              hint: const Text(
+                                                                  "Start Minutes *"),
+                                                              value:
+                                                                  _selectedMinutes,
+                                                              items: _minutes
+                                                                  .map(
+                                                                      (minutes) {
+                                                                return DropdownMenuItem(
+                                                                    value:
+                                                                        minutes,
+                                                                    child: Text(
+                                                                      minutes,
+                                                                      style: const TextStyle(
+                                                                          color:
+                                                                              kGrey4,
+                                                                          fontFamily:
+                                                                              "Roboto",
+                                                                          fontSize:
+                                                                              13),
+                                                                    ));
+                                                              }).toList(),
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                setState(() {
+                                                                  _selectedMinutes =
+                                                                      newValue
+                                                                          as String?;
+                                                                });
+                                                              }),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    commontextfiled(
+                                                        validator: (value) {
+                                                          if (value != null) {
+                                                            return "Subject";
+                                                          }
+                                                        },
+                                                        controller: subject,
+                                                        hintText: 'Subject *'),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextFormField(
+                                                      controller: description,
+                                                      maxLines: 4,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: 'Description',
+                                                        hintStyle: TextStyle(
+                                                          color: Colors.black
+                                                              .withOpacity(0.2),
+>>>>>>> 462d70e5f6351d4bfd90cb15fec4450d85991d3e
                                                         ),
                                                         const SizedBox(
                                                           height: 20,
@@ -920,6 +990,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                               .now(),
                                                                           firstDate: DateTime(
                                                                               1900),
+<<<<<<< HEAD
                                                                           lastDate:
                                                                               DateTime.now()))!;
                                                                       // _fromDate.text =
@@ -930,6 +1001,22 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                   focusedBorder:
                                                                       OutlineInputBorder(
                                                                           borderRadius: BorderRadius.circular(
+=======
+                                                                      lastDate:
+                                                                          DateTime
+                                                                              .now()))!;
+                                                                  _fromDate
+                                                                          .text =
+                                                                      formatter
+                                                                          .format(
+                                                                              date);
+                                                                },
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+>>>>>>> 462d70e5f6351d4bfd90cb15fec4450d85991d3e
                                                                               15),
                                                                           borderSide:
                                                                               const BorderSide(
@@ -950,6 +1037,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             15),
+<<<<<<< HEAD
                                                                   )),
                                                         ),
                                                         const SizedBox(
@@ -967,6 +1055,119 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                 fontFamily:
                                                                     'Roboto',
                                                                 fontSize: 10),
+=======
+                                                              )),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    const Text(
+                                                      'DD/MM/YYYY',
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xff808080),
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: 11,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    CheckboxListTile(
+                                                      activeColor:
+                                                          Colors.orange,
+                                                      controlAffinity:
+                                                          ListTileControlAffinity
+                                                              .leading,
+                                                      title: const Text(
+                                                          'Recurring'),
+                                                      value: _checkboxListTile,
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          _checkboxListTile =
+                                                              !_checkboxListTile;
+                                                        });
+                                                      },
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 7,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        Map<String, dynamic>
+                                                            _map = {
+                                                          "TaskId": 0,
+                                                          "ParentId": null,
+                                                          "ParentType": 3,
+                                                          "TaskSubject":
+                                                              "something",
+                                                          "DueDate":
+                                                              "2022-07-20T05:24:11.902Z",
+                                                          "minDueDate":
+                                                              "2022-07-20T05:24:11.903Z",
+                                                          "TaskStatus": 1,
+                                                          "NoOfEmail": null,
+                                                          "TaskPriority": 0,
+                                                          "TaskDescription": "Amazing",
+                                                          "ReminderDate": "",
+                                                          "minReminderDate": "",
+                                                          "maxReminderDate": "",
+                                                          "isRecurring": false,
+                                                          "RecurringMode": -1,
+                                                          "RecurranceStart": "",
+                                                          "minRecurranceStart":
+                                                              "",
+                                                          "RecurranceEnd": "",
+                                                          "minRecurranceEnd":
+                                                              "",
+                                                          "AssignedTo": 81,
+                                                          "TaskOwner": 81,
+                                                          "TaskResponse": "",
+                                                          "TaskType": 27,
+                                                          "DueHours": "10",
+                                                          "DueMinutes": "06",
+                                                          "ActualHours": null,
+                                                          "ActualMinutes": null
+                                                        };
+                                                        final GetUserTaskViewModel
+                                                            getUserTaskViewModel =
+                                                            Get.put(
+                                                                GetUserTaskViewModel());
+                                                        await getUserTaskViewModel
+                                                            .addTaskViewModel(
+                                                                map: _map);
+
+                                                        setState(() {});
+                                                        Get.back();
+                                                      },
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Container(
+                                                          height:
+                                                              Get.height * 0.04,
+                                                          width:
+                                                              Get.width * 0.20,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: kRedLight,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Text(
+                                                              'Add',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+>>>>>>> 462d70e5f6351d4bfd90cb15fec4450d85991d3e
                                                           ),
                                                         ),
                                                         CheckboxListTile(

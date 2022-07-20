@@ -9,14 +9,14 @@ class StudentListViewModel extends GetxController {
   ApiResponse get apiResponse => _apiResponse;
 
   onInit() {
-    studentListViewModel();
+    studentListViewModel(keyword: '');
   }
 
-  Future<void> studentListViewModel({String? keyword}) async {
+  Future<void> studentListViewModel({required String keyword}) async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     try {
       StudentListResponseModel response =
-          await StudentListRepo.studentListRepo();
+          await StudentListRepo.studentListRepo(keyword: keyword);
       print('studentListViewModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
       update();

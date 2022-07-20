@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -40,12 +42,16 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
 
   final TextEditingController _endDate = TextEditingController();
   final TextEditingController _degreeawarded = TextEditingController();
+  final TextEditingController institution = TextEditingController();
+
   String? _selectedDegreeEducation;
   String? _selectedGradeEducation;
   String? _selectedCountryEducation;
   String? _selectedLevelOfEducation;
   String? _selectedPrimaryLanguage;
   String? _selectedProvince;
+
+  final TextEditingController _degreeawardedprogram = TextEditingController();
 
   final GradeViewModel _gradeViewModel = Get.put(GradeViewModel());
 
@@ -141,20 +147,18 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 10,
-              ),
-              CommonCountry(
-                hintText: 'Country of Education',
-                selectedCountry: _selectedCountryEducation,
-                onchange: (String val) {
-                  setState(() {
-                    _selectedCountryEducation = val;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CommonCountry(
+                  hintText: 'Country of Education',
+                  selectedCountry: _selectedCountryEducation,
+                  onchange: (String val) {
+                    setState(() {
+                      _selectedCountryEducation = val;
+                      print(_selectedCountryEducation);
+                    });
+                  },
+                ),
               ),
               DropdownButtonHideUnderline(
                 child: DropdownButtonFormField(
@@ -184,9 +188,6 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                       _selectedDegreeEducation = newValue as String?;
                       //print('countryOfEducation==$_selectedDegreeEducation');
                     }),
-              ),
-              const SizedBox(
-                height: 15,
               ),
               DropdownButtonHideUnderline(
                 child: DropdownButtonFormField(
@@ -293,19 +294,16 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                '*10th Grade and 12th Grade details are mandatory',
-                style: TextStyle(
-                  color: Color(0xff3C4858),
-                  fontSize: 13,
-                  fontFamily: 'Roboto',
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: const Text(
+                  '*10th Grade and 12th Grade details are mandatory',
+                  style: TextStyle(
+                    color: Color(0xff3C4858),
+                    fontSize: 13,
+                    fontFamily: 'Roboto',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 15,
               ),
               Align(
                 alignment: Alignment.centerRight,
@@ -396,6 +394,8 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             setState(() {
                                               _selectedLevelOfEducation =
                                                   newValue as String?;
+                                              print(_selectedLevelOfEducation
+                                                  .toString());
                                             });
                                           }),
                                     ),
@@ -442,6 +442,8 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             provinceState.clear();
                                             _selectedCountryEducation =
                                                 newValue as String?;
+                                            print(_selectedCountryEducation
+                                                .toString());
 
                                             provinceCountry().then(
                                                 (value) => setState(() {}));
@@ -451,6 +453,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       height: 15,
                                     ),
                                     TextFormField(
+                                      controller: institution,
                                       validator: (fName) {
                                         if (fName != null) {
                                           return "Name Of Institution";
@@ -543,7 +546,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2024)))!;
                                               _startDate.text =
                                                   formatter.format(date);
                                             },
@@ -582,7 +585,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2030)))!;
                                               _endDate.text =
                                                   formatter.format(date);
                                             },
@@ -621,7 +624,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                                   context: context,
                                                   initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now()))!;
+                                                  lastDate: DateTime(2027)))!;
                                               _degreeawarded.text =
                                                   formatter.format(date);
                                             },
@@ -647,8 +650,9 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                       height: 15,
                                     ),
                                     TextFormField(
-                                      validator: (fName) {
-                                        if (fName != null) {
+                                      //controller: _degreeawardedprogram,
+                                      validator: (value) {
+                                        if (value != null) {
                                           return "Name Of Institution";
                                         }
                                       },
@@ -681,23 +685,24 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                           "ParentId":
                                               widget.data!.genInfo!.studentId,
                                           "ParentType": 6,
-                                          "LevelOfEducation": 1108,
-                                          "LevelOfEducationName": "Grade 12",
+                                          "LevelOfEducation":
+                                              _selectedLevelOfEducation,
+                                          "LevelOfEducationName": widget
+                                              .data!
+                                              .eduInfo!
+                                              .highestLevelOfEducationName,
                                           "CountryOfInstitution": 1,
                                           "CountryOfInstitutionName": "",
                                           "NameOfInstitution": "aktu",
-                                          "Language": "Acholi",
-                                          "AttendendFrom":
-                                              "2022-07-05T00:00:00.000Z",
-                                          "AttendendTo":
-                                              "2022-07-31T00:00:00.000Z",
-                                          "Degree":
-                                              "Associate of Arts for Transfer",
+                                          "Language": '',
+                                          "AttendendFrom": _startDate.text,
+                                          "AttendendTo": _endDate.text,
+                                          "Degree": _degreeawardedprogram.text,
                                           "DegreeAwardedOn":
-                                              "2022-07-15T00:00:00.000Z",
+                                              _degreeawarded.text,
                                           "Addres": "Bihar board",
                                           "City": "patna",
-                                          "Province": 42,
+                                          "Province": _selectedProvince,
                                           "Pincode": "",
                                           "Marks": [
                                             {
@@ -720,6 +725,7 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
                                             .educationHistoryModel(map: _map);
 
                                         setState(() {});
+                                        Get.back();
                                       },
                                       child: Align(
                                         alignment: Alignment.center,
