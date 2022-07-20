@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,8 @@ import 'package:msm_unify/model/responseModek/document_dropdown_response_model.d
 import 'package:msm_unify/model/responseModek/student_document_table_response_model.dart';
 import 'package:msm_unify/viewModel/document_dropdown_view_model.dart';
 import 'package:msm_unify/viewModel/student_document_table_view_model.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 
 import '../../../../model/responseModek/student_view_response_model.dart';
 import '../../../common/AppConfig/support_section.dart';
@@ -51,6 +55,39 @@ class _StudentEditDocumentTabScreenState
     getDocument();
     super.initState();
   }
+
+//  String fileType = 'All';
+//   var fileTypeList = ['All', 'Image', 'Video', 'Audio', 'MultipleFile'];
+//   FilePickerResult? result;
+//   PlatformFile? file;
+
+//   File? files;
+//   Future selectFile() async {
+//   final result = FilePicker.platform.pickFiles(allowMultiple: false);
+//   if (result == null) return;
+//     //final path = result.files.single.path!;
+//     setState(() {
+//     //files = File(path);
+//     });
+//   }
+
+// Future getPdfAndUpload(int position) async {
+
+//     File file = await FilePicker.getFile(
+//       type: FileType.custom,
+//       allowedExtensions: ['pdf','docx'], //here you can add any of extention what you need to pick
+//     );
+
+//     if(file != null) {
+
+//       setState(() {
+
+//           file1 = file; //file1 is a global variable which i created
+
+//       });
+
+//     }
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +162,12 @@ class _StudentEditDocumentTabScreenState
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15))),
-                                          validator: (doc) {
-                                            if (doc != null) {
+                                          validator: (document) {
+                                            //FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+                                            // PlatformFile file = result!.files.first;
+
+                                            if (document != null) {
                                               return "Please Select Document";
                                             }
                                           },
@@ -1299,9 +1340,9 @@ class TableRow extends DataTableSource {
                       ),
                       child: const Center(
                           child: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.white,
-                          )),
+                        Icons.keyboard_arrow_down,
+                        color: Colors.white,
+                      )),
                     ),
                   );
                 },
