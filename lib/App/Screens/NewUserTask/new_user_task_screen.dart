@@ -233,7 +233,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(1900),
-                                  lastDate: DateTime.now()))!;
+                                  lastDate: DateTime(2024)))!;
                               _fromDate.text = date.toString();
                             },
                           ),
@@ -283,7 +283,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(1900),
-                                  lastDate: DateTime.now()))!;
+                                  lastDate: DateTime(2024)))!;
                               _toDate.text = date.toString();
                             },
                           ),
@@ -713,8 +713,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                           DateTime(
                                                                               1900),
                                                                       lastDate:
-                                                                          DateTime
-                                                                              .now()))!;
+                                                                          DateTime(
+                                                                              2030)))!;
                                                                   _fromDate
                                                                           .text =
                                                                       formatter
@@ -924,11 +924,13 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                           DateTime(
                                                                               1900),
                                                                       lastDate:
-                                                                          DateTime
-                                                                              .now()))!;
-                                                                  _fromDate.text =
+                                                                          DateTime(
+                                                                              2024)))!;
+                                                                  _fromDate
+                                                                          .text =
                                                                       formatter
-                                                                          .format(date);
+                                                                          .format(
+                                                                              date);
                                                                 },
                                                               ),
                                                               focusedBorder:
