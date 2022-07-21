@@ -356,213 +356,6 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
               const SizedBox(
                 height: 10,
               ),
-<<<<<<< HEAD
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'User Tasks',
-                      style: TextStyle(
-                        color: kNavy,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    DropdownButtonHideUnderline(
-                      child: DropdownButtonFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                          hint: const Text("All"),
-                          value: _selectedAssignee,
-                          items: assignee.map((assignee) {
-                            return DropdownMenuItem(
-                                value: assignee.userId.toString(),
-                                child: Text(
-                                  assignee.displayName.toString(),
-                                  style: const TextStyle(
-                                      color: kGrey4,
-                                      fontFamily: "Roboto",
-                                      fontSize: 13),
-                                ));
-                          }).toList(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedAssignee = newValue as String?;
-                            });
-                          }),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: _fromDate,
-                      validator: (date) {
-                        if (date != null) {
-                          return "Enter valid date";
-                        }
-                      },
-                      cursorColor: kRed,
-                      decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.today),
-                            onPressed: () async {
-                              DateTime date = DateTime(1900);
-                              FocusScope.of(context).requestFocus(FocusNode());
-
-                              date = (await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2024)))!;
-                              _fromDate.text = date.toString();
-                            },
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              )),
-                          hintStyle: TextStyle(
-                              color: Colors.black.withOpacity(0.2),
-                              fontFamily: 'Roboto'),
-                          hintText: 'From Date',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    const Text(
-                      'DD/MM/YYYY',
-                      style: TextStyle(
-                        color: Color(0xff808080),
-                        fontFamily: 'Roboto',
-                        fontSize: 11,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: _toDate,
-                      validator: (date) {
-                        if (date != null) {
-                          return "Enter valid date";
-                        }
-                      },
-                      cursorColor: kRed,
-                      decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.today),
-                            onPressed: () async {
-                              DateTime date = DateTime(1900);
-                              FocusScope.of(context).requestFocus(FocusNode());
-
-                              date = (await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2024)))!;
-                              _toDate.text = date.toString();
-                            },
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              )),
-                          hintStyle: TextStyle(
-                              color: Colors.black.withOpacity(0.2),
-                              fontFamily: 'Roboto'),
-                          hintText: '02/06/2022',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    const Text(
-                      'DD/MM/YYYY',
-                      style: TextStyle(
-                        color: Color(0xff808080),
-                        fontFamily: 'Roboto',
-                        fontSize: 11,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        _getUserTaskViewModel.getUserTaskViewModel(
-                            toDate: _toDate.text,
-                            assignedTo: _selectedAssignee == null
-                                ? 81
-                                : int.parse(_selectedAssignee.toString()),
-                            fromDate: _fromDate.text);
-                        setState(() {});
-                      },
-                      child: Container(
-                        height: Get.height * 0.04,
-                        width: Get.width * 0.20,
-                        decoration: BoxDecoration(
-                          color: kGreen1,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Search',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 11,
-                                fontFamily: 'Poppins'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return SimpleDialog(
-                                        shape: RoundedRectangleBorder(
-                                            side: const BorderSide(
-                                                color: Color(0xffe8252a)),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Container(
-                                              height: Get.height * 0.70,
-                                              width: Get.width,
-                                              child: SingleChildScrollView(
-                                                child: Column(
-=======
               Column(
                 children: [
                   Row(
@@ -587,7 +380,6 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                             width: Get.width,
                                             child: SingleChildScrollView(
                                               child: Column(
->>>>>>> 4873ebcf8514de50e045d583f66e23a069fc0f9b
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
@@ -1140,21 +932,11 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                           DateTime(
                                                                               1900),
                                                                       lastDate:
-<<<<<<< HEAD
-                                                                          DateTime(
-                                                                              2024)))!;
-                                                                  _fromDate
-                                                                          .text =
-                                                                      formatter
-                                                                          .format(
-                                                                              date);
-=======
                                                                           DateTime
                                                                               .now()))!;
                                                                   // _fromDate.text =
                                                                   //     formatter
                                                                   //         .format(date);
->>>>>>> 4873ebcf8514de50e045d583f66e23a069fc0f9b
                                                                 },
                                                               ),
                                                               focusedBorder:
