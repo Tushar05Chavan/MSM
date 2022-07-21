@@ -12,7 +12,7 @@ import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/destination_response_model.dart';
 import 'package:msm_unify/model/responseModek/get_feedback_list_response_model.dart';
 import 'package:msm_unify/model/responseModek/what_do_you_want_response_model.dart';
-import 'package:msm_unify/repo/what_do_you_want_repo.dart';
+
 import 'package:msm_unify/viewModel/country_view_model.dart';
 import 'package:msm_unify/viewModel/destination_view_model.dart';
 import 'package:msm_unify/viewModel/get_notification_count_view_model.dart';
@@ -223,7 +223,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     return PreferredSize(
       preferredSize: Size(MediaQuery.of(context).size.height, 205),
-      child: Column(
+      child: ListView(
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12),

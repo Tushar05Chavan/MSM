@@ -65,16 +65,7 @@ class _CommonLanguageState extends State<CommonLanguage> {
                             color: kGrey4, fontFamily: "Roboto", fontSize: 13),
                       ));
                 }).toList(),
-<<<<<<< HEAD
                 onChanged: (newValue) => widget.callBack(newValue)),
-=======
-                onChanged: (newValue) {
-                  setState(() {
-                    widget.selectedLanguage = newValue as String?;
-                    print(widget.selectedLanguage);
-                  });
-                }),
->>>>>>> 462d70e5f6351d4bfd90cb15fec4450d85991d3e
           ),
         ],
       ),
