@@ -8,10 +8,6 @@ class StudentViewViewModel extends GetxController {
 
   ApiResponse get apiResponse => _apiResponse;
 
-  // onInit() {
-  //   applicationViewViewModel();
-  // }
-
   Future<void> studentViewViewModel({int? studentId}) async {
     print('=========$studentId');
     _apiResponse = ApiResponse.loading(message: 'Loading');

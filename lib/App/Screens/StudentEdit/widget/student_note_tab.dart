@@ -5,7 +5,6 @@ import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/model/responseModek/get_student_notes_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_note_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_view_response_model.dart';
-import 'package:msm_unify/viewModel/add_student_notes_view_model.dart';
 import 'package:msm_unify/viewModel/get_notes_view_model.dart';
 import 'package:msm_unify/viewModel/get_student_notes_view_model.dart';
 import 'package:msm_unify/viewModel/student_note_view_model.dart';
@@ -23,9 +22,6 @@ class StdNoteTab extends StatefulWidget {
 class _StdNoteTabState extends State<StdNoteTab> {
   final GetStudentNotesViewModel _getStudentNotesViewModel =
       Get.put(GetStudentNotesViewModel());
-
-  final AddStudentNotesViewModel _addStudentNotesViewModel =
-      Get.put(AddStudentNotesViewModel());
 
   @override
   void initState() {
@@ -127,26 +123,25 @@ class _StdNoteTabState extends State<StdNoteTab> {
                       "ApplicationId": widget.data!.genInfo!.studentId,
                       "Remark": _notes.text,
                     };
-                    _addStudentNotesViewModel
+                    _getStudentNotesViewModel
                         .addStudentNotesViewModel(map)
                         .whenComplete((() {
-                      Future.delayed(Duration(seconds: 5), () {
+                      _notes.clear();
+                      Future.delayed(Duration(seconds: 4), () {
                         setState(() {
-                          GetStudentNotesViewModel getStudentNotesViewModel =
-                              GetStudentNotesViewModel();
-                          getStudentNotesViewModel.getStudentNotesViewModel(
+                          _getStudentNotesViewModel.getStudentNotesViewModel(
                               activityId: map["ApplicationId"]);
                         });
                       });
                     }));
-                    if (_addStudentNotesViewModel.apiResponse.status ==
+
+                    if (_getStudentNotesViewModel.apiResponse.status ==
                         Status.COMPLETE) {
                       setState(() {
                         showInSnackBar();
                       });
-                      _notes.clear();
                     } else {
-                      if (_addStudentNotesViewModel.apiResponse.status ==
+                      if (_getStudentNotesViewModel.apiResponse.status ==
                           Status.ERROR) {
                         showInErrorSnackBar();
                       }
@@ -179,10 +174,14 @@ class _StdNoteTabState extends State<StdNoteTab> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: Get.height * 0.07,
-                ),
-                Container(
+                SizedBox(height: Get.height * 0.07),
+                GetBuilder<GetStudentNotesViewModel>(
+                  builder: (controller) {
+                    if (controller.apiResponse.status == Status.COMPLETE) {
+                      List<GetStudentNotesResponseModel> response =
+                          controller.apiResponse.data;
+                      print('RESPONSEEEE>>>>> $response');
+                      return Container(
                         height: 500,
                         child: ListView.builder(
                           itemCount: response.length,
@@ -227,21 +226,13 @@ class _StdNoteTabState extends State<StdNoteTab> {
                             );
                           },
                         ),
-                      )
-                //GetBuilder<GetStudentNotesViewModel>(
-                  // builder: (controller) {
-                  //   if (controller.apiResponse.status == Status.COMPLETE) {
-                  //     List<GetStudentNotesResponseModel> response =
-                  //         controller.apiResponse.data;
-                  //     print('RESPONSEEEE>>>>> $response');
-                  //     return 
-                      
-                  //   } else if (controller.apiResponse.status == Status.ERROR) {
-                  //     return const CircularProgressIndicator();
-                  //   }
-                  //   return const Center(child: CircularProgressIndicator());
-                  // },
-               // ),
+                      );
+                    } else if (controller.apiResponse.status == Status.ERROR) {
+                      return const CircularProgressIndicator();
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),

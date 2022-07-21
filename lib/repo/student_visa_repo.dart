@@ -12,11 +12,10 @@ class StudentVisaRepo extends ApiURLService {
       url: "${BaseUrl.baseUrl}/StudentVisa/List?StudentId=$studentId",
       apitype: APIType.aGet,
     );
-    print('sdhgrtjfd');
-    
+    print('StudentVisaRepo1${response.first}');
     List<StudentVisaResponseModel> studentVisaResponseModel =
         studentVisaResponseModelFromJson(jsonEncode(response));
-    print('========${studentVisaResponseModel.first}');
+    print('StudentVisaRepo2${studentVisaResponseModel.first}');
     return studentVisaResponseModel;
   }
 }

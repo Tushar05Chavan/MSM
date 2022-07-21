@@ -1,37 +1,41 @@
- // To parse this JSON data, do
+// To parse this JSON data, do
 //
 //     final studentVisaResponseModel = studentVisaResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<StudentVisaResponseModel> studentVisaResponseModelFromJson(String str) => List<StudentVisaResponseModel>.from(json.decode(str).map((x) => StudentVisaResponseModel.fromJson(x)));
+List<StudentVisaResponseModel> studentVisaResponseModelFromJson(String str) =>
+    List<StudentVisaResponseModel>.from(
+        json.decode(str).map((x) => StudentVisaResponseModel.fromJson(x)));
 
-String studentVisaResponseModelToJson(List<StudentVisaResponseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String studentVisaResponseModelToJson(List<StudentVisaResponseModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class StudentVisaResponseModel {
-    StudentVisaResponseModel({
-        required this.studentVisaId,
-        required this.countryName,
-        required this.visaTypeName,
-        required this.visaStatus,
-        required this.issueDate,
-        required this.validUpto,
-        required this.comment,
-        required this.countryId,
-        required this.visaTypeId,
-    });
+  StudentVisaResponseModel({
+    required this.studentVisaId,
+    required this.countryName,
+    required this.visaTypeName,
+    required this.visaStatus,
+    required this.issueDate,
+    required this.validUpto,
+    required this.comment,
+    this.countryId,
+    this.visaTypeId,
+  });
 
-    int studentVisaId;
-    String countryName;
-    String visaTypeName;
-    String visaStatus;
-    DateTime issueDate;
-    DateTime validUpto;
-    String comment;
-    int countryId;
-    int visaTypeId;
+  int studentVisaId;
+  String countryName;
+  String visaTypeName;
+  String visaStatus;
+  DateTime issueDate;
+  DateTime validUpto;
+  String comment;
+  int? countryId;
+  int? visaTypeId;
 
-    factory StudentVisaResponseModel.fromJson(Map<String, dynamic> json) => StudentVisaResponseModel(
+  factory StudentVisaResponseModel.fromJson(Map<String, dynamic> json) =>
+      StudentVisaResponseModel(
         studentVisaId: json["StudentVisaId"],
         countryName: json["CountryName"],
         visaTypeName: json["VisaTypeName"],
@@ -39,11 +43,11 @@ class StudentVisaResponseModel {
         issueDate: DateTime.parse(json["IssueDate"]),
         validUpto: DateTime.parse(json["ValidUpto"]),
         comment: json["Comment"],
-        countryId: json["CountryId"],
-        visaTypeId: json["VisaTypeId"],
-    );
+        countryId: json["CountryId"] as int?,
+        visaTypeId: json["VisaTypeId"] as int?,
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "StudentVisaId": studentVisaId,
         "CountryName": countryName,
         "VisaTypeName": visaTypeName,
@@ -53,5 +57,5 @@ class StudentVisaResponseModel {
         "Comment": comment,
         "CountryId": countryId,
         "VisaTypeId": visaTypeId,
-    };
+      };
 }

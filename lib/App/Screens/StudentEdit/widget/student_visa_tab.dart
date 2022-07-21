@@ -9,6 +9,7 @@ import 'package:msm_unify/model/responseModek/type_dropdown_response_model.dart'
 import 'package:msm_unify/viewModel/country_dropdown_view_model.dart';
 import 'package:msm_unify/viewModel/student_visa_View_model.dart';
 
+import '../../../../viewModel/student_visa_view_model.dart';
 import '../../../../viewModel/type_dropdown_view_model.dart';
 import '../../../common/AppConfig/support_section.dart';
 import '../../../common/color_constant.dart';
@@ -18,8 +19,7 @@ class StudentVisaTab extends StatefulWidget {
   final int? studentId;
   final StudentViewResponseModel? data;
 
-  const StudentVisaTab(
-      {Key? key, this.countryId, this.studentId, this.data})
+  const StudentVisaTab({Key? key, this.countryId, this.studentId, this.data})
       : super(key: key);
 
   @override
@@ -1330,4 +1330,3 @@ class TableRow extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-

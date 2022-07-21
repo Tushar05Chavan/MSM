@@ -1734,7 +1734,7 @@ class _StudentEditScreenState extends State<StudentEditScreen>
                               StudentEducationTab(data: resp),
                               const StdTestScoreTab(),
                               StudentEditDocumentTabScreen(data: resp),
-                              const StudentVisaTab(),
+                              StudentVisaTab(data: resp),
                               //const StdInterestTab(),
                               StdApplicationScreen(data: resp),
                               StdNoteTab(data: resp),
