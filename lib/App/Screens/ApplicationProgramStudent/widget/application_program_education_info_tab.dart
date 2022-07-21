@@ -520,6 +520,9 @@ class _AppEducationTabState extends State<AppEducationTab> {
                                           CommonLanguage(
                                               selectedLanguage:
                                                   _selectedLanguage,
+                                              callBack: (value) {
+                                                _selectedLanguage = value;
+                                              },
                                               hintText:
                                                   "Primary Language of Instruction"),
                                           SizedBox(

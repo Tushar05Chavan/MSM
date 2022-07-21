@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/common_app_bar.dart';
+import 'package:msm_unify/App/common/AppConfig/CommonAppBar/widget/primery_button.dart';
 import 'package:msm_unify/App/common/AppConfig/CommonDrawer/widget/common_drawer.dart';
 import 'package:msm_unify/App/common/AppConfig/common_textfiled.dart';
-import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/get_user_task_type_response_model.dart';
 import 'package:msm_unify/model/responseModek/user_assignee_response_model.dart';
@@ -15,6 +15,7 @@ import 'package:msm_unify/viewModel/get_user_task_view_model.dart';
 import 'package:msm_unify/viewModel/user_assignee_view_model.dart';
 
 import '../../../model/responseModek/get_user_task_response_model.dart';
+import '../../common/AppConfig/support_section.dart';
 
 class NewUserTaskScreen extends StatefulWidget {
   const NewUserTaskScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class NewUserTaskScreen extends StatefulWidget {
 
 class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   String? _selectedCountry;
+  late final GetUserTaskResponseModel? data;
   final List<String> _country = [
     'Yemen',
     'India',
@@ -32,6 +34,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     "Afghanistan",
     "Argentina"
   ];
+  String dateFormate = 'DD/MM/YYYY';
 
   String? _selectedPartner;
   String? _selectedOwner;
@@ -76,6 +79,9 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final TextEditingController _fromDate = TextEditingController();
   final TextEditingController _toDate = TextEditingController();
+  final TextEditingController subject = TextEditingController();
+  final TextEditingController description = TextEditingController();
+
   bool _checkboxListTile = false;
   String? add;
   String? add1;
@@ -101,12 +107,23 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     _toDate.text = DateTime.now().toString();
     getUserAssignee();
     getUserTaskType();
+    getUserTask();
     // DateFormat.MMMd().format(_toDate).toString();
     super.initState();
   }
 
   final GetUserTaskViewModel _getUserTaskViewModel =
       Get.put(GetUserTaskViewModel());
+  List<GetUserTaskViewModel> getUsertask = [];
+  Future<void> getUserTask() async {
+    await _getUserTaskViewModel.getUserTaskViewModel();
+    List<GetUserTaskResponseModel> response =
+        _getUserTaskViewModel.apiResponse.data;
+    response.forEach((element) {
+      //getUsertask.add(element);
+    });
+    setState(() {});
+  }
 
   final GetUserTaskTypeViewModel _getUserTaskTypeViewModel =
       Get.put(GetUserTaskTypeViewModel());
@@ -123,50 +140,223 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _key,
-        endDrawer: commonDrawer(context),
-        body: SingleChildScrollView(
+    return Scaffold(
+      key: _key,
+      endDrawer: commonDrawer(context),
+      body: ListView(children: [
+        // buildPreferredSize(context, _key),
+        SearchBar(keyGlobal: _key),
+
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/back.svg',
+                  height: 22,
+                  width: 22,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                        color: kGrey5,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // buildPreferredSize(context, _key),
-              SearchBar(keyGlobal: _key),
+              const Text(
+                'User Tasks',
+                style: TextStyle(
+                  color: kNavy,
+                  fontSize: 21,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                      hint: const Text("All"),
+                      value: _selectedAssignee,
+                      items: assignee.map((assignee) {
+                        return DropdownMenuItem(
+                            value: assignee.userId.toString(),
+                            child: Text(
+                              assignee.displayName.toString(),
+                              style: const TextStyle(
+                                  color: kGrey4,
+                                  fontFamily: "Roboto",
+                                  fontSize: 13),
+                            ));
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedAssignee = newValue as String?;
+                        });
+                      }),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                controller: _fromDate,
+                validator: (date) {
+                  if (date != null) {
+                    return "Enter valid date";
+                  }
+                },
+                cursorColor: kRed,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.today),
+                      onPressed: () async {
+                        DateTime date = DateTime(1900);
+                        FocusScope.of(context).requestFocus(FocusNode());
+
+                        date = (await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime.now()))!;
+                        _fromDate.text = date.toString();
+                      },
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: Colors.black,
+                        )),
+                    hintStyle: TextStyle(
+                        color: Colors.black.withOpacity(0.2),
+                        fontFamily: 'Roboto'),
+                    hintText: 'From Date',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              Text(
+                dateFormate,
+                style: TextStyle(
+                  color: Color(0xff808080),
+                  fontFamily: 'Roboto',
+                  fontSize: 11,
+                ),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              TextFormField(
+                controller: _toDate,
+                validator: (date) {
+                  if (date != null) {
+                    return "Enter valid date";
+                  }
+                },
+                cursorColor: kRed,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.today),
+                      onPressed: () async {
+                        DateTime date = DateTime(1900);
+                        FocusScope.of(context).requestFocus(FocusNode());
+
+                        date = (await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime.now()))!;
+                        _toDate.text = date.toString();
+                      },
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          color: Colors.black,
+                        )),
+                    hintStyle: TextStyle(
+                        color: Colors.black.withOpacity(0.2),
+                        fontFamily: 'Roboto'),
+                    hintText: '02/06/2022',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
+              Text(
+                dateFormate,
+                style: TextStyle(
+                  color: Color(0xff808080),
+                  fontFamily: 'Roboto',
+                  fontSize: 11,
+                ),
+              ),
+              const SizedBox(
+                height: 7,
+              ),
               const SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/back.svg',
-                        height: 22,
-                        width: 22,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Back',
-                        style: TextStyle(
-                            color: kGrey5,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16),
-                      ),
-                    ],
+              InkWell(
+                onTap: () {
+                  _getUserTaskViewModel.getUserTaskViewModel(
+                      toDate: _toDate.text,
+                      assignedTo: _selectedAssignee == null
+                          ? 81
+                          : int.parse(_selectedAssignee.toString()),
+                      fromDate: _fromDate.text);
+                  setState(() {});
+                },
+                child: Container(
+                  height: Get.height * 0.04,
+                  width: Get.width * 0.20,
+                  decoration: BoxDecoration(
+                    color: kGreen1,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Search',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontFamily: 'Poppins'),
+                    ),
                   ),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
+<<<<<<< HEAD
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -372,6 +562,32 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                               width: Get.width,
                                               child: SingleChildScrollView(
                                                 child: Column(
+=======
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SimpleDialog(
+                                    shape: RoundedRectangleBorder(
+                                        side: const BorderSide(
+                                            color: Color(0xffe8252a)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    children: [
+                                      Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Container(
+                                            height: Get.height * 0.70,
+                                            width: Get.width,
+                                            child: SingleChildScrollView(
+                                              child: Column(
+>>>>>>> 4873ebcf8514de50e045d583f66e23a069fc0f9b
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
@@ -752,8 +968,8 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                     const SizedBox(
                                                       height: 7,
                                                     ),
-                                                    const Text(
-                                                      'DD/MM/YYYY',
+                                                    Text(
+                                                      dateFormate,
                                                       style: TextStyle(
                                                         color:
                                                             Color(0xff808080),
@@ -924,6 +1140,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                           DateTime(
                                                                               1900),
                                                                       lastDate:
+<<<<<<< HEAD
                                                                           DateTime(
                                                                               2024)))!;
                                                                   _fromDate
@@ -931,6 +1148,13 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                       formatter
                                                                           .format(
                                                                               date);
+=======
+                                                                          DateTime
+                                                                              .now()))!;
+                                                                  // _fromDate.text =
+                                                                  //     formatter
+                                                                  //         .format(date);
+>>>>>>> 4873ebcf8514de50e045d583f66e23a069fc0f9b
                                                                 },
                                                               ),
                                                               focusedBorder:
@@ -960,23 +1184,20 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                             15),
                                                               )),
                                                     ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    const Text(
-                                                      'DD/MM/YYYY',
-                                                      style: TextStyle(
-                                                        color:
-                                                            Color(0xff808080),
-                                                        fontFamily: 'Roboto',
-                                                        fontSize: 11,
+                                                    const SizedBox(height: 20),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 8),
+                                                      child: Text(
+                                                        dateFormate,
+                                                        style: TextStyle(
+                                                            color: Color(
+                                                                0xff808080),
+                                                            fontFamily:
+                                                                'Roboto',
+                                                            fontSize: 10),
                                                       ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
                                                     ),
                                                     CheckboxListTile(
                                                       activeColor:
@@ -994,575 +1215,692 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                         });
                                                       },
                                                     ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      child: Container(
-                                                        height:
-                                                            Get.height * 0.04,
-                                                        width: Get.width * 0.20,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: kRedLight,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        child: const Center(
-                                                          child: Text(
-                                                            'Add',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
+                                                    const SizedBox(height: 7),
+                                                    PrimeryButton(
+                                                        callBack: () {
+                                                          Map<String, dynamic>
+                                                              _map = {
+                                                            "TaskId": 0,
+                                                            "ParentId": null,
+                                                            "ParentType": 3,
+                                                            "TaskSubject":
+                                                                "abcd",
+                                                            "DueDate":
+                                                                "2022-07-20T19:12:20.333Z",
+                                                            "minDueDate":
+                                                                "2022-07-20T19:12:20.333Z",
+                                                            "TaskStatus": 1,
+                                                            "NoOfEmail": null,
+                                                            "TaskPriority": 0,
+                                                            "TaskDescription":
+                                                                "description txt",
+                                                            "ReminderDate": "",
+                                                            "minReminderDate":
+                                                                "",
+                                                            "maxReminderDate":
+                                                                "",
+                                                            "isRecurring":
+                                                                false,
+                                                            "RecurringMode": -1,
+                                                            "RecurranceStart":
+                                                                "",
+                                                            "minRecurranceStart":
+                                                                "",
+                                                            "RecurranceEnd": "",
+                                                            "minRecurranceEnd":
+                                                                "",
+                                                            "AssignedTo": 81,
+                                                            "TaskOwner": 81,
+                                                            "TaskResponse": "",
+                                                            "TaskType": 27,
+                                                            "DueHours": "00",
+                                                            "DueMinutes": "01",
+                                                            "ActualHours": null,
+                                                            "ActualMinutes":
+                                                                null
+                                                          };
+                                                        },
+                                                        title: 'Add',
+                                                        color: kRedLight)
+                                                  ]),
                                             ),
-                                          )
-                                        ],
-                                      );
-                                    });
-                              },
-                              child: Container(
-                                height: Get.height * 0.04,
-                                width: Get.width * 0.30,
-                                decoration: BoxDecoration(
-                                  color: kGreen1,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: const [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      "Add Task",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Poppins',
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
+                                          ))
+                                    ]);
+                              });
+                        },
+                        child: Container(
+                          height: Get.height * 0.04,
+                          width: Get.width * 0.30,
+                          decoration: BoxDecoration(
+                            color: kGreen1,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: const [
+                              Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                "Add Task",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12,
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 10),
-                            SvgPicture.asset('assets/icons/Filter.svg'),
-                            const SizedBox(width: 10),
-                            SvgPicture.asset('assets/icons/XLSX.svg'),
-                          ],
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Column(
-                      children: [
-                        GetBuilder<GetUserTaskViewModel>(
-                          builder: (controller) {
-                            if (controller.apiResponse.status ==
-                                Status.COMPLETE) {
-                              List<GetUserTaskResponseModel> response =
-                                  controller.apiResponse.data;
+                      ),
+                      const SizedBox(width: 10),
+                      SvgPicture.asset('assets/icons/Filter.svg'),
+                      const SizedBox(width: 10),
+                      SvgPicture.asset('assets/icons/XLSX.svg'),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
+                children: [
+                  GetBuilder<GetUserTaskViewModel>(
+                    builder: (controller) {
+                      if (controller.apiResponse.status == Status.COMPLETE) {
+                        List<GetUserTaskResponseModel> response =
+                            controller.apiResponse.data;
 
-                              return PaginatedDataTable(
-                                  onRowsPerPageChanged: (perPage) {},
-                                  columnSpacing: 0,
-                                  availableRowsPerPage: [5],
-                                  rowsPerPage: 5,
-                                  dataRowHeight: Get.height * 0.08,
-                                  headingRowHeight: Get.height * 0.08,
-                                  horizontalMargin: 1,
-                                  columns: [
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.25,
-                                            width: Get.width * 0.33,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Owner',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: const Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.10,
-                                            width: Get.width * 0.33,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Type',
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    softWrap: false,
-                                                    style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                    DataColumn(
-                                      label: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 2),
-                                        height: Get.height * 0.10,
-                                        width: Get.width * 0.33,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xffF5F5F5),
-                                            border: Border.all(
-                                                color: Colors.white, width: 2)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            InkWell(
+                        return PaginatedDataTable(
+                            onRowsPerPageChanged: (perPage) {},
+                            columnSpacing: 0,
+                            availableRowsPerPage: [5],
+                            rowsPerPage: 5,
+                            dataRowHeight: Get.height * 0.08,
+                            headingRowHeight: Get.height * 0.08,
+                            horizontalMargin: 1,
+                            columns: [
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.25,
+                                      width: Get.width * 0.33,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Owner',
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
                                               onTap: () {
                                                 setState(() {
                                                   // colorsValue = true;
                                                   Future.delayed(
-                                                      const Duration(
-                                                          seconds: 2), () {
+                                                      Duration(seconds: 1), () {
                                                     // colorsValue = false;
                                                     setState(() {});
                                                   });
                                                 });
                                               },
-                                              child: const Text(
-                                                'Subject',
-                                                style: TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  color: Colors.black,
-                                                ),
+                                              // onTap: () {},
+                                              child: const Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.33,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Type',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              softWrap: false,
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
                                               ),
                                             ),
-                                            InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // colorsValue = true;
-                                                    Future.delayed(
-                                                        Duration(seconds: 1),
-                                                        () {
-                                                      // colorsValue = false;
-                                                      setState(() {});
-                                                    });
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
                                                   });
-                                                },
-                                                // onTap: () {},
-                                                child: Icon(
-                                                  Icons.filter_list,
-                                                  color: Colors.black,
-                                                ))
-                                          ],
+                                                });
+                                              },
+                                              // onTap: () {},
+                                              child: Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.33,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            // colorsValue = true;
+                                            Future.delayed(
+                                                const Duration(seconds: 2), () {
+                                              // colorsValue = false;
+                                              setState(() {});
+                                            });
+                                          });
+                                        },
+                                        child: const Text(
+                                          'Subject',
+                                          style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.10,
-                                            width: Get.width * 0.40,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Activity Count',
+                                      InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              // colorsValue = true;
+                                              Future.delayed(
+                                                  Duration(seconds: 1), () {
+                                                // colorsValue = false;
+                                                setState(() {});
+                                              });
+                                            });
+                                          },
+                                          // onTap: () {},
+                                          child: Icon(
+                                            Icons.filter_list,
+                                            color: Colors.black,
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.40,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Activity Count',
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      const Duration(
+                                                          seconds: 1), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
+                                                  });
+                                                });
+                                              },
+                                              // onTap: () {},
+                                              child: const Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.40,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Due Date',
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
+                                                  });
+                                                });
+                                              },
+                                              // onTap: () {},
+                                              child: Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.40,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Status',
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
+                                                  });
+                                                });
+                                              },
+                                              // onTap: () {},
+                                              child: Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.40,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    const Duration(seconds: 2),
+                                                    () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            child: const Text(
+                                              'Priority',
+                                              style: TextStyle(
+                                                fontFamily: 'Roboto',
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      Duration(seconds: 1), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
+                                                  });
+                                                });
+                                              },
+                                              // onTap: () {},
+                                              child: Icon(
+                                                Icons.filter_list,
+                                                color: Colors.black,
+                                              ))
+                                        ],
+                                      ))),
+                            ],
+                            source: TableRow(response));
+                      } else {
+                        if (controller.apiResponse.status == Status.ERROR) {
+                          return const Center(
+                            child: Text('No Data Found'),
+                          );
+                        }
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: Container(
+                  height: Get.height * 0.08,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black.withOpacity(0.2)),
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SvgPicture.asset(
+                        'assets/icons/Filter.svg',
+                        height: 30,
+                        width: 30,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  actions: [
+                                    Stack(
+                                      children: [
+                                        SizedBox(
+                                          height: Get.height * 0.80,
+                                          width: Get.width,
+                                          child: StatefulBuilder(
+                                            builder: (BuildContext context,
+                                                void Function(void Function())
+                                                    setState) {
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const Text(
+                                                    'Filter Builder',
                                                     style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: 22,
+                                                        color: Colors.black),
                                                   ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            const Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: const Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.10,
-                                            width: Get.width * 0.40,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Due Date',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
+                                                  SizedBox(
+                                                    height: Get.height * 0.04,
                                                   ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.10,
-                                            width: Get.width * 0.40,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Status',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
+                                                  Divider(),
+                                                  SizedBox(
+                                                    height: Get.height * 0.04,
                                                   ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                    DataColumn(
-                                        label: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2),
-                                            height: Get.height * 0.10,
-                                            width: Get.width * 0.40,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xffF5F5F5),
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      // colorsValue = true;
-                                                      Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        // colorsValue = false;
-                                                        setState(() {});
-                                                      });
-                                                    });
-                                                  },
-                                                  child: const Text(
-                                                    'Priority',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        // colorsValue = true;
-                                                        Future.delayed(
-                                                            Duration(
-                                                                seconds: 1),
-                                                            () {
-                                                          // colorsValue = false;
-                                                          setState(() {});
-                                                        });
-                                                      });
-                                                    },
-                                                    // onTap: () {},
-                                                    child: Icon(
-                                                      Icons.filter_list,
-                                                      color: Colors.black,
-                                                    ))
-                                              ],
-                                            ))),
-                                  ],
-                                  source: TableRow(response));
-                            } else {
-                              if (controller.apiResponse.status ==
-                                  Status.ERROR) {
-                                return const Center(
-                                  child: Text('No Data Found'),
-                                );
-                              }
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2),
-                      child: Container(
-                        height: Get.height * 0.08,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.black.withOpacity(0.2)),
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            SvgPicture.asset(
-                              'assets/icons/Filter.svg',
-                              height: 30,
-                              width: 30,
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        actions: [
-                                          Stack(
-                                            children: [
-                                              SizedBox(
-                                                height: Get.height * 0.80,
-                                                width: Get.width,
-                                                child: StatefulBuilder(
-                                                  builder: (BuildContext
-                                                          context,
-                                                      void Function(
-                                                              void Function())
-                                                          setState) {
-                                                    return Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          'Filter Builder',
-                                                          style: TextStyle(
-                                                              fontFamily:
-                                                                  'Roboto',
-                                                              fontSize: 22,
-                                                              color:
-                                                                  Colors.black),
+                                                  Row(
+                                                    children: [
+                                                      PopupMenuButton(
+                                                          child: Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors.red
+                                                                  .withOpacity(
+                                                                      0.2),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                            ),
+                                                            child: Text(
+                                                                add.toString()),
+                                                          ),
+                                                          itemBuilder:
+                                                              (context) => [
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          add =
+                                                                              'Not And';
+                                                                        });
+                                                                      },
+                                                                      child: const Text(
+                                                                          'Not And'),
+                                                                    ),
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          add =
+                                                                              'or';
+                                                                        });
+                                                                      },
+                                                                      child: const Text(
+                                                                          'or'),
+                                                                    ),
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          add =
+                                                                              'Not or';
+                                                                        });
+                                                                      },
+                                                                      child: const Text(
+                                                                          'Not or'),
+                                                                    ),
+                                                                    PopupMenuItem(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          add =
+                                                                              'And';
+                                                                        });
+                                                                      },
+                                                                      child: const Text(
+                                                                          'And'),
+                                                                    ),
+                                                                  ]),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      PopupMenuButton(
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10),
+                                                          child: Text(
+                                                            "+",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .green
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                fontSize: 25),
+                                                          ),
                                                         ),
-                                                        SizedBox(
-                                                          height:
-                                                              Get.height * 0.04,
-                                                        ),
-                                                        Divider(),
-                                                        SizedBox(
-                                                          height:
-                                                              Get.height * 0.04,
-                                                        ),
-                                                        Row(
+                                                        itemBuilder:
+                                                            (context) => [
+                                                          PopupMenuItem(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                _addCondition =
+                                                                    true;
+                                                              });
+                                                            },
+                                                            child: const Text(
+                                                                'Add Condition'),
+                                                          ),
+                                                          PopupMenuItem(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                _addGroup =
+                                                                    true;
+                                                              });
+                                                            },
+                                                            child: const Text(
+                                                                'Add Group'),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  _addGroup == true
+                                                      ? Row(
                                                           children: [
+                                                            const SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  _addGroup =
+                                                                      false;
+                                                                });
+                                                              },
+                                                              child: const Icon(
+                                                                Icons.close,
+                                                                color:
+                                                                    Colors.red,
+                                                                size: 25,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
                                                             PopupMenuButton(
                                                                 child:
                                                                     Container(
@@ -1579,7 +1917,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                         BorderRadius.circular(
                                                                             10),
                                                                   ),
-                                                                  child: Text(add
+                                                                  child: Text(add1
                                                                       .toString()),
                                                                 ),
                                                                 itemBuilder:
@@ -1589,7 +1927,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                             onTap:
                                                                                 () {
                                                                               setState(() {
-                                                                                add = 'Not And';
+                                                                                add1 = 'Not And';
                                                                               });
                                                                             },
                                                                             child:
@@ -1599,7 +1937,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                             onTap:
                                                                                 () {
                                                                               setState(() {
-                                                                                add = 'or';
+                                                                                add1 = 'or';
                                                                               });
                                                                             },
                                                                             child:
@@ -1609,7 +1947,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                             onTap:
                                                                                 () {
                                                                               setState(() {
-                                                                                add = 'Not or';
+                                                                                add1 = 'Not or';
                                                                               });
                                                                             },
                                                                             child:
@@ -1619,7 +1957,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                             onTap:
                                                                                 () {
                                                                               setState(() {
-                                                                                add = 'And';
+                                                                                add1 = 'And';
                                                                               });
                                                                             },
                                                                             child:
@@ -1661,10 +1999,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                 PopupMenuItem(
                                                                   onTap: () {
                                                                     setState(
-                                                                        () {
-                                                                      _addGroup =
-                                                                          true;
-                                                                    });
+                                                                        () {});
                                                                   },
                                                                   child: const Text(
                                                                       'Add Group'),
@@ -1672,322 +2007,199 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                               ],
                                                             ),
                                                           ],
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        _addGroup == true
-                                                            ? Row(
-                                                                children: [
-                                                                  const SizedBox(
-                                                                    width: 5,
-                                                                  ),
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      setState(
-                                                                          () {
-                                                                        _addGroup =
-                                                                            false;
-                                                                      });
-                                                                    },
-                                                                    child:
-                                                                        const Icon(
-                                                                      Icons
-                                                                          .close,
-                                                                      color: Colors
-                                                                          .red,
-                                                                      size: 25,
-                                                                    ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  PopupMenuButton(
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            const EdgeInsets.all(10),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color: Colors
-                                                                              .red
-                                                                              .withOpacity(0.2),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10),
-                                                                        ),
-                                                                        child: Text(
-                                                                            add1.toString()),
-                                                                      ),
-                                                                      itemBuilder:
-                                                                          (context) =>
-                                                                              [
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'Not And';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('Not And'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'or';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('or'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'Not or';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('Not or'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'And';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('And'),
-                                                                                ),
-                                                                              ]),
-                                                                  const SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  PopupMenuButton(
-                                                                    child:
-                                                                        Container(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
-                                                                              10),
-                                                                      child:
-                                                                          Text(
-                                                                        "+",
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.green.withOpacity(0.5),
-                                                                            fontSize: 25),
-                                                                      ),
-                                                                    ),
-                                                                    itemBuilder:
-                                                                        (context) =>
-                                                                            [
-                                                                      PopupMenuItem(
-                                                                        onTap:
-                                                                            () {
-                                                                          setState(
-                                                                              () {
-                                                                            _addCondition =
-                                                                                true;
-                                                                          });
-                                                                        },
-                                                                        child: const Text(
-                                                                            'Add Condition'),
-                                                                      ),
-                                                                      PopupMenuItem(
-                                                                        onTap:
-                                                                            () {
-                                                                          setState(
-                                                                              () {});
-                                                                        },
-                                                                        child: const Text(
-                                                                            'Add Group'),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              )
-                                                            : const SizedBox(),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        _addCondition == true
-                                                            ? Row(
-                                                                children: [
-                                                                  const SizedBox(
-                                                                    width: 5,
-                                                                  ),
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      setState(
-                                                                          () {
-                                                                        _addCondition =
-                                                                            false;
-                                                                      });
-                                                                    },
-                                                                    child:
-                                                                        const Icon(
-                                                                      Icons
-                                                                          .close,
-                                                                      color: Colors
-                                                                          .red,
-                                                                      size: 25,
-                                                                    ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  PopupMenuButton(
-                                                                      child:
-                                                                          Container(
-                                                                        padding:
-                                                                            const EdgeInsets.all(10),
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color: Colors
-                                                                              .red
-                                                                              .withOpacity(0.2),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10),
-                                                                        ),
-                                                                        child: Text(
-                                                                            add1.toString()),
-                                                                      ),
-                                                                      itemBuilder:
-                                                                          (context) =>
-                                                                              [
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'Not And';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('Not And'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'or';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('or'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'Not or';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('Not or'),
-                                                                                ),
-                                                                                PopupMenuItem(
-                                                                                  onTap: () {
-                                                                                    setState(() {
-                                                                                      add1 = 'And';
-                                                                                    });
-                                                                                  },
-                                                                                  child: const Text('And'),
-                                                                                ),
-                                                                              ]),
-                                                                  const SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  Container(
-                                                                    padding:
-                                                                        const EdgeInsets.all(
+                                                        )
+                                                      : const SizedBox(),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  _addCondition == true
+                                                      ? Row(
+                                                          children: [
+                                                            const SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                setState(() {
+                                                                  _addCondition =
+                                                                      false;
+                                                                });
+                                                              },
+                                                              child: const Icon(
+                                                                Icons.close,
+                                                                color:
+                                                                    Colors.red,
+                                                                size: 25,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            PopupMenuButton(
+                                                                child:
+                                                                    Container(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(10),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Colors
+                                                                        .red
+                                                                        .withOpacity(
+                                                                            0.2),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
                                                                             10),
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: Colors
-                                                                          .green
-                                                                          .withOpacity(
-                                                                              0.5),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                    ),
-                                                                    child: Text(
-                                                                        'Contains'),
                                                                   ),
-                                                                ],
-                                                              )
-                                                            : SizedBox(),
-                                                      ],
-                                                    );
-                                                  },
+                                                                  child: Text(add1
+                                                                      .toString()),
+                                                                ),
+                                                                itemBuilder:
+                                                                    (context) =>
+                                                                        [
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                add1 = 'Not And';
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('Not And'),
+                                                                          ),
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                add1 = 'or';
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('or'),
+                                                                          ),
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                add1 = 'Not or';
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('Not or'),
+                                                                          ),
+                                                                          PopupMenuItem(
+                                                                            onTap:
+                                                                                () {
+                                                                              setState(() {
+                                                                                add1 = 'And';
+                                                                              });
+                                                                            },
+                                                                            child:
+                                                                                const Text('And'),
+                                                                          ),
+                                                                        ]),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Container(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(10),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .green
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                              ),
+                                                              child: Text(
+                                                                  'Contains'),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      : SizedBox(),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 5,
+                                          bottom: 5,
+                                          child: Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text(
+                                                  'OK',
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 16),
                                                 ),
                                               ),
-                                              Positioned(
-                                                right: 5,
-                                                bottom: 5,
-                                                child: Row(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.back();
-                                                      },
-                                                      child: const Text(
-                                                        'OK',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 16),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 25,
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.back();
-                                                      },
-                                                      child: const Text(
-                                                        'CANCEL',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 16),
-                                                      ),
-                                                    ),
-                                                  ],
+                                              const SizedBox(
+                                                width: 25,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text(
+                                                  'CANCEL',
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 16),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      );
-                                    });
-                              },
-                              child: const Text(
-                                "Create Filter",
-                                style: TextStyle(
-                                  color: Color(0xffe8252a),
-                                  fontFamily: 'Roboto',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        child: const Text(
+                          "Create Filter",
+                          style: TextStyle(
+                            color: Color(0xffe8252a),
+                            fontFamily: 'Roboto',
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.030,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Row(
-                children: const [
-                  Text(
-                    'Number of items: 21',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontFamily: 'Poppins'),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: Get.height * 0.025,
+                height: Get.height * 0.030,
               ),
-              supportSection()
             ],
           ),
         ),
-      ),
+        Row(
+          children: const [
+            Text(
+              'Number of items: 21',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 16, color: Colors.black, fontFamily: 'Poppins'),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.height * 0.025,
+        ),
+        supportSection()
+      ]),
     );
   }
 }

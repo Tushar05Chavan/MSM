@@ -27,8 +27,6 @@ class APIService {
     Map<String, String> header = {
       "Referer": "localhost:4200",
       "Authorization": "${Get.find<AppData>().loginResponseModel.token}",
-      // "Authorization":
-      //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIzMTUiLCJVc2VyTmFtZSI6ImluZm9lZHVnbG9iYWwub3JnQGdtYWlsLmNvbSIsIlVQYXNzd29yZCI6IkVMdyswbzBYYnRrcWpuYXpwMUU4SVE9PSIsIlJvbGVJZCI6IjIiLCJSb2xlVHlwZSI6IjAiLCJSZWZJZCI6Ijk3MDEiLCJHZW5lcmF0ZWRPbiI6IjYvMjAvMjAyMiA4OjI2OjAyIEFNIiwiSXNzdWVUbyI6Imh0dHBzOi8vYXBwLm1zbXVuaWZ5LmNvbSIsIlByb3ZpZGVySWQiOiIiLCJQcm92aWRlck5hbWUiOiIiLCJWZXJpZmljYXRpb25TdGF0dXMiOiIxIiwiUGFydG5lclR5cGVJZCI6IjMiLCJuYmYiOjE2NTU3MTM1NjIsImV4cCI6MTY1NTcyNDM2MiwiaWF0IjoxNjU1NzEzNTYyfQ.MjQU7UJwaPsFjKZvCzOxbSWVk4dJKEbRIpHLRxES01c",
       "Content-Type": "application/json"
     };
 

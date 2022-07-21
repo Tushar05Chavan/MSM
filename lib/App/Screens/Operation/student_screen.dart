@@ -45,7 +45,7 @@ class _StudentListScreenState extends State<StudentListScreen> {
   final TextEditingController _search = TextEditingController();
   @override
   void initState() {
-    _studentListViewModel.studentListViewModel();
+    _studentListViewModel.studentListViewModel(keyword: '');
     super.initState();
   }
 

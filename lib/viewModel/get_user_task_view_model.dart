@@ -30,16 +30,12 @@ class GetUserTaskViewModel extends GetxController {
 
 
 
-    Future<void> addUserTaskViewModel(
-      {int? assignedTo, String? fromDate, String? toDate}) async {
+    Future<void> addTaskViewModel(
+      {required Map<String, dynamic> map}) async {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     update();
     try {
-      List<GetUserTaskResponseModel> response = await GetUserTaskRepo()
-          .getUserTaskRepo(
-              assignedTo: assignedTo, fromDate: fromDate, toDate: toDate);
-      print('GetUserTaskResponseModel=>${response}');
-      _apiResponse = ApiResponse.complete(response);
+      bool response = await GetUserTaskRepo.addTaskRepo(map: map);
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');

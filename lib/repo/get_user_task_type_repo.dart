@@ -7,10 +7,13 @@ import 'package:msm_unify/services/api_url.dart';
 
 class GetUserTaskTypeRepo extends ApiURLService {
   Future<List<GetUserTaskTypeResponseModel>> getUserTaskTypeRepo() async {
-    var response = await APIService().getResponse(
-      url: "${BaseUrl.baseUrl}/Task/GetTaskType",
-      apitype: APIType.aGet,
-    );
+    var response;
+    String url = "https://unify-qa-api.azurewebsites.net/Task/GetTaskType";
+    await APIService()
+        .getResponse(url: url, apitype: APIType.aGet)
+        .then((value) {
+      response = value;
+    });
     List<GetUserTaskTypeResponseModel> getUserTaskTypeResponseModel =
         getUserTaskTypeResponseModelFromJson(jsonEncode(response));
     print('=========jjjj${getUserTaskTypeResponseModel.first}');

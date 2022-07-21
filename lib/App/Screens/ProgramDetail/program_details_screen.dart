@@ -906,7 +906,7 @@ class _ProgramDetailScreenState extends State<ProgramDetailScreen> {
               ),
             ),
           );
-        } else {
+      } else {
           if (controller.apiResponse.status == Status.ERROR) {
             return const Center(
               child: Scaffold(
