@@ -7,7 +7,6 @@ import 'package:msm_unify/model/responseModek/student_view_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_visa_response_model.dart';
 import 'package:msm_unify/model/responseModek/type_dropdown_response_model.dart';
 import 'package:msm_unify/viewModel/country_dropdown_view_model.dart';
-import 'package:msm_unify/viewModel/student_visa_View_model.dart';
 
 import '../../../../viewModel/student_visa_view_model.dart';
 import '../../../../viewModel/type_dropdown_view_model.dart';
