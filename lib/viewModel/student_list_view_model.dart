@@ -16,7 +16,7 @@ class StudentListViewModel extends GetxController {
     _apiResponse = ApiResponse.loading(message: 'Loading');
     try {
       StudentListResponseModel response =
-          await StudentListRepo.studentListRepo();
+          await StudentListRepo.studentListRepo(keyword: keyword??'');
       print('studentListViewModel=>${response}');
       _apiResponse = ApiResponse.complete(response);
       update();

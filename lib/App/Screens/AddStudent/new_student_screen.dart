@@ -1680,7 +1680,10 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                     },
                                                     "emergencyInfo": {}
                                                   };
-
+                                                    
+                                                    setState(() {
+                                                      _addNewStudentViewModel.clicked = true;
+                                                    });
                                                   bool milan =
                                                       await AddNewStudentRepo
                                                           .addNewStudentRepo(
@@ -1697,7 +1700,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                   }
                                                 }
                                               },
-                                              child: Container(
+                                              child: !_addNewStudentViewModel.clicked ? Container(
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 20),
@@ -1716,7 +1719,7 @@ class _NewStudentScreenState extends State<NewStudentScreen> {
                                                         fontSize: 11),
                                                   ),
                                                 ),
-                                              ),
+                                              ): CircularProgressIndicator()
                                             ),
                                           ],
                                         ),

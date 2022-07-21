@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/model/responseModek/country_dropdown_response_model.dart';
+import 'package:msm_unify/model/responseModek/student_view_response_model.dart';
+import 'package:msm_unify/model/responseModek/student_visa_response_model.dart';
 import 'package:msm_unify/model/responseModek/type_dropdown_response_model.dart';
 import 'package:msm_unify/viewModel/country_dropdown_view_model.dart';
+import 'package:msm_unify/viewModel/student_visa_View_model.dart';
 
 import '../../../../viewModel/type_dropdown_view_model.dart';
 import '../../../common/AppConfig/support_section.dart';
@@ -11,8 +15,12 @@ import '../../../common/color_constant.dart';
 
 class StudentVisaTab extends StatefulWidget {
   final int? countryId;
+  final int? studentId;
+  final StudentViewResponseModel? data;
 
-  const StudentVisaTab({Key? key, this.countryId}) : super(key: key);
+  const StudentVisaTab(
+      {Key? key, this.countryId, this.studentId, this.data})
+      : super(key: key);
 
   @override
   State<StudentVisaTab> createState() => _StudentVisaTabState();
@@ -40,6 +48,8 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
 
   final CountryDropViewModel countryDropViewModel =
       Get.put(CountryDropViewModel());
+
+  final StudentVisaViewModel studentVisa = Get.put(StudentVisaViewModel());
 
   String? _selectedCountryEducation;
   List<CountryDropResponseModel> countries = [];
@@ -73,6 +83,8 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
   void initState() {
     getType();
     getCountry();
+    studentVisa.studentVisaViewModel(
+        studentId: widget.data!.genInfo!.studentId);
     super.initState();
   }
 
@@ -375,83 +387,37 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
               SizedBox(
                 height: Get.height * 0.025,
               ),
-              Column(
-                children: [
-                  PaginatedDataTable(
-                      onRowsPerPageChanged: (perPage) {},
-                      columnSpacing: 0,
-                      rowsPerPage: 10,
-                      dataRowHeight: Get.height * 0.05,
-                      headingRowHeight: Get.height * 0.08,
-                      horizontalMargin: 1,
-                      columns: [
-                        DataColumn(
-                          label: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            height: Get.height * 0.10,
-                            width: Get.width * 0.43,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF5F5F5),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      // colorsValue = true;
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () {
-                                        // colorsValue = false;
-                                        setState(() {});
-                                      });
-                                    });
-                                  },
-                                  child: const Text(
-                                    'Country',
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        // colorsValue = true;
-                                        Future.delayed(Duration(seconds: 1),
-                                            () {
-                                          // colorsValue = false;
-                                          setState(() {});
-                                        });
-                                      });
-                                    },
-                                    // onTap: () {},
-                                    child: Icon(
-                                      Icons.filter_list,
-                                      color: Colors.black,
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                            label: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 2),
-                                height: Get.height * 0.10,
-                                width: Get.width * 0.43,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffF5F5F5),
-                                    border: Border.all(
-                                        color: Colors.white, width: 2)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      child: InkWell(
+              GetBuilder<StudentVisaViewModel>(
+                builder: (controller) {
+                  if (controller.apiResponse.status == Status.COMPLETE) {
+                    List<StudentVisaResponseModel> resp =
+                        controller.apiResponse.data;
+
+                    return Column(
+                      children: [
+                        PaginatedDataTable(
+                            onRowsPerPageChanged: (perPage) {},
+                            columnSpacing: 0,
+                            rowsPerPage: 10,
+                            dataRowHeight: Get.height * 0.05,
+                            headingRowHeight: Get.height * 0.08,
+                            horizontalMargin: 1,
+                            columns: [
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.43,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
                                         onTap: () {
                                           setState(() {
                                             // colorsValue = true;
@@ -463,19 +429,14 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                           });
                                         },
                                         child: const Text(
-                                          'Type',
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          softWrap: false,
+                                          'Country',
                                           style: TextStyle(
                                             fontFamily: 'Roboto',
                                             color: Colors.black,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Flexible(
-                                      child: InkWell(
+                                      InkWell(
                                           onTap: () {
                                             setState(() {
                                               // colorsValue = true;
@@ -490,210 +451,290 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                           child: Icon(
                                             Icons.filter_list,
                                             color: Colors.black,
-                                          )),
-                                    )
-                                  ],
-                                ))),
-                        DataColumn(
-                          label: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            height: Get.height * 0.10,
-                            width: Get.width * 0.53,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF5F5F5),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        // colorsValue = true;
-                                        Future.delayed(
-                                            const Duration(seconds: 2), () {
-                                          // colorsValue = false;
-                                          setState(() {});
-                                        });
-                                      });
-                                    },
-                                    child: const Text(
-                                      'Status',
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          // colorsValue = true;
-                                          Future.delayed(Duration(seconds: 1),
-                                              () {
-                                            // colorsValue = false;
-                                            setState(() {});
-                                          });
-                                        });
-                                      },
-                                      // onTap: () {},
-                                      child: const Icon(
-                                        Icons.filter_list,
-                                        color: Colors.black,
-                                      )),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            height: Get.height * 0.10,
-                            width: Get.width * 0.73,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF5F5F5),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        // colorsValue = true;
-                                        Future.delayed(
-                                            const Duration(seconds: 2), () {
-                                          // colorsValue = false;
-                                          setState(() {});
-                                        });
-                                      });
-                                    },
-                                    child: const Text(
-                                      'Issue Date',
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          // colorsValue = true;
-                                          Future.delayed(Duration(seconds: 1),
-                                              () {
-                                            // colorsValue = false;
-                                            setState(() {});
-                                          });
-                                        });
-                                      },
-                                      // onTap: () {},
-                                      child: Icon(
-                                        Icons.filter_list,
-                                        color: Colors.black,
-                                      )),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            height: Get.height * 0.10,
-                            width: Get.width * 0.43,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF5F5F5),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        // colorsValue = true;
-                                        Future.delayed(
-                                            const Duration(seconds: 2), () {
-                                          // colorsValue = false;
-                                          setState(() {});
-                                        });
-                                      });
-                                    },
-                                    child: const Text(
-                                      'Valid Date',
-                                      style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          // colorsValue = true;
-                                          Future.delayed(Duration(seconds: 1),
-                                              () {
-                                            // colorsValue = false;
-                                            setState(() {});
-                                          });
-                                        });
-                                      },
-                                      // onTap: () {},
-                                      child: Icon(
-                                        Icons.filter_list,
-                                        color: Colors.black,
-                                      )),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            height: Get.height * 0.10,
-                            width: Get.width * 0.43,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffF5F5F5),
-                                border:
-                                    Border.all(color: Colors.white, width: 2)),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  // colorsValue = true;
-                                  Future.delayed(const Duration(seconds: 2),
-                                      () {
-                                    // colorsValue = false;
-                                    setState(() {});
-                                  });
-                                });
-                              },
-                              child: const Center(
-                                child: Text(
-                                  'Action',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    color: Colors.black,
+                                          ))
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
+                              DataColumn(
+                                  label: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      height: Get.height * 0.10,
+                                      width: Get.width * 0.43,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF5F5F5),
+                                          border: Border.all(
+                                              color: Colors.white, width: 2)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  // colorsValue = true;
+                                                  Future.delayed(
+                                                      const Duration(
+                                                          seconds: 2), () {
+                                                    // colorsValue = false;
+                                                    setState(() {});
+                                                  });
+                                                });
+                                              },
+                                              child: const Text(
+                                                'Type',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                softWrap: false,
+                                                style: TextStyle(
+                                                  fontFamily: 'Roboto',
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    // colorsValue = true;
+                                                    Future.delayed(
+                                                        Duration(seconds: 1),
+                                                        () {
+                                                      // colorsValue = false;
+                                                      setState(() {});
+                                                    });
+                                                  });
+                                                },
+                                                // onTap: () {},
+                                                child: Icon(
+                                                  Icons.filter_list,
+                                                  color: Colors.black,
+                                                )),
+                                          )
+                                        ],
+                                      ))),
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.53,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              // colorsValue = true;
+                                              Future.delayed(
+                                                  const Duration(seconds: 2),
+                                                  () {
+                                                // colorsValue = false;
+                                                setState(() {});
+                                              });
+                                            });
+                                          },
+                                          child: const Text(
+                                            'Status',
+                                            style: TextStyle(
+                                              fontFamily: 'Roboto',
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            // onTap: () {},
+                                            child: const Icon(
+                                              Icons.filter_list,
+                                              color: Colors.black,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.73,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              // colorsValue = true;
+                                              Future.delayed(
+                                                  const Duration(seconds: 2),
+                                                  () {
+                                                // colorsValue = false;
+                                                setState(() {});
+                                              });
+                                            });
+                                          },
+                                          child: const Text(
+                                            'Issue Date',
+                                            style: TextStyle(
+                                              fontFamily: 'Roboto',
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            // onTap: () {},
+                                            child: Icon(
+                                              Icons.filter_list,
+                                              color: Colors.black,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.43,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              // colorsValue = true;
+                                              Future.delayed(
+                                                  const Duration(seconds: 2),
+                                                  () {
+                                                // colorsValue = false;
+                                                setState(() {});
+                                              });
+                                            });
+                                          },
+                                          child: const Text(
+                                            'Valid Date',
+                                            style: TextStyle(
+                                              fontFamily: 'Roboto',
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                // colorsValue = true;
+                                                Future.delayed(
+                                                    Duration(seconds: 1), () {
+                                                  // colorsValue = false;
+                                                  setState(() {});
+                                                });
+                                              });
+                                            },
+                                            // onTap: () {},
+                                            child: Icon(
+                                              Icons.filter_list,
+                                              color: Colors.black,
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
+                                  height: Get.height * 0.10,
+                                  width: Get.width * 0.43,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF5F5F5),
+                                      border: Border.all(
+                                          color: Colors.white, width: 2)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        // colorsValue = true;
+                                        Future.delayed(
+                                            const Duration(seconds: 2), () {
+                                          // colorsValue = false;
+                                          setState(() {});
+                                        });
+                                      });
+                                    },
+                                    child: const Center(
+                                      child: Text(
+                                        'Action',
+                                        style: TextStyle(
+                                          fontFamily: 'Roboto',
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                            source: TableRow(context, resp)),
                       ],
-                      source: TableRow()),
-                ],
+                    );
+                  } else {
+                    return Center(
+                        child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text('No Data Available'),
+                    ));
+                  }
+                },
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -1196,6 +1237,13 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
 }
 
 class TableRow extends DataTableSource {
+  final List<StudentVisaResponseModel>? data;
+  final BuildContext;
+
+  TableRow(
+    this.BuildContext,
+    this.data,
+  );
   @override
   DataRow? getRow(int index) {
     return DataRow(cells: [
@@ -1208,6 +1256,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: Center(child: Text('${data![index].countryName}')),
         ),
       ),
       DataCell(
@@ -1219,6 +1268,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: Center(child: Text('${data![index].visaTypeName}')),
         ),
       ),
       DataCell(
@@ -1230,6 +1280,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: Center(child: Text('${data![index].visaStatus}')),
         ),
       ),
       DataCell(
@@ -1241,6 +1292,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: Center(child: Text('${data![index].issueDate}')),
         ),
       ),
       DataCell(
@@ -1252,6 +1304,7 @@ class TableRow extends DataTableSource {
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: Center(child: Text('${data![index].validUpto}')),
         ),
       ),
       DataCell(
@@ -1277,3 +1330,4 @@ class TableRow extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
+

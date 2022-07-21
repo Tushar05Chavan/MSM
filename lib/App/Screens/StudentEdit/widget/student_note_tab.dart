@@ -21,8 +21,8 @@ class StdNoteTab extends StatefulWidget {
 }
 
 class _StdNoteTabState extends State<StdNoteTab> {
-  
- final GetStudentNotesViewModel _getStudentNotesViewModel = Get.put(GetStudentNotesViewModel());
+  final GetStudentNotesViewModel _getStudentNotesViewModel =
+      Get.put(GetStudentNotesViewModel());
 
   final AddStudentNotesViewModel _addStudentNotesViewModel =
       Get.put(AddStudentNotesViewModel());
@@ -34,7 +34,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
     super.initState();
   }
 
-    TextEditingController _notes = TextEditingController();
+  TextEditingController _notes = TextEditingController();
   void showInSnackBar() {
     Scaffold.of(context).showSnackBar(const SnackBar(
         backgroundColor: kGreen,
@@ -120,65 +120,69 @@ class _StdNoteTabState extends State<StdNoteTab> {
                 ),
                 InkWell(
                   onTap: () {
-                var body = {
-                  "ActivityType": "10",
-                  "StatusId": 0,
-                  "Priority": -1,
-                  "ApplicationId": "${widget.data!.genInfo!.studentId}",
-                  "Remark": _notes.text,
-                };
-                _addStudentNotesViewModel
-                    .addStudentNotesViewModel(body);
-                if (_addStudentNotesViewModel.apiResponse.status ==
-                    Status.COMPLETE) {
-                  showInSnackBar();
-                  setState(() {});
-                  _notes.clear();
-                } else {
-                  if (_addStudentNotesViewModel.apiResponse.status ==
-                      Status.ERROR) {
-                    showInErrorSnackBar();
-                  }
-                }
-              },
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      height: Get.height * 0.05,
-                      width: Get.width * 0.29,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                              color: kNavy, style: BorderStyle.solid)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Icon(
-                            Icons.add,
-                            color: kNavy,
-                          ),
-                          Flexible(
-                            child: Text(
-                              'Add More',
-                              style: TextStyle(
-                                color: kNavy,
-                              ),
+                    Map<String, dynamic> map = {
+                      "ActivityType": "10",
+                      "StatusId": 0,
+                      "Priority": -1,
+                      "ApplicationId": widget.data!.genInfo!.studentId,
+                      "Remark": _notes.text,
+                    };
+                    _addStudentNotesViewModel
+                        .addStudentNotesViewModel(map)
+                        .whenComplete((() {
+                      Future.delayed(Duration(seconds: 5), () {
+                        setState(() {
+                          GetStudentNotesViewModel getStudentNotesViewModel =
+                              GetStudentNotesViewModel();
+                          getStudentNotesViewModel.getStudentNotesViewModel(
+                              activityId: map["ApplicationId"]);
+                        });
+                      });
+                    }));
+                    if (_addStudentNotesViewModel.apiResponse.status ==
+                        Status.COMPLETE) {
+                      setState(() {
+                        showInSnackBar();
+                      });
+                      _notes.clear();
+                    } else {
+                      if (_addStudentNotesViewModel.apiResponse.status ==
+                          Status.ERROR) {
+                        showInErrorSnackBar();
+                      }
+                    }
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    height: Get.height * 0.05,
+                    width: Get.width * 0.29,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border:
+                            Border.all(color: kNavy, style: BorderStyle.solid)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(
+                          Icons.add,
+                          color: kNavy,
+                        ),
+                        Flexible(
+                          child: Text(
+                            'Add More',
+                            style: TextStyle(
+                              color: kNavy,
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-               
+                ),
                 SizedBox(
                   height: Get.height * 0.07,
                 ),
-                GetBuilder<GetStudentNotesViewModel>(
-                  builder: (controller) {
-                    if (controller.apiResponse.status == Status.COMPLETE) {
-                      List<GetStudentNotesResponseModel> response =
-                          controller.apiResponse.data;
-                      print('RESPONSEEEE>>>>> $response');
-                      return Container(
+                Container(
                         height: 500,
                         child: ListView.builder(
                           itemCount: response.length,
@@ -223,13 +227,21 @@ class _StdNoteTabState extends State<StdNoteTab> {
                             );
                           },
                         ),
-                      );
-                    } else if (controller.apiResponse.status == Status.ERROR) {
-                      return const CircularProgressIndicator();
-                    }
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                ),
+                      )
+                //GetBuilder<GetStudentNotesViewModel>(
+                  // builder: (controller) {
+                  //   if (controller.apiResponse.status == Status.COMPLETE) {
+                  //     List<GetStudentNotesResponseModel> response =
+                  //         controller.apiResponse.data;
+                  //     print('RESPONSEEEE>>>>> $response');
+                  //     return 
+                      
+                  //   } else if (controller.apiResponse.status == Status.ERROR) {
+                  //     return const CircularProgressIndicator();
+                  //   }
+                  //   return const Center(child: CircularProgressIndicator());
+                  // },
+               // ),
                 const SizedBox(
                   height: 10,
                 ),

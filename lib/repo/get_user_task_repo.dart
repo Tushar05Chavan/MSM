@@ -23,4 +23,14 @@ class GetUserTaskRepo extends ApiURLService {
     print('=========jjjj${getUserTaskResponseModel.first}');
     return getUserTaskResponseModel;
   }
+
+   static Future<bool> addUserTaskRepo(
+      {required Map<String, dynamic> map}) async {
+    var response = await APIService().getResponse(
+        url: "${BaseUrl.baseUrl}/Task/Add",
+        apitype: APIType.aPost,
+        body: map);
+    print('Resposnse is:${response}');
+    return true;
+  }
 }

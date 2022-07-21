@@ -8,17 +8,12 @@ import 'package:msm_unify/services/api_url.dart';
 
 class AddNewStudentRepo extends ApiURLService {
   static Future<bool> addNewStudentRepo(Map<String, dynamic> body) async {
-    // var response = await APIService().getResponse(
-    //   url: "${BaseUrl.baseUrl}/Student/Add",
-    //   apitype: APIType.aPost,
-    //   body: body,
-    // );
-    //
-    // return response;
+  
     var headers = {
       'Authorization': '${Get.find<AppData>().loginResponseModel.token}',
       'Content-Type': 'application/json',
     };
+  
     var request =
         await http.Request('POST', Uri.parse('${BaseUrl.baseUrl}/Student/Add'));
     request.body = json.encode(body);

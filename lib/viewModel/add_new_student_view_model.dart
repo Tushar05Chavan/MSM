@@ -7,21 +7,22 @@ class AddNewStudentViewModel extends GetxController {
 
   ApiResponse get apiResponse => _apiResponse;
 
-  // onInit() {
-  //   addNewStudentViewModel();
-  // }
+  bool clicked = false;
   String? res;
   Future<void> addNewStudentViewModel(Map<String, dynamic>? model) async {
+    clicked = true;
+    update();
     _apiResponse = ApiResponse.loading(message: 'Loading');
+    
     update();
     try {
       var response = AddNewStudentRepo.addNewStudentRepo(model!);
       _apiResponse = ApiResponse.complete(response);
-      // print('View ModelRESPONSE=$response');
     } catch (e) {
       print(".........>$e");
       _apiResponse = ApiResponse.error(message: 'error');
     }
+    clicked = false;
     update();
   }
 }

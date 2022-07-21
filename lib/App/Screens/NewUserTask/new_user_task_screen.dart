@@ -11,6 +11,7 @@ import 'package:msm_unify/App/common/AppConfig/support_section.dart';
 import 'package:msm_unify/App/common/color_constant.dart';
 import 'package:msm_unify/model/responseModek/get_user_task_type_response_model.dart';
 import 'package:msm_unify/model/responseModek/user_assignee_response_model.dart';
+import 'package:msm_unify/repo/get_user_task_repo.dart';
 import 'package:msm_unify/viewModel/get_user_task_type_view_model.dart';
 import 'package:msm_unify/viewModel/get_user_task_view_model.dart';
 import 'package:msm_unify/viewModel/user_assignee_view_model.dart';
@@ -73,11 +74,16 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
     '05 AM',
     '06 AM'
   ];
+
   final List<String> _assignedTo = ['Jay/infoeduglobal@gmail.com'];
   final List<String> _type = ['Jay/infoeduglobal@gmail.com'];
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   final TextEditingController _fromDate = TextEditingController();
+  final TextEditingController _dueDate = TextEditingController();
   final TextEditingController _toDate = TextEditingController();
+  final TextEditingController taskdescription = TextEditingController();
+  final TextEditingController tasksubject = TextEditingController();
+
   bool _checkboxListTile = false;
   String? add;
   String? add1;
@@ -682,7 +688,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                           height: 20,
                                                         ),
                                                         TextFormField(
-                                                          controller: _fromDate,
+                                                          controller: _dueDate,
                                                           validator: (date) {
                                                             if (date != null) {
                                                               return "Enter valid date";
@@ -715,8 +721,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                               1900),
                                                                           lastDate:
                                                                               DateTime.now()))!;
-                                                                      _fromDate
-                                                                              .text =
+                                                                      _dueDate.text =
                                                                           formatter
                                                                               .format(date);
                                                                     },
@@ -859,12 +864,16 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                           height: 20,
                                                         ),
                                                         commontextfiled(
+                                                            controller:
+                                                                tasksubject,
                                                             hintText:
                                                                 'Subject *'),
                                                         const SizedBox(
                                                           height: 20,
                                                         ),
                                                         TextFormField(
+                                                          controller:
+                                                              taskdescription,
                                                           maxLines: 4,
                                                           decoration:
                                                               InputDecoration(
@@ -990,7 +999,7 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                         const SizedBox(
                                                             height: 7),
                                                         PrimeryButton(
-                                                            callBack: () {
+                                                            callBack: () async {
                                                               Map<String,
                                                                       dynamic>
                                                                   _map = {
@@ -999,20 +1008,26 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                     null,
                                                                 "ParentType": 3,
                                                                 "TaskSubject":
-                                                                    "abcd",
-                                                                "DueDate":
-                                                                    "2022-07-20T19:12:20.333Z",
+                                                                    tasksubject
+                                                                        .text,
+                                                                "DueDate": _dueDate
+                                                                    .text,
                                                                 "minDueDate":
                                                                     "2022-07-20T19:12:20.333Z",
-                                                                "TaskStatus": 1,
+                                                                "TaskStatus": _selectedStatus,
+                                                                //int.parse(_selectedStatus.toString()),
+                                                                        
                                                                 "NoOfEmail":
                                                                     null,
                                                                 "TaskPriority":
-                                                                    0,
+                                                                    _selectedLow
+                                                                        ,
                                                                 "TaskDescription":
-                                                                    "description txt",
+                                                                    taskdescription
+                                                                        .text,
                                                                 "ReminderDate":
-                                                                    "",
+                                                                    _fromDate
+                                                                        .text,
                                                                 "minReminderDate":
                                                                     "",
                                                                 "maxReminderDate":
@@ -1030,20 +1045,38 @@ class _NewUserTaskScreenState extends State<NewUserTaskScreen> {
                                                                 "minRecurranceEnd":
                                                                     "",
                                                                 "AssignedTo":
-                                                                    81,
-                                                                "TaskOwner": 81,
+                                                                    _selectedAssignedTo
+                                                                        ,
+                                                                "TaskOwner":
+                                                                    _selectedOwner
+                                                                        ,
                                                                 "TaskResponse":
                                                                     "",
-                                                                "TaskType": 27,
+                                                                "TaskType":
+                                                                    _selectedType
+                                                                        .toString(),
                                                                 "DueHours":
-                                                                    "00",
+                                                                    _selectedStartHours
+                                                                        .toString(),
                                                                 "DueMinutes":
-                                                                    "01",
+                                                                    _selectedMinutes
+                                                                        .toString(),
                                                                 "ActualHours":
                                                                     null,
                                                                 "ActualMinutes":
                                                                     null
                                                               };
+                                                              final GetUserTaskViewModel
+                                                                  _getUserTaskViewModel =
+                                                                  Get.put(
+                                                                      GetUserTaskViewModel());
+                                                              await _getUserTaskViewModel
+                                                                  .addUserTaskViewModel(
+                                                                      map:
+                                                                          _map);
+
+                                                              setState(() {});
+                                                              //Get.back();
                                                             },
                                                             title: 'Add',
                                                             color: kRedLight)
