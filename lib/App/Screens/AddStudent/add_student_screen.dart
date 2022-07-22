@@ -91,7 +91,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    hintText: 'Enter student name,student ID lor email ID',
+                    hintText: 'Enter student name, student ID for email ID',
                   ),
                 ),
               ),

@@ -18,4 +18,15 @@ class StudentVisaRepo extends ApiURLService {
     print('StudentVisaRepo2${studentVisaResponseModel.first}');
     return studentVisaResponseModel;
   }
+
+
+  static Future<bool> addVisaRepo(
+      {required Map<String, dynamic> map}) async {
+    var response = await APIService().getResponse(
+        url: "${BaseUrl.baseUrl}/Task/Add",
+        apitype: APIType.aPost,
+        body: map);
+    print('Resposnse is:${response}');
+    return true;
+  }
 }

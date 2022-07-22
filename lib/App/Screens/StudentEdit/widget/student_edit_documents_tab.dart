@@ -1246,7 +1246,7 @@ class TableRow extends DataTableSource {
                                                   child: InkWell(
                                                     onTap: () {
                                                       Get.back();
-                                                      Get.back();
+                                                      //Get.back();
                                                     },
                                                     child: Container(
                                                       height: Get.height * 0.03,

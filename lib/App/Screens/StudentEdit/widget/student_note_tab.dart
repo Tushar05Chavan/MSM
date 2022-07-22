@@ -134,6 +134,7 @@ class _StdNoteTabState extends State<StdNoteTab> {
                         });
                       });
                     }));
+                    
 
                     if (_getStudentNotesViewModel.apiResponse.status ==
                         Status.COMPLETE) {

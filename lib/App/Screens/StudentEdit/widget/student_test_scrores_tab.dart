@@ -210,6 +210,11 @@ class _StdTestScoreTabState extends State<StdTestScoreTab> {
                           SizedBox(height: Get.height * 0.01),
                           TextFormField(
                             controller: cael_Date,
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return "Enter valid date";
+                              }
+                            },
                             cursorColor: kRed,
                             decoration: InputDecoration(
                                 suffixIcon: IconButton(
@@ -254,6 +259,14 @@ class _StdTestScoreTabState extends State<StdTestScoreTab> {
                           ),
                           TextFormField(
                             controller: cael_Listening,
+                            validator: (value){
+                              if(value!.isEmpty){
+                                return "Enter valid score";
+                              }
+                              // if(cael_Listening.value < 10 || value > 90) {
+                              //   return "Value should be in between 10 to 90";
+                              // }
+                            },
                             cursorColor: kRed,
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:msm_unify/Api/api_response.dart';
 import 'package:msm_unify/model/responseModek/country_dropdown_response_model.dart';
 import 'package:msm_unify/model/responseModek/student_view_response_model.dart';
@@ -397,7 +398,8 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                         PaginatedDataTable(
                             onRowsPerPageChanged: (perPage) {},
                             columnSpacing: 0,
-                            rowsPerPage: 10,
+                            rowsPerPage: resp.length,
+                            availableRowsPerPage: [resp.length],
                             dataRowHeight: Get.height * 0.05,
                             headingRowHeight: Get.height * 0.08,
                             horizontalMargin: 1,
@@ -407,7 +409,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.43,
+                                  width: Get.width * 0.33,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(
@@ -460,7 +462,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 2),
                                       height: Get.height * 0.10,
-                                      width: Get.width * 0.43,
+                                      width: Get.width * 0.33,
                                       decoration: BoxDecoration(
                                           color: const Color(0xffF5F5F5),
                                           border: Border.all(
@@ -520,7 +522,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.53,
+                                  width: Get.width * 0.33,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(
@@ -578,7 +580,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.73,
+                                  width: Get.width * 0.45,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(
@@ -636,7 +638,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.43,
+                                  width: Get.width * 0.45,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(
@@ -694,7 +696,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 2),
                                   height: Get.height * 0.10,
-                                  width: Get.width * 0.43,
+                                  width: Get.width * 0.33,
                                   decoration: BoxDecoration(
                                       color: const Color(0xffF5F5F5),
                                       border: Border.all(
@@ -1212,17 +1214,24 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                children: const [
-                  Text(
-                    'Number of items: 0',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontFamily: 'Poppins'),
-                  ),
-                ],
-              ),
+              GetBuilder<StudentVisaViewModel>(builder: (controller) {
+                List<StudentVisaResponseModel> response =
+                    controller.apiResponse.data;
+                List data = [response.length];
+                print('response>>>${response.length}');
+
+                return Row(
+                  children: [
+                    Text(
+                      'Number of items: ${response.length}',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontFamily: 'Poppins'),
+                    ),
+                  ],
+                );
+              }),
               SizedBox(
                 height: Get.height * 0.025,
               ),
@@ -1243,88 +1252,180 @@ class TableRow extends DataTableSource {
     this.BuildContext,
     this.data,
   );
+
   @override
   DataRow? getRow(int index) {
     return DataRow(cells: [
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.43,
+          width: Get.width * 0.33,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Center(child: Text('${data![index].countryName}')),
+          child: Text('${data![index].countryName}'),
         ),
       ),
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.43,
+          width: Get.width * 0.33,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Center(child: Text('${data![index].visaTypeName}')),
+          child: Text('${data![index].visaTypeName}'),
         ),
       ),
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.53,
+          width: Get.width * 0.33,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Center(child: Text('${data![index].visaStatus}')),
+          child: Text('${data![index].visaStatus}'),
         ),
       ),
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.73,
+          width: Get.width * 0.45,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Center(child: Text('${data![index].issueDate}')),
+          child: Text(DateFormat('dd/MM/yyyy')
+              .format(DateTime.parse('${data![index].issueDate}'))),
+            
         ),
       ),
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.43,
+          width: Get.width * 0.45,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
-          child: Center(child: Text('${data![index].validUpto}')),
+          child: Text(DateFormat('dd/MM/yyyy')
+              .format(DateTime.parse('${data![index].validUpto}'))), 
+          
         ),
       ),
       DataCell(
         Container(
           height: Get.height * 0.17,
-          width: Get.width * 0.43,
+          width: Get.width * 0.33,
           decoration: const BoxDecoration(
             border: Border.symmetric(
               vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
             ),
           ),
+          child: InkWell(
+            onTap: ()  {
+              SimpleDialog(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric( horizontal: 10),
+                     child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.symmetric(vertical: 0.8),
+                                                      child: Text(
+                                                  ' Are you sure, want to delete this record?',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                        color: kGrey5,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                ),
+                                                    ),
+                                                    Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    MaterialButton(
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
+                                                      height: Get.height * 0.06,
+                                                      minWidth:
+                                                          Get.width * 0.20,
+                                                      color: Colors.green,
+                                                      shape:
+                                                          ContinuousRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      child: const Text(
+                                                        'No',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                    MaterialButton(
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
+                                                      height: Get.height * 0.06,
+                                                      minWidth:
+                                                          Get.width * 0.20,
+                                                      color: Colors.red,
+                                                      shape:
+                                                          ContinuousRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      child: const Text(
+                                                        'yes',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                    ),
+                                                  ]
+                                                  )
+                    )
+                ],
+              );
+            }
+             ,
+            child: IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                
+              },
+              color: kRed,),
+          )
         ),
       ),
     ]);
   }
 
   @override
-  bool get isRowCountApproximate => true;
+  bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 3;
+  int get rowCount => data!.length;
 
   @override
   int get selectedRowCount => 0;

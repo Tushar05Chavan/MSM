@@ -27,5 +27,19 @@ class StudentVisaViewModel extends GetxController {
     update();
   }
 
+
+  Future<void> addVisaViewModel(
+      {required Map<String, dynamic> map}) async {
+    _apiResponse = ApiResponse.loading(message: 'Loading');
+    update();
+    try {
+      var response = await StudentVisaRepo.addVisaRepo(map: map);
+    } catch (e) {
+      print(".........>$e");
+      _apiResponse = ApiResponse.error(message: 'error');
+    }
+    update();
+  }
+
 }
 
