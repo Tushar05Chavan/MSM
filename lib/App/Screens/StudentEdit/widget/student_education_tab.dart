@@ -79,7 +79,9 @@ class _StudentEducationTabState extends State<StudentEducationTab> {
       Get.put(EducationProvinceViewModel());
 
   List<EducationProvinceResponseModel> provinceState = [];
+
   Future<void> provinceCountry() async {
+    if (_selectedCountryEducation == null) return;
     await _educationProvinceViewModel.educationDropViewModel(
         countryId: int.parse(_selectedCountryEducation.toString()));
     List<EducationProvinceResponseModel> response =

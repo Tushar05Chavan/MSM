@@ -70,6 +70,7 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
   List<TypeDropResponseModel> type = [];
 
   Future<void> getType() async {
+    if (_selectedCountryEducation == null) return;
     await typeDropViewModel.typeDropViewModel(
         countryId: int.parse(_selectedCountryEducation.toString()));
     List<TypeDropResponseModel> response = typeDropViewModel.apiResponse.data;
@@ -1211,29 +1212,21 @@ class _StudentVisaTabState extends State<StudentVisaTab> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              GetBuilder<StudentVisaViewModel>(builder: (controller) {
-                List<StudentVisaResponseModel> response =
-                    controller.apiResponse.data;
-                List data = [response.length];
-                print('response>>>${response.length}');
-
-                return Row(
-                  children: [
-                    Text(
-                      'Number of items: ${response.length}',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontFamily: 'Poppins'),
-                    ),
-                  ],
-                );
-              }),
-              SizedBox(
-                height: Get.height * 0.025,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: GetBuilder<StudentVisaViewModel>(builder: (controller) {
+                  return controller.apiResponse.data != null
+                      ? Row(children: [
+                          Text(
+                            'Number of items: ${controller.apiResponse.data.length}',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontFamily: 'Poppins'),
+                          ),
+                        ])
+                      : CircularProgressIndicator();
+                }),
               ),
               supportSection(),
             ],
@@ -1303,7 +1296,6 @@ class TableRow extends DataTableSource {
           ),
           child: Text(DateFormat('dd/MM/yyyy')
               .format(DateTime.parse('${data![index].issueDate}'))),
-            
         ),
       ),
       DataCell(
@@ -1316,107 +1308,86 @@ class TableRow extends DataTableSource {
             ),
           ),
           child: Text(DateFormat('dd/MM/yyyy')
-              .format(DateTime.parse('${data![index].validUpto}'))), 
-          
+              .format(DateTime.parse('${data![index].validUpto}'))),
         ),
       ),
       DataCell(
         Container(
-          height: Get.height * 0.17,
-          width: Get.width * 0.33,
-          decoration: const BoxDecoration(
-            border: Border.symmetric(
-              vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+            height: Get.height * 0.17,
+            width: Get.width * 0.33,
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(width: 2, color: Color(0xffF5F5F5)),
+              ),
             ),
-          ),
-          child: InkWell(
-            onTap: ()  {
-              SimpleDialog(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric( horizontal: 10),
-                     child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.symmetric(vertical: 0.8),
-                                                      child: Text(
-                                                  ' Are you sure, want to delete this record?',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                        color: kGrey5,
-                                                        fontFamily: 'Poppins',
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                ),
-                                                    ),
-                                                    Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    MaterialButton(
-                                                      onPressed: () {
-                                                        Get.back();
-                                                      },
-                                                      height: Get.height * 0.06,
-                                                      minWidth:
-                                                          Get.width * 0.20,
-                                                      color: Colors.green,
-                                                      shape:
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20)),
-                                                      child: const Text(
-                                                        'No',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                    MaterialButton(
-                                                      onPressed: () {
-                                                        Get.back();
-                                                      },
-                                                      height: Get.height * 0.06,
-                                                      minWidth:
-                                                          Get.width * 0.20,
-                                                      color: Colors.red,
-                                                      shape:
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20)),
-                                                      child: const Text(
-                                                        'yes',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                    ),
-                                                  ]
-                                                  )
-                    )
-                ],
-              );
-            }
-             ,
-            child: IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                
+            child: InkWell(
+              onTap: () {
+                SimpleDialog(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 0.8),
+                                child: Text(
+                                  ' Are you sure, want to delete this record?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: kGrey5,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  MaterialButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    height: Get.height * 0.06,
+                                    minWidth: Get.width * 0.20,
+                                    color: Colors.green,
+                                    shape: ContinuousRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: const Text(
+                                      'No',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  MaterialButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    height: Get.height * 0.06,
+                                    minWidth: Get.width * 0.20,
+                                    color: Colors.red,
+                                    shape: ContinuousRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: const Text(
+                                      'yes',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ]))
+                  ],
+                );
               },
-              color: kRed,),
-          )
-        ),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {},
+                color: kRed,
+              ),
+            )),
       ),
     ]);
   }
