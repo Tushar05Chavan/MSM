@@ -32,6 +32,7 @@ dependencies:
   syncfusion_flutter_xlsio: ^20.2.36-beta
   form_field_validator: ^1.1.0
   syncfusion_flutter_datagrid_export: ^20.2.36-beta
+  file_picker: ^4.6.1
   
   
  
